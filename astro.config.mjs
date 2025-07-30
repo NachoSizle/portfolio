@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import compressor from 'astro-compressor';
 
 import tailwindcss from '@tailwindcss/vite';
 
@@ -8,7 +9,7 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://nachosizle.github.io',
   base: '/portfolio',
-  integrations: [sitemap()],
+  integrations: [sitemap(), compressor()],
 
   vite: {
     plugins: [tailwindcss()],

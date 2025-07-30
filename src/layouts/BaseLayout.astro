@@ -1,5 +1,6 @@
 ---
 import Header from '../components/Header.astro';
+import '../styles/global.css';
 
 export interface Props {
   title: string;
@@ -22,10 +23,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/png" href="/portfolio/favicon.png" />
     <meta name="generator" content={Astro.generator} />
-
-    <style is:global>
-      @import '../styles/global.css';
-    </style>
 
     <script is:inline>
       const theme = (() => {
