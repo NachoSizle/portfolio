@@ -1,0 +1,13 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+---
+
+<header class="flex justify-between items-center p-4">
+  <nav class="flex gap-4">
+    <a href="/" class="text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100">Inicio</a>
+    <a href="/proyectos" class="text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100">Proyectos</a>
+    <a href="/blog" class="text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100">Blog</a>
+    <a href="/contacto" class="text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100">Contacto</a>
+  </nav>
+  <ThemeToggle />
+</header>
