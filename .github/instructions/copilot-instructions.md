@@ -38,6 +38,13 @@ import Plausible from '@plausible/astro'; // o script Umami clásico
 
 Plausible empieza a reportar en tiempo real sin cookies
 
+## 📁 Directorio de Documentación
+
+- **docs/NEXT_STEPS.md**: Tareas prioritarias para evolucionar el portfolio
+- **/README.md**: Información general del proyecto
+- **/src/content/**: Configuración de colecciones y contenido en MDX
+- **/src/components/**: Componentes reutilizables de UI
+- **/src/layouts/**: Estructuras de página base
 
 ## ⚙️ Flujos de Desarrollo
 

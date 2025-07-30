@@ -1,0 +1,17 @@
+---
+export interface Props {
+  project: any;
+}
+const { project } = Astro.props;
+import { Image } from 'astro:assets';
+import { BASE_URL } from '../constants';
+---
+<li class="flex items-center gap-4">
+  <Image src={project.data.cover} alt={`Cover de ${project.data.title}`} inferSize class="w-16 h-16 object-cover rounded shadow" />
+  <div>
+    <a href={`${BASE_URL}/projects/${project.slug}`} class="text-blue-600 dark:text-blue-400 underline hover:text-blue-800">
+      {project.data.title}
+    </a>
+    <span class="ml-2 text-sm text-gray-500">{project.data.stack.join(', ')}</span>
+  </div>
+</li>

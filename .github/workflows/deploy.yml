@@ -21,6 +21,14 @@ jobs:
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
+      
+      - name: Restore Astro cache
+        uses: actions/cache@v4
+        with:
+          path: .astro-cache          # o node_modules/.astro
+          key: astro-${{ hashFiles('bun.lock') }}
+          restore-keys: |
+            astro-
 
       - name: Build & Upload with Astro Action
         uses: withastro/action@v4

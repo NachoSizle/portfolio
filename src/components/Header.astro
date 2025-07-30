@@ -1,13 +1,59 @@
 ---
-import ThemeToggle from './ThemeToggle.astro';
+import ThemeToggle from "./ThemeToggle.astro";
+
+const navLinks = [
+  { href: "/portfolio/", label: "Experiencia" },
+  { href: "#projects", label: "Proyectos" },
+  { href: "#about", label: "Nacho" },
+  { href: "#contacto", label: "Contacto" },
+];
+
+if (typeof window !== "undefined") {
+  window.addEventListener("scroll", () => {
+    const nav = document.getElementById("main-nav");
+    if (window.scrollY > 10) {
+      nav?.classList.add("scrolled-nav");
+    } else {
+      nav?.classList.remove("scrolled-nav");
+    }
+  });
+}
 ---
 
-<header class="flex justify-between items-center p-4">
-  <nav class="flex gap-4">
-    <a href="/" class="text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100">Inicio</a>
-    <a href="/proyectos" class="text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100">Proyectos</a>
-    <a href="/blog" class="text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100">Blog</a>
-    <a href="/contacto" class="text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100">Contacto</a>
+<style>
+  :root.dark .scrolled-nav {
+    background: rgba(30, 41, 59, 0.85);
+    border-radius: 2rem;
+    padding: 0.5rem 1.5rem;
+    box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.1);
+    transition:
+      background 0.2s,
+      box-shadow 0.2s;
+  }
+
+  :root:not(.dark) .scrolled-nav {
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 2rem;
+    padding: 0.5rem 1.5rem;
+    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.15);
+    transition:
+      background 0.2s,
+      box-shadow 0.2s;
+  }
+</style>
+
+<header class="flex justify-center items-center p-4">
+  <nav id="main-nav" class="flex gap-3.5">
+    {
+      navLinks.map((link) => (
+        <a
+          href={link.href}
+          class="text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100"
+        >
+          {link.label}
+        </a>
+      ))
+    }
+    <ThemeToggle />
   </nav>
-  <ThemeToggle />
 </header>

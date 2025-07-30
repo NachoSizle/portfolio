@@ -1,0 +1,15 @@
+---
+export interface Props {
+  projects: any[];
+}
+const { projects } = Astro.props;
+import ProjectCard from './ProjectCard.astro';
+---
+<section class="mt-8">
+  <h2 class="text-xl font-semibold mb-4">Proyectos destacados</h2>
+  <ul class="space-y-2">
+    {projects.map((project) => (
+      <ProjectCard project={project} />
+    ))}
+  </ul>
+</section>
