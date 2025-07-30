@@ -1,8 +1,8 @@
----
-// Este componente no necesita props por ahora
----
-
-<button id="theme-toggle" class="text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100 focus:outline-none">
+<button 
+  id="theme-toggle"
+  class="text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800 focus:ring-gray-500"
+  aria-label="Cambiar tema"
+>
   <svg id="theme-toggle-dark-icon" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
   </svg>
@@ -18,9 +18,13 @@
     const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
 
     if (themeToggleBtn && themeToggleDarkIcon && themeToggleLightIcon) {
-      // Función para actualizar el estado de los iconos
-      function updateIconState() {
-        if (document.documentElement.classList.contains('dark')) {
+      // Función para actualizar el estado de los iconos y el aria-label
+      function updateTheme() {
+        const isDark = document.documentElement.classList.contains('dark');
+        const newLabel = `Cambiar a tema ${isDark ? 'claro' : 'oscuro'}`;
+        themeToggleBtn?.setAttribute('aria-label', newLabel);
+        themeToggleBtn?.setAttribute('title', newLabel);
+        if (isDark) {
           themeToggleDarkIcon?.classList.remove('hidden');
           themeToggleLightIcon?.classList.add('hidden');
         } else {
@@ -29,19 +33,14 @@
         }
       }
 
-      // Actualizar iconos al cargar la página
-      updateIconState();
+      // Actualizar estado al cargar la página
+      updateTheme();
 
       themeToggleBtn.addEventListener('click', () => {
-        // Alternar la clase 'dark' en el elemento <html>
         document.documentElement.classList.toggle('dark');
-
-        // Determinar el nuevo tema y guardarlo en localStorage
-        const theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-        localStorage.setItem('theme', theme);
-
-        // Actualizar el estado de los iconos
-        updateIconState();
+        const newTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+        localStorage.setItem('theme', newTheme);
+        updateTheme();
       });
     }
   });

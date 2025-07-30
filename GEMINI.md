@@ -127,6 +127,8 @@ Este enfoque aísla el componente interactivo, asegurando que el HTML renderizad
     - **Título corto y descriptivo**: Lleno de emojis relevantes. 🎉
     - **Cuerpo del mensaje**: Explicando el *qué* y el *porqué* de los cambios de una forma más detallada y visual.
     - **Lista de cambios clave**: Para tener una referencia rápida de las modificaciones.
+    - **Todas las secciones del commit deben estar separadas por líneas en blanco** para una mejor legibilidad.
+    - **Todas las secciones del commit deben estar en español y con emojis relevantes** para mantener la coherencia del proyecto y facilitar la comprensión.
 - **Commits por Hito**: Después de cada refactorización o funcionalidad importante, haré una pausa para commitear los cambios. Esto mantiene el historial del proyecto limpio y ordenado. 💾
 - **Push a Remoto**: Después de realizar un commit, te consultaré si deseas que suba los cambios al repositorio remoto.
 
