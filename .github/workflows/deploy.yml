@@ -16,6 +16,10 @@ jobs:
   build-deploy:
     runs-on: ubuntu-latest
 
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
@@ -25,10 +29,10 @@ jobs:
       - name: Restore Astro cache
         uses: actions/cache@v4
         with:
-          path: .astro-cache          # o node_modules/.astro
-          key: astro-${{ hashFiles('bun.lock') }}
+          path: .astro-cache
+          key: astro-${{ runner.os }}-${{ hashFiles('bun.lock') }}
           restore-keys: |
-            astro-
+            astro-${{ runner.os }}- 
 
       - name: Build & Upload with Astro Action
         uses: withastro/action@v4
