@@ -2,6 +2,12 @@
 
 ¡Bienvenido a mi rincón digital! Este proyecto es mi portfolio personal, un espacio centralizado para mostrar mis proyectos, artículos y habilidades como desarrollador. Construido para ser ultrarrápido, accesible y visualmente atractivo.
 
+## ✨ Logros Actuales
+
+-   🏆 **Puntuación Perfecta en Lighthouse**: ¡Hemos alcanzado un **100%** en Performance, Accesibilidad, Best Practices y SEO!
+-   🚀 **Despliegue Automatizado**: CI/CD configurado con GitHub Actions para un despliegue continuo en GitHub Pages.
+-   📈 **SEO Optimizado**: Implementación de sitemap, robots.txt, URLs canónicas y metadatos para redes sociales (Open Graph & Twitter Cards).
+
 ## 🏗️ Tech Stack
 
 La selección de tecnologías está pensada para obtener el máximo rendimiento y una experiencia de desarrollo de primera.
@@ -10,10 +16,10 @@ La selección de tecnologías está pensada para obtener el máximo rendimiento 
 | :--- | :--- | :--- |
 | **Runtime & PM** | **Bun v1.x** | Rendimiento y velocidad excepcionales. |
 | **Framework** | **Astro 4** | Generación de sitios estáticos (SSG) para máxima velocidad. |
-| **CSS** | **Tailwind CSS** | Desarrollo ágil de UI con un sistema de clases utilidad. |
-| **Imágenes** | `@astrojs/image` | Optimización automática de imágenes (AVIF/WebP). |
-| **Contenido** | **Content Collections** | Gestión de contenido en Markdown con tipado seguro. |
-| **Deploy** | **GitHub Pages** | Alojamiento gratuito y despliegue continuo con GitHub Actions. |
+| **CSS** | **Tailwind CSS** | (Próximamente) Desarrollo ágil de UI con clases utilidad. |
+| **Contenido** | **Content Collections** | (Próximamente) Gestión de contenido en Markdown con tipado. |
+| **SEO** | `@astrojs/sitemap` | Generación automática del mapa del sitio. |
+| **Deploy** | **GitHub Pages & Actions** | Alojamiento gratuito y CI/CD robusto. |
 
 ## 🚀 Empezando
 
@@ -21,7 +27,7 @@ Para levantar el proyecto en tu entorno local, solo necesitas [Bun](https://bun.
 
 1.  **Clona el repositorio:**
     ```bash
-    git clone https://github.com/tu-usuario/portfolio.git
+    git clone https://github.com/NachoSizle/portfolio.git
     cd portfolio
     ```
 
@@ -39,7 +45,7 @@ Para levantar el proyecto en tu entorno local, solo necesitas [Bun](https://bun.
 
 ## 🎯 Objetivos del Proyecto
 
--   **Lighthouse Score**: > 95 en todas las categorías (Performance, Accesibilidad, Best Practices, SEO).
--   **Core Web Vitals**: Métricas por debajo de los umbrales recomendados (LCP < 1.2s).
--   **Accesibilidad**: Cumplimiento del nivel AA de las WCAG 2.1.
--   **Despliegue automatizado**: CI/CD con GitHub Actions para publicar en GitHub Pages.
+-   [x] **Lighthouse Score > 95**: ¡Conseguido (100)! ✅
+-   [x] **Core Web Vitals Optimizados**: ¡Conseguido! ✅
+-   [ ] **Accesibilidad WCAG 2.1 AA**: En progreso.
+-   [x] **Despliegue automatizado**: ¡Conseguido! ✅
