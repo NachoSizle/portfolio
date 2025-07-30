@@ -2,6 +2,7 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import compressor from 'astro-compressor';
+import critters from 'astro-critters';
 
 import tailwindcss from '@tailwindcss/vite';
 
@@ -9,7 +10,7 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://nachosizle.github.io',
   base: '/portfolio',
-  integrations: [sitemap(), compressor()],
+  integrations: [sitemap(), compressor(), critters()],
 
   vite: {
     plugins: [tailwindcss()],
