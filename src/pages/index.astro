@@ -1,16 +1,21 @@
 ---
-
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/portfolio/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="Portfolio de Nacho Sizle" description="Portfolio de Nacho Sizle, desarrollador de software. Proyectos, artículos y más.">
+	<header>
+		<nav>
+			<a href="/">Inicio</a>
+			<a href="/proyectos">Proyectos</a>
+			<a href="/blog">Blog</a>
+			<a href="/contacto">Contacto</a>
+		</nav>
+	</header>
+
+	<h1>Nacho Sizle</h1>
+	<p>Desarrollador de Software</p>
+
+	<footer>
+		<p>&copy; 2025 Nacho Sizle</p>
+	</footer>
+</BaseLayout>
