@@ -11,7 +11,9 @@ export default defineConfig({
   site: 'https://nachosizle.github.io',
   base: '/portfolio',
   integrations: [sitemap(), compressor(), critters()],
-
+  build: {
+    inlineStylesheets: "always",
+  },
   vite: {
     plugins: [tailwindcss()],
   },
