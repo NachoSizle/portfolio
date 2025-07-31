@@ -131,12 +131,13 @@ Este enfoque aísla el componente interactivo, asegurando que el HTML renderizad
 
 ### ✅ **Control de Versiones**
 - **Confirmación de Cambios**: Al finalizar una tarea, siempre te preguntaré si deseas guardar los cambios en Git.
-- **Commits Alegres y con Emojis**: Redactaré mensajes de commit con la siguiente estructura:
-    - **Título corto y descriptivo**: Lleno de emojis relevantes. 🎉
+- **Commits Alegres y con Emojis**: Redactaré mensajes de commit con la siguiente estructura lleno de emojis relevantes. 🎉:
+    - **Título corto y descriptivo**
     - **Cuerpo del mensaje**: Explicando el *qué* y el *porqué* de los cambios de una forma más detallada y visual.
     - **Lista de cambios clave**: Para tener una referencia rápida de las modificaciones.
 - **Commits por Hito**: Después de cada refactorización o funcionalidad importante, haré una pausa para commitear los cambios. Esto mantiene el historial del proyecto limpio y ordenado. 💾
 - **Push a Remoto**: Después de realizar un commit, te consultaré si deseas que suba los cambios al repositorio remoto.
+- EN WINDOWS NO VAS A PODER COMMITEAR CON EMOJIS, PORQUE NO ESTÁ SOPORTADO. PARA ESO, UTILIZARÉ UN FICHERO TEMPORAL QUE CONTENGA EL MENSAJE DEL COMMIT Y LO USARÉ PARA HACER EL COMMIT. ASÍ, NO TE DARÁ PROBLEMAS. DESPUÉS DE REALIZAR EL COMMIT, ELIMINARÉ ESE FICHERO TEMPORAL.
 
 ### 🔄 **Migración y Adaptación de Componentes**
 - **Análisis de Componentes Existentes**: Evaluaré la estructura, estilos y lógica de tus componentes actuales.

@@ -25,13 +25,13 @@ export default function SocialButton({ href, label, children }) {
         onBlur={() => setIsHovered(false)}
         whileHover={{ scale: 1.05, y: -2 }}
         whileTap={{ scale: 0.95 }}
-        className="inline-flex items-center gap-2 rounded-full border text-emerald-600 sm:text-gray-600  
-                 dark:text-emerald-400 sm:dark:text-gray-400
+        className="inline-flex items-center gap-2 rounded-full border text-emerald-600 sm:text-gray-900  
+                 dark:text-emerald-400 sm:dark:text-white
                    p-3 text-sm font-medium shadow-sm transition-colors focus:outline-none
                    focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary hover:text-emerald-500"
         aria-label={label}
-        aria-hidden="true"
       >
+        <span className='sr-only'>{label}</span>
         {iconWithClasses}
       </motion.a>
       {isHovered && (
