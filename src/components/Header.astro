@@ -2,48 +2,30 @@
 import ThemeToggle from "./ThemeToggle.astro";
 
 const navLinks = [
-  { href: "/portfolio/", label: "Experiencia" },
+  { href: "#experience", label: "Experiencia" },
   { href: "#projects", label: "Proyectos" },
   { href: "#about", label: "Nacho" },
-  { href: "#contacto", label: "Contacto" },
+  { href: "#contact", label: "Contacto" },
 ];
-
-if (typeof window !== "undefined") {
-  window.addEventListener("scroll", () => {
-    const nav = document.getElementById("main-nav");
-    if (window.scrollY > 10) {
-      nav?.classList.add("scrolled-nav");
-    } else {
-      nav?.classList.remove("scrolled-nav");
-    }
-  });
-}
 ---
 
 <style>
   :root.dark .scrolled-nav {
-    background: rgba(30, 41, 59, 0.85);
-    border-radius: 2rem;
-    padding: 0.5rem 1.5rem;
-    box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.1);
+    background: rgba(30, 41, 59, 1);
+    box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.85);
     transition:
       background 0.2s,
       box-shadow 0.2s;
   }
 
   :root:not(.dark) .scrolled-nav {
-    background: rgba(255, 255, 255, 0.85);
-    border-radius: 2rem;
-    padding: 0.5rem 1.5rem;
-    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.15);
-    transition:
-      background 0.2s,
-      box-shadow 0.2s;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.85);
   }
 </style>
 
-<header class="flex justify-center items-center p-4">
-  <nav id="main-nav" class="flex gap-3.5">
+<header class="sticky top-0 z-50 flex justify-center items-center p-4">
+  <nav id="main-nav" class="flex gap-3.5 py-2 px-6 rounded-4xl">
     {
       navLinks.map((link) => (
         <a
@@ -57,3 +39,14 @@ if (typeof window !== "undefined") {
     <ThemeToggle />
   </nav>
 </header>
+
+<script is:inline>
+  window.addEventListener("scroll", () => {
+    const nav = document.getElementById("main-nav");
+    if (window.scrollY > 10) {
+      nav?.classList.add("scrolled-nav");
+    } else {
+      nav?.classList.remove("scrolled-nav");
+    }
+  });
+</script>

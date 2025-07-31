@@ -1,0 +1,16 @@
+---
+import SocialButton from '../islands/SocialButton.jsx';
+
+interface Props {
+  href: string;
+  label: string;
+}
+
+const { href, label } = Astro.props;
+---
+
+<div class="relative">
+  <SocialButton href={href} label={label} client:visible>
+    <slot />
+  </SocialButton>
+</div>

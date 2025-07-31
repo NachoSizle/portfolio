@@ -1,0 +1,58 @@
+---
+import HeroCTA from "../islands/HeroCTA.jsx";
+import SocialButtonWrapper from './SocialButtonWrapper.astro';
+import { Github, Linkedin, AtSign } from 'lucide-react';
+---
+
+<section class="relative isolate overflow-hidden" aria-labelledby="hero-section">
+  <div class="mx-auto max-w-4xl px-6 py-18 text-center">
+    <h1 class="text-4xl mt-0 sm:mt-18 font-extrabold tracking-tight sm:text-5xl md:text-6xl text-balance md:leading-20">
+      Construyo frontends que cargan en <span class="text-primary">menos de un segundo</span>⚡
+    </h1>
+
+    <p class="my-18 mt-10 text-xl max-w-2xl mx-auto leading-8 text-neutral-600 dark:text-neutral-300 text-balance">
+      Frontend lover que convierte cada ms en 💰 sin sacrificar código limpio.
+      <br />
+      Rendimiento⚡y DX 🛠️, todo en un mismo commit.
+    </p>
+
+    <!-- CTAs -->
+    <div
+      class="mt-10 flex flex-row items-center gap-4 justify-center"
+    >
+      <HeroCTA client:load />
+      <a aria-label="Descargar CV"
+        href="https://www.icloud.com/iclouddrive/0013zvwHdziZe1ClzuPRrvbJQ#CV_Nacho_Updated"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 rounded-xl border-2 border-emerald-500 hover:bg-emerald-500
+         px-6 py-3 text-sm font-medium shadow-sm transition hover:bg-primary/10 focus:outline-none
+         focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary"
+      >
+        Descargar CV
+      </a>
+    </div>
+
+    <!-- Social buttons -->
+    <div class="mt-12 flex flex-wrap justify-center gap-4">
+      <SocialButtonWrapper
+        href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=nacho-marmo"
+        label="LinkedIn"
+      >
+        <Linkedin />
+      </SocialButtonWrapper>
+      <SocialButtonWrapper
+        href="https://www.threads.com/@nachosizle"
+        label="Threads"
+      >
+        <AtSign />
+      </SocialButtonWrapper>
+      <SocialButtonWrapper
+        href="https://github.com/NachoSizle"
+        label="GitHub"
+      >
+        <Github />
+      </SocialButtonWrapper>
+    </div>
+  </div>
+</section>

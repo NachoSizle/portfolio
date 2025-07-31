@@ -5,6 +5,7 @@ import sitemap from '@astrojs/sitemap';
 import compressor from 'astro-compressor';
 import critters from 'astro-critters';
 import mdx from '@astrojs/mdx';
+import react from "@astrojs/react";
 
 import tailwindcss from '@tailwindcss/vite';
 
@@ -12,7 +13,7 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://nachosizle.github.io',
   base: '/portfolio',
-  integrations: [mdx(), sitemap(), compressor(), critters()],
+  integrations: [react(), mdx(), sitemap(), compressor(), critters()],
   build: {
     inlineStylesheets: "always",
   },

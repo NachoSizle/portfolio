@@ -2,12 +2,12 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import ProjectList from '../components/ProjectList.astro';
+import Hero from '../components/Hero.astro';
 const projects = await getCollection('projects');
 ---
 
 <BaseLayout title="Portfolio de Nacho Sizle" description="Portfolio de Nacho Sizle, desarrollador de software. Proyectos, artículos y más.">
-	<h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Nacho Sizle</h1>
-	<p class="text-gray-600 dark:text-gray-400">Desarrollador de Software</p>
+	<Hero />
 
 	<ProjectList projects={projects} />
 

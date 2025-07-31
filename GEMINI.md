@@ -2,10 +2,11 @@
 applyTo: '**'
 ---
 
-
 # � Instrucciones para Agentes de IA en Portfolio
 
 Estas directrices están diseñadas para que los agentes de IA sean productivos y mantengan la coherencia del proyecto. Actúa como si fueras el DevOps & Frontend lead: ejecuta cada paso, confirma con logs y reporta métricas de rendimiento tras el primer deploy.
+
+Siempre me tienes que contestar en Español.
 
 # Objetivo  
 Crear un portfolio estático en **Astro 4** que actúe como hub central de mi marca personal (posts de LinkedIn & dev.to, proyectos de GitHub, formulario de contacto y métricas en tiempo real). Debe desplegarse gratis en **GitHub Pages** y medir Core Web Vitals por debajo de los umbrales recomendados.
@@ -128,7 +129,7 @@ Este enfoque aísla el componente interactivo, asegurando que el HTML renderizad
 - **Documentación de Código**: Generar documentación clara y útil para tu código.
 - **Buenas Prácticas**: Aconsejarte sobre las mejores prácticas de la industria en cuanto a accesibilidad, SEO y seguridad.
 
-### ✅ **Gestión de Tareas y Control de Versiones**
+### ✅ **Control de Versiones**
 - **Confirmación de Cambios**: Al finalizar una tarea, siempre te preguntaré si deseas guardar los cambios en Git.
 - **Commits Alegres y con Emojis**: Redactaré mensajes de commit con la siguiente estructura:
     - **Título corto y descriptivo**: Lleno de emojis relevantes. 🎉
