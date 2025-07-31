@@ -1,6 +1,7 @@
 ---
+import type { CollectionEntry } from 'astro:content';
 export interface Props {
-  project: any;
+  project: CollectionEntry<'projects'>;
 }
 const { project } = Astro.props;
 import { Image } from 'astro:assets';
@@ -12,6 +13,8 @@ import { BASE_URL } from '../constants';
     <a href={`${BASE_URL}/projects/${project.slug}`} class="text-blue-600 dark:text-blue-400 underline hover:text-blue-800">
       {project.data.title}
     </a>
-    <span class="ml-2 text-sm text-gray-500">{project.data.stack.join(', ')}</span>
+    <ul class="mt-4 flex flex-wrap gap-2">
+      {project.data.stack.map(tag => <li class="badge">{tag}</li>)}
+    </ul>
   </div>
 </li>

@@ -9,6 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.4",
     "@astrojs/image": "^0.18.0",
     "@astrojs/mdx": "^4.3.1",
     "@astrojs/react": "4.3.0",
@@ -20,8 +21,9 @@
     "astro-compressor": "^1.1.1",
     "astro-critters": "^2.2.1",
     "framer-motion": "^12.23.12",
-    "lucide-react": "^0.535.0",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "react-icons": "^5.5.0",
+    "typescript": "^5.9.2"
   }
 }

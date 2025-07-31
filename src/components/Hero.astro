@@ -1,7 +1,6 @@
 ---
 import HeroCTA from "../islands/HeroCTA.jsx";
 import SocialButtonWrapper from './SocialButtonWrapper.astro';
-import { Github, Linkedin, AtSign } from 'lucide-react';
 ---
 
 <section class="relative isolate overflow-hidden" aria-labelledby="hero-section">
@@ -38,21 +37,21 @@ import { Github, Linkedin, AtSign } from 'lucide-react';
       <SocialButtonWrapper
         href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=nacho-marmo"
         label="LinkedIn"
-      >
-        <Linkedin />
-      </SocialButtonWrapper>
+        iconName="linkedin"
+        iconClassName="h-12 w-12"
+      />
       <SocialButtonWrapper
         href="https://www.threads.com/@nachosizle"
         label="Threads"
-      >
-        <AtSign />
-      </SocialButtonWrapper>
+        iconName="threads"
+        iconClassName="h-12 w-12"
+      />
       <SocialButtonWrapper
         href="https://github.com/NachoSizle"
         label="GitHub"
-      >
-        <Github />
-      </SocialButtonWrapper>
+        iconName="github"
+        iconClassName="h-12 w-12"
+      />
     </div>
   </div>
 </section>
