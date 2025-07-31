@@ -5,15 +5,16 @@ import sitemap from '@astrojs/sitemap';
 import compressor from 'astro-compressor';
 import critters from 'astro-critters';
 import mdx from '@astrojs/mdx';
-import react from "@astrojs/react";
 
 import tailwindcss from '@tailwindcss/vite';
+
+import solidJs from '@astrojs/solid-js';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://nachosizle.github.io',
   base: '/portfolio',
-  integrations: [react(), mdx(), sitemap(), compressor(), critters()],
+  integrations: [mdx(), sitemap(), compressor(), critters(), solidJs()],
   build: {
     inlineStylesheets: "always",
   },

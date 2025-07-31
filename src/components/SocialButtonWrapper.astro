@@ -1,22 +1,20 @@
 ---
-import SocialButton from '../islands/SocialButton.jsx';
+import SocialButton from '../islands/SocialButton.tsx';
 
 interface Props {
   href: string;
   label: string;
-  iconName: string; // Nombre del icono (ej: "github")
-  iconClassName?: string; // Clases opcionales para el icono
+  iconName: "github" | "linkedin" | "threads";
+  iconClassName?: string;
 }
 
 const { href, label, iconName, iconClassName } = Astro.props;
 ---
 
-<div class="relative">
-  <SocialButton 
-    href={href} 
-    label={label} 
-    iconName={iconName} 
-    iconClassName={iconClassName}
-    client:visible 
-  />
-</div>
+<SocialButton 
+  href={href} 
+  label={label} 
+  iconName={iconName} 
+  iconClassName={iconClassName}
+  client:visible 
+/>
