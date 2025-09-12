@@ -23,7 +23,7 @@ export default defineConfig({
   },
   image: {
      remotePatterns: [
-      { protocol: 'https', hostname: 'picsum.dev', pathname: '/**' },
+      { protocol: 'https', hostname: 'placehold.co', pathname: '/**' },
     ],
   },
   cacheDir: '.astro-cache'
