@@ -3,6 +3,10 @@ export interface Props {
   projects: any[];
 }
 import ProjectCard from './ProjectCard.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const { projects } = Astro.props;
 const totalProjects = projects.length;
@@ -12,13 +16,9 @@ const totalProjects = projects.length;
   <!-- Header con animación sutil -->
   <div class="text-center mb-12 relative z-10">
     <h2 id="projects-section" class="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl text-balance md:leading-20 mb-4">
-      Proyectos <span class="text-primary">destacados</span>
+      {t('projects.title')} <span class="text-primary">{t('projects.titleHighlight')}</span>
     </h2>
-    <p class="text-lg text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto">
-      Una selección de mis trabajos más recientes 🎨.
-      <br />
-      Proyectos significativos como desarrollador frontend 💡.
-    </p>
+    <p class="text-lg text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto" set:html={t('projects.subtitle')} />
   </div>
 
   <!-- Lista de proyectos usando ProjectCard con sticky scroll -->
@@ -41,12 +41,12 @@ const totalProjects = projects.length;
         rel="noopener noreferrer"
         class="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 
                transition-colors duration-200"
-        aria-label="Ver más proyectos en GitHub"
+        aria-label={t('projects.viewMore')}
       >
         <span class="text-sm font-medium text-neutral-700 dark:text-neutral-300">
-          ¿Te gusta lo que ves?
+          {t('projects.likeWhat')}
         </span>
-        Ver más en GitHub
+        {t('projects.viewMore')}
       </a>
     </div>
   </div>

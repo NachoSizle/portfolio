@@ -12,3 +12,17 @@ const projects = await getCollection('projects');
 	<AboutSection />
 	<ProjectList projects={projects} />
 </BaseLayout>
+
+<script>
+	// Detectar idioma del navegador solo en la primera visita
+	const hasVisited = sessionStorage.getItem('lang-detected');
+	if (!hasVisited) {
+		const browserLang = navigator.language.split('-')[0];
+		if (browserLang === 'en') {
+			sessionStorage.setItem('lang-detected', 'true');
+			window.location.href = '/portfolio/en/';
+		} else {
+			sessionStorage.setItem('lang-detected', 'true');
+		}
+	}
+</script>

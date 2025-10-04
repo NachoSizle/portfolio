@@ -1,11 +1,16 @@
 ---
 import ThemeToggle from "./ThemeToggle.astro";
+import LanguagePicker from "./LanguagePicker.astro";
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const navLinks = [
-  { href: "#experience", label: "Experiencia" },
-  { href: "#projects", label: "Proyectos" },
-  { href: "#about", label: "Nacho" },
-  { href: "#contact", label: "Contacto" },
+  { href: "#experience", label: t('nav.experience') },
+  { href: "#projects", label: t('nav.projects') },
+  { href: "#about", label: t('nav.about') },
+  { href: "#contact", label: t('nav.contact') },
 ];
 ---
 
@@ -25,7 +30,7 @@ const navLinks = [
 </style>
 
 <header class="sticky top-0 z-200 flex justify-center items-center p-4">
-  <nav id="main-nav" class="flex gap-3.5 py-2 px-6 rounded-4xl">
+  <nav id="main-nav" class="flex gap-3.5 py-2 px-6 rounded-4xl items-center">
     {
       navLinks.map((link) => (
         <a
@@ -36,6 +41,8 @@ const navLinks = [
         </a>
       ))
     }
+    <div class="h-6 w-px bg-gray-300 dark:bg-gray-700"></div>
+    <LanguagePicker />
     <ThemeToggle />
   </nav>
 </header>

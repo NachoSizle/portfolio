@@ -2,6 +2,7 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import BackgroundGradients from '../components/BackgroundGradients.astro';
+import { getLangFromUrl } from '../i18n/utils';
 import '../styles/global.css';
 
 export interface Props {
@@ -15,11 +16,23 @@ const {
   description,
   image = "/portfolio/placeholder-social.jpg",
 } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// Extraer el path sin /portfolio y sin idioma
+const basePath = '/portfolio';
+let pathWithoutBase = Astro.url.pathname.replace(/^\/portfolio/, '');
+pathWithoutBase = pathWithoutBase.replace(/^\/(en|es)/, '');
+
+// URLs alternativas para SEO multiidioma
+const esUrl = new URL(`${basePath}${pathWithoutBase}`, Astro.site);
+const enUrl = new URL(`${basePath}/en${pathWithoutBase}`, Astro.site);
+const alternateUrl = lang === 'es' ? enUrl : esUrl;
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -49,6 +62,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Alternate languages for SEO -->
+    <link rel="alternate" hreflang="es" href={esUrl} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="x-default" href={esUrl} />
 
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
@@ -56,6 +74,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content={new URL(image, Astro.site)} />
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content={lang === 'es' ? 'es_ES' : 'en_US'} />
+    <meta property="og:locale:alternate" content={lang === 'es' ? 'en_US' : 'es_ES'} />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />

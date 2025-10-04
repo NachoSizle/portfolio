@@ -3,12 +3,16 @@
 import ProfilePhoto from './ProfilePhoto.astro';
 import TechOrbit from './TechOrbit.astro';
 import StatsGrid from './StatsGrid.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const stats = [
-  { number: '10+', label: 'Años de experiencia' },
-  { number: '50+', label: 'Proyectos completados' },
-  { number: '15+', label: 'Tecnologías dominadas' },
-  { number: '100%', label: 'Pasión por el código' }
+  { number: '10+', label: t('about.stats.experience') },
+  { number: '50+', label: t('about.stats.projects') },
+  { number: '15+', label: t('about.stats.technologies') },
+  { number: '100%', label: t('about.stats.passion') }
 ];
 ---
 
@@ -25,16 +29,10 @@ const stats = [
     <div class="text-center mb-16">
       <h2 class="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl text-balance md:leading-20 mb-6">
         <span class="bg-gradient-to-r from-gray-900 via-primary to-gray-900 dark:from-white dark:via-primary-400 dark:to-white bg-clip-text text-transparent">
-          Conoce a Nacho
+          {t('about.title')}
         </span>
       </h2>
-      <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-        Desarrollador frontend 💻 apasionado por crear experiencias digitales.
-        <br />
-        Transformo ideas en realidades interactivas 🚀 con código limpio.
-        <br />
-        Diseño intuitivo ✨ que marca la diferencia.
-      </p>
+      <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed" set:html={t('about.subtitle')} />
     </div>
   </div>
 

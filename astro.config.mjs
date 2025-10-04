@@ -14,6 +14,14 @@ import solidJs from '@astrojs/solid-js';
 export default defineConfig({
   site: 'https://nachosizle.github.io',
   base: '/portfolio',
+  i18n: {
+    defaultLocale: 'es',
+    locales: ['es', 'en'],
+    routing: {
+      prefixDefaultLocale: false,
+      redirectToDefaultLocale: false
+    }
+  },
   integrations: [mdx(), sitemap(), compressor(), critters(), solidJs()],
   build: {
     inlineStylesheets: "always",
@@ -22,9 +30,15 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   image: {
-     remotePatterns: [
+    service: {
+      entrypoint: 'astro/assets/services/sharp'
+    },
+    remotePatterns: [
       { protocol: 'https', hostname: 'placehold.co', pathname: '/**' },
     ],
   },
-  cacheDir: '.astro-cache'
+  cacheDir: '.astro-cache',
+  devToolbar: {
+    enabled: false
+  }
 });

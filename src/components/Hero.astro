@@ -1,18 +1,22 @@
 ---
 import HeroCTA from "../islands/HeroCTA.tsx";
 import SocialButtonWrapper from './SocialButtonWrapper.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <section class="relative isolate overflow-hidden bg-transparent" aria-labelledby="hero-section">
   <div class="mx-auto max-w-4xl px-6 py-12 sm:py-0 sm:pb-18 text-center relative z-10">
     <h1 class="text-4xl mt-0 sm:mt-18 font-extrabold tracking-tight sm:text-5xl md:text-6xl text-balance md:leading-20">
-      Construyo frontends que cargan en <span class="text-primary">menos de un segundo</span>⚡
+      {t('hero.title')} <span class="text-primary">{t('hero.title.highlight')}</span>⚡
     </h1>
 
     <p class="my-18 mt-10 text-xl max-w-2xl mx-auto leading-8 text-neutral-600 dark:text-neutral-300 text-balance">
-      Frontend lover que convierte cada ms en 💰 sin sacrificar código limpio.
+      {t('hero.description')}
       <br />
-      Rendimiento⚡y DX 🛠️, todo en un mismo commit.
+      {t('hero.description.line2')}
     </p>
 
     <!-- CTAs -->
@@ -20,7 +24,7 @@ import SocialButtonWrapper from './SocialButtonWrapper.astro';
       class="mt-10 flex flex-row items-center gap-4 justify-center"
     >
       <HeroCTA client:load />
-      <a aria-label="Descargar CV"
+      <a aria-label={t('hero.cta.cv')}
         href="https://www.icloud.com/iclouddrive/0013zvwHdziZe1ClzuPRrvbJQ#CV_Nacho_Updated"
         target="_blank"
         rel="noopener noreferrer"
@@ -28,7 +32,7 @@ import SocialButtonWrapper from './SocialButtonWrapper.astro';
          px-6 py-3 text-sm font-medium shadow-sm transition hover:bg-primary/10 focus:outline-none
          focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary"
       >
-        Descargar CV
+        {t('hero.cta.cv')}
       </a>
     </div>
 
@@ -36,19 +40,19 @@ import SocialButtonWrapper from './SocialButtonWrapper.astro';
     <div class="mt-12 flex flex-wrap justify-center gap-4">
       <SocialButtonWrapper
         href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=nacho-marmo"
-        label="LinkedIn"
+        label={t('hero.social.linkedin')}
         iconName="linkedin"
         iconClassName="h-8 w-8"
       />
       <SocialButtonWrapper
         href="https://www.threads.com/@nachosizle"
-        label="Threads"
+        label={t('hero.social.threads')}
         iconName="threads"
         iconClassName="h-8 w-8"
       />
       <SocialButtonWrapper
         href="https://github.com/NachoSizle"
-        label="GitHub"
+        label={t('hero.social.github')}
         iconName="github"
         iconClassName="h-8 w-8"
       />

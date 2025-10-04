@@ -8,9 +8,13 @@ export interface Props {
 const { project, index = 0, total = 1 } = Astro.props;
 import { Image } from 'astro:assets';
 import { BASE_URL } from '../constants';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const { title, description, stack, cover, demoLink, repoLink, date } = project.data;
-const formattedDate = date?.toLocaleDateString('es-ES', {
+const formattedDate = date?.toLocaleDateString(lang === 'es' ? 'es-ES' : 'en-US', {
   month: 'long',
   year: 'numeric',
 });
@@ -32,7 +36,8 @@ const layerZIndex = 100 - index;
             <Image
               src={cover}
               alt={`Cover de ${title}`}
-              inferSize
+              width={1275}
+              height={850}
               class="relative z-10 h-full w-full rounded-[16px] object-cover shadow-[0_15px_35px_-20px_rgba(15,23,42,0.55)] transition-transform duration-700 group-hover:scale-[1.03]"
             />
             {formattedDate && (
@@ -88,7 +93,7 @@ const layerZIndex = 100 - index;
                     rel="noopener noreferrer"
                     class="inline-flex items-center gap-2 rounded-full bg-primary px-3 py-1.5 text-white shadow-[0_8px_20px_-10px_rgba(59,130,246,0.9)] transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                   >
-                    Ver demo
+                    {t('projects.viewDemo')}
                     <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 3h7m0 0v7m0-7L10 14" />
                     </svg>
@@ -101,7 +106,7 @@ const layerZIndex = 100 - index;
                     rel="noopener noreferrer"
                     class="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-neutral-700 transition-colors duration-200 hover:border-neutral-400 hover:text-neutral-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-400 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200 dark:hover:border-primary/40"
                   >
-                    Código fuente
+                    {t('projects.viewRepository')}
                     <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 5h8m-8 14h8m-9-7h1m4 0h1m4 0h1" />
                     </svg>

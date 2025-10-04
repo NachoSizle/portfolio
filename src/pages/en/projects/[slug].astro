@@ -1,9 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
-import { BASE_URL } from '../../constants';
+import { BASE_URL } from '../../../constants';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
@@ -21,7 +21,7 @@ if (!project) {
 const content = project.data;
 ---
 <BaseLayout title={content.title} description={content.description}>
-  <Image src={content.cover} alt={`Cover de ${content.title}`} width={1275} height={850} class="w-full max-w-2xl h-64 object-cover rounded shadow mb-6 mx-auto" />
+  <Image src={content.cover} alt={`Cover of ${content.title}`} width={1275} height={850} class="w-full max-w-2xl h-64 object-cover rounded shadow mb-6 mx-auto" />
   <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl text-balance md:leading-20">{content.title}</h1>
   <p>{content.description}</p>
   <ul>
@@ -31,15 +31,15 @@ const content = project.data;
   </ul>
   {content.demoLink && (
     <a href={content.demoLink} target="_blank" rel="noopener noreferrer">
-      Ver Demo
+      View Demo
     </a>
   )}
   {content.repoLink && (
     <a href={content.repoLink} target="_blank" rel="noopener noreferrer">
-      Ver Repositorio
+      View Repository
     </a>
   )}
-  <a href={`${BASE_URL}/`} class="block mt-8 text-blue-600 dark:text-blue-400 underline hover:text-blue-800">
-    ← Volver a proyectos
+  <a href={`${BASE_URL}/en/`} class="block mt-8 text-blue-600 dark:text-blue-400 underline hover:text-blue-800">
+    ← Back to projects
   </a>
 </BaseLayout>

@@ -1,0 +1,98 @@
+---
+import { languages } from '../i18n/ui';
+import { getLangFromUrl } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const currentPath = Astro.url.pathname;
+
+// Función para obtener la ruta en el otro idioma
+function getAlternateUrl(targetLang: string) {
+  const basePath = '/portfolio';
+  
+  // Remover /portfolio y el idioma actual del path
+  let pathWithoutBase = currentPath.replace(/^\/portfolio/, '');
+  pathWithoutBase = pathWithoutBase.replace(/^\/(en|es)/, '');
+  
+  // Si el path está vacío, usar /
+  if (!pathWithoutBase) {
+    pathWithoutBase = '/';
+  }
+  
+  // Construir la nueva URL
+  if (targetLang === 'es') {
+    return `${basePath}${pathWithoutBase}`;
+  }
+  return `${basePath}/${targetLang}${pathWithoutBase}`;
+}
+---
+
+<div class="relative inline-block">
+  <button
+    id="language-toggle"
+    class="flex items-center gap-2 px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
+    aria-label="Change language"
+  >
+    <svg class="w-5 h-5 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+    </svg>
+    <span class="text-sm font-medium text-gray-700 dark:text-gray-200 uppercase">
+      {lang}
+    </span>
+    <svg class="w-4 h-4 text-gray-600 dark:text-gray-300 transition-transform duration-200" id="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+
+  <div
+    id="language-menu"
+    class="absolute right-0 mt-2 w-40 rounded-lg bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700 opacity-0 invisible transition-all duration-200 z-50"
+  >
+    {Object.entries(languages).map(([code, name]) => (
+      <a
+        href={getAlternateUrl(code)}
+        class={`block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors first:rounded-t-lg last:rounded-b-lg ${
+          code === lang
+            ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 font-semibold'
+            : 'text-gray-700 dark:text-gray-200'
+        }`}
+      >
+        <div class="flex items-center justify-between">
+          <span>{name}</span>
+          {code === lang && (
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+            </svg>
+          )}
+        </div>
+      </a>
+    ))}
+  </div>
+</div>
+
+<script>
+  const toggle = document.getElementById('language-toggle');
+  const menu = document.getElementById('language-menu');
+  const chevron = document.getElementById('chevron');
+
+  if (toggle && menu && chevron) {
+    toggle.addEventListener('click', () => {
+      const isVisible = !menu.classList.contains('invisible');
+      
+      if (isVisible) {
+        menu.classList.add('opacity-0', 'invisible');
+        chevron.style.transform = 'rotate(0deg)';
+      } else {
+        menu.classList.remove('opacity-0', 'invisible');
+        chevron.style.transform = 'rotate(180deg)';
+      }
+    });
+
+    // Cerrar al hacer clic fuera
+    document.addEventListener('click', (e) => {
+      if (!toggle.contains(e.target as Node) && !menu.contains(e.target as Node)) {
+        menu.classList.add('opacity-0', 'invisible');
+        chevron.style.transform = 'rotate(0deg)';
+      }
+    });
+  }
+</script>
