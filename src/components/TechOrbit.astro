@@ -1,0 +1,323 @@
+---
+// Tech Orbit Component - Sistema de órbita con iconos de tecnologías
+import JavaScriptIcon from '../assets/icons/javascript.svg?raw';
+import TypeScriptIcon from '../assets/icons/typescript.svg?raw';
+import AstroIcon from '../assets/icons/astro.svg?raw';
+import CSS3Icon from '../assets/icons/css3.svg?raw';
+import HTML5Icon from '../assets/icons/html5.svg?raw';
+import VueIcon from '../assets/icons/vue.svg?raw';
+import GitHubIcon from '../assets/icons/github.svg?raw';
+import PlaywrightIcon from '../assets/icons/playwright.svg?raw';
+import VitestIcon from '../assets/icons/vitest.svg?raw';
+import BunIcon from '../assets/icons/bun.svg?raw';
+import ReactIcon from '../assets/icons/react.svg?raw';
+import MongoIcon from '../assets/icons/mongo.svg?raw';
+import SupabaseIcon from '../assets/icons/supabase.svg?raw';
+
+const iconMap: Record<string, string> = {
+  javascript: JavaScriptIcon,
+  typescript: TypeScriptIcon,
+  astro: AstroIcon,
+  css3: CSS3Icon,
+  html5: HTML5Icon,
+  vue: VueIcon,
+  github: GitHubIcon,
+  playwright: PlaywrightIcon,
+  vitest: VitestIcon,
+  bun: BunIcon,
+  react: ReactIcon,
+  mongo: MongoIcon,
+  supabase: SupabaseIcon
+};
+
+const technologies = [
+  {
+    name: 'HTML5',
+    icon: 'html5',
+    color: 'from-orange-500 to-red-600',
+    angle: 0,
+    size: 'large'
+  },
+  {
+    name: 'React',
+    icon: 'react',
+    color: 'from-cyan-400 to-blue-500',
+    angle: 28,
+    size: 'small'
+  },
+  {
+    name: 'CSS3',
+    icon: 'css3',
+    color: 'from-blue-400 to-blue-600',
+    angle: 56,
+    size: 'large'
+  },
+  {
+    name: 'Astro',
+    icon: 'astro',
+    color: 'from-orange-500 to-purple-600',
+    angle: 84,
+    size: 'medium'
+  },
+  {
+    name: 'JavaScript',
+    icon: 'javascript',
+    color: 'from-yellow-400 to-yellow-600',
+    angle: 112,
+    size: 'large'
+  },
+  {
+    name: 'MongoDB',
+    icon: 'mongo',
+    color: 'from-green-500 to-green-700',
+    angle: 140,
+    size: 'medium'
+  },
+  {
+    name: 'Vitest',
+    icon: 'vitest',
+    color: 'from-yellow-400 to-green-500',
+    angle: 168,
+    size: 'small'
+  },
+  {
+    name: 'TypeScript',
+    icon: 'typescript',
+    color: 'from-blue-500 to-blue-700',
+    angle: 196,
+    size: 'large'
+  },
+  {
+    name: 'Playwright',
+    icon: 'playwright',
+    color: 'from-red-500 to-green-500',
+    angle: 224,
+    size: 'small'
+  },
+  {
+    name: 'Vue.js',
+    icon: 'vue',
+    color: 'from-green-400 to-green-600',
+    angle: 252,
+    size: 'large'
+  },
+  {
+    name: 'Supabase',
+    icon: 'supabase',
+    color: 'from-green-400 to-emerald-600',
+    angle: 280,
+    size: 'medium'
+  },
+  {
+    name: 'Bun',
+    icon: 'bun',
+    color: 'from-amber-100 to-amber-300',
+    angle: 308,
+    size: 'medium'
+  },
+  {
+    name: 'GitHub',
+    icon: 'github',
+    color: 'from-gray-700 to-gray-900',
+    angle: 336,
+    size: 'medium'
+  }
+];
+---
+
+<!-- Floating Technology Orbs - Posicionados absolutamente en el contenedor -->
+{technologies.map((tech) => (
+  <div 
+    class="absolute top-0 left-0 w-full h-full z-0 flex items-center justify-center orbit-container"
+  >
+    <div class={`relative orb-${tech.size} bg-gradient-to-br ${tech.color} rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer`}>
+      <!-- Icon container -->
+      <div class="absolute inset-2 bg-white/90 dark:bg-gray-900/90 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+        <div 
+          class={`icon-wrapper
+            ${tech.icon === 'javascript' && 'text-yellow-600'}
+            ${tech.icon === 'typescript' && 'text-blue-600'}
+            ${tech.icon === 'astro' && 'text-white'}
+            ${tech.icon === 'html5' && 'text-orange-600'}
+            ${tech.icon === 'css3' && 'text-blue-600'}
+            ${tech.icon === 'vue' && 'text-green-600'}
+            ${tech.icon === 'github' && 'text-gray-900 dark:text-white'}
+            ${tech.icon === 'playwright' && 'text-red-500'}
+            ${tech.icon === 'vitest' && 'text-yellow-500'}
+            ${tech.icon === 'bun' && 'text-gray-900 dark:text-white'}
+            ${tech.icon === 'react' && 'text-cyan-500'}
+            ${tech.icon === 'mongo' && 'text-green-600'}
+            ${tech.icon === 'supabase' && 'text-emerald-500'}
+          `}
+          set:html={iconMap[tech.icon]}
+        />
+      </div>
+    </div>
+  </div>
+))}
+
+<style>
+  /* Animación de órbita elíptica para MOBILE - Radio aumentado (180px) */
+  @keyframes orbit-saturn-mobile {
+    0% {
+      transform: rotateX(20deg) rotateZ(0deg) translateX(180px) rotateZ(0deg) rotateX(-20deg);
+    }
+    15% {
+      transform: rotateX(20deg) rotateZ(54deg) translateX(180px) rotateZ(-54deg) rotateX(-20deg);
+    }
+    20% {
+      transform: rotateX(20deg) rotateZ(72deg) translateX(180px) rotateZ(-72deg) rotateX(-20deg);
+    }
+    25% {
+      transform: rotateX(20deg) rotateZ(90deg) translateX(180px) rotateZ(-90deg) rotateX(-20deg);
+    }
+    30% {
+      transform: rotateX(20deg) rotateZ(108deg) translateX(180px) rotateZ(-108deg) rotateX(-20deg);
+    }
+    35% {
+      transform: rotateX(20deg) rotateZ(126deg) translateX(180px) rotateZ(-126deg) rotateX(-20deg);
+    }
+    50% {
+      transform: rotateX(20deg) rotateZ(180deg) translateX(180px) rotateZ(-180deg) rotateX(-20deg);
+    }
+    75% {
+      transform: rotateX(20deg) rotateZ(270deg) translateX(180px) rotateZ(-270deg) rotateX(-20deg);
+    }
+    100% {
+      transform: rotateX(20deg) rotateZ(360deg) translateX(180px) rotateZ(-360deg) rotateX(-20deg);
+    }
+  }
+
+  /* Animación de órbita elíptica para DESKTOP - Radio normal (180px) */
+  @keyframes orbit-saturn {
+    0% {
+      transform: rotateX(20deg) rotateZ(0deg) translateX(220px) rotateZ(0deg) rotateX(-20deg);
+    }
+    15% {
+      transform: rotateX(20deg) rotateZ(54deg) translateX(220px) rotateZ(-54deg) rotateX(-20deg);
+    }
+    20% {
+      transform: rotateX(20deg) rotateZ(72deg) translateX(220px) rotateZ(-72deg) rotateX(-20deg);
+    }
+    25% {
+      transform: rotateX(20deg) rotateZ(90deg) translateX(220px) rotateZ(-90deg) rotateX(-20deg);
+    }
+    30% {
+      transform: rotateX(20deg) rotateZ(108deg) translateX(220px) rotateZ(-108deg) rotateX(-20deg);
+    }
+    35% {
+      transform: rotateX(20deg) rotateZ(126deg) translateX(220px) rotateZ(-126deg) rotateX(-20deg);
+    }
+    50% {
+      transform: rotateX(20deg) rotateZ(180deg) translateX(220px) rotateZ(-180deg) rotateX(-20deg);
+    }
+    75% {
+      transform: rotateX(20deg) rotateZ(270deg) translateX(220px) rotateZ(-270deg) rotateX(-20deg);
+    }
+    100% {
+      transform: rotateX(20deg) rotateZ(360deg) translateX(220px) rotateZ(-360deg) rotateX(-20deg);
+    }
+  }
+
+  /* Aplicar la animación de órbita a cada item */
+  .orbit-container {
+    animation: orbit-saturn-mobile 40s linear infinite;
+    will-change: transform;
+    pointer-events: none;
+  }
+  
+  /* Desktop usa el radio más grande */
+  @media (min-width: 1024px) {
+    .orbit-container {
+      animation: orbit-saturn 40s linear infinite;
+    }
+  }
+  
+  .orbit-container > div {
+    pointer-events: auto;
+  }
+  
+  /* Delays ajustados para distribuir los orbes uniformemente (13 orbes con 40s de duración) */
+  .orbit-container:nth-child(1) { animation-delay: 0s; }
+  .orbit-container:nth-child(2) { animation-delay: -3.08s; }
+  .orbit-container:nth-child(3) { animation-delay: -6.15s; }
+  .orbit-container:nth-child(4) { animation-delay: -9.23s; }
+  .orbit-container:nth-child(5) { animation-delay: -12.31s; }
+  .orbit-container:nth-child(6) { animation-delay: -15.38s; }
+  .orbit-container:nth-child(7) { animation-delay: -18.46s; }
+  .orbit-container:nth-child(8) { animation-delay: -21.54s; }
+  .orbit-container:nth-child(9) { animation-delay: -24.62s; }
+  .orbit-container:nth-child(10) { animation-delay: -27.69s; }
+  .orbit-container:nth-child(11) { animation-delay: -30.77s; }
+  .orbit-container:nth-child(12) { animation-delay: -33.85s; }
+  .orbit-container:nth-child(13) { animation-delay: -36.92s; }
+
+  /* Tamaños variados para los orbes */
+  .orb-small {
+    width: 60px !important;
+    height: 60px !important;
+  }
+  
+  .orb-small .icon-wrapper :global(svg),
+  .orb-small .icon-wrapper :global(img) {
+    width: 24px !important;
+    height: 24px !important;
+  }
+  
+  .orb-medium {
+    width: 80px !important;
+    height: 80px !important;
+  }
+  
+  .orb-medium .icon-wrapper :global(svg),
+  .orb-medium .icon-wrapper :global(img) {
+    width: 32px !important;
+    height: 32px !important;
+  }
+  
+  .orb-large {
+    width: 100px !important;
+    height: 100px !important;
+  }
+  
+  .orb-large .icon-wrapper :global(svg),
+  .orb-large .icon-wrapper :global(img) {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  @media (min-width: 1024px) {
+    .orb-small {
+      width: 70px !important;
+      height: 70px !important;
+    }
+    
+    .orb-small .icon-wrapper :global(svg),
+    .orb-small .icon-wrapper :global(img) {
+      width: 28px !important;
+      height: 28px !important;
+    }
+    
+    .orb-medium {
+      width: 90px !important;
+      height: 90px !important;
+    }
+    
+    .orb-medium .icon-wrapper :global(svg),
+    .orb-medium .icon-wrapper :global(img) {
+      width: 36px !important;
+      height: 36px !important;
+    }
+    
+    .orb-large {
+      width: 110px !important;
+      height: 110px !important;
+    }
+    
+    .orb-large .icon-wrapper :global(svg),
+    .orb-large .icon-wrapper :global(img) {
+      width: 52px !important;
+      height: 52px !important;
+    }
+  }
+</style>

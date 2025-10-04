@@ -2,19 +2,135 @@
 import type { CollectionEntry } from 'astro:content';
 export interface Props {
   project: CollectionEntry<'projects'>;
+  index?: number;
+  total?: number;
 }
-const { project } = Astro.props;
+const { project, index = 0, total = 1 } = Astro.props;
 import { Image } from 'astro:assets';
 import { BASE_URL } from '../constants';
+
+const { title, description, stack, cover, demoLink, repoLink, date } = project.data;
+const formattedDate = date?.toLocaleDateString('es-ES', {
+  month: 'long',
+  year: 'numeric',
+});
+const projectUrl = `${BASE_URL}/projects/${project.slug}`;
+const hasLinks = demoLink || repoLink;
+const [primaryTag, ...restStack] = stack;
+const supportingTags = restStack.length > 0 ? restStack : stack.slice(1);
+const stickyBaseRem = 4;
+const stickyIncrementRem = 2;
+const stickyTop = `${stickyBaseRem + index * stickyIncrementRem}rem`;
+const layerZIndex = 100 - index;
 ---
-<li class="flex items-center gap-4">
-  <Image src={project.data.cover} alt={`Cover de ${project.data.title}`} inferSize class="w-16 h-16 object-cover rounded shadow" />
-  <div>
-    <a href={`${BASE_URL}/projects/${project.slug}`} class="text-blue-600 dark:text-blue-400 underline hover:text-blue-800">
-      {project.data.title}
-    </a>
-    <ul class="mt-4 flex flex-wrap gap-2">
-      {project.data.stack.map(tag => <li class="badge">{tag}</li>)}
-    </ul>
-  </div>
+<li class="project-card-stack list-none lg:sticky h-64" style={`--stack-index: ${index}; top: ${stickyTop}; z-index: ${layerZIndex};`}>
+  <div class="relative max-w-2xl mx-auto h-72">
+    <article class="group relative overflow-hidden rounded-[40px] border border-white/10 bg-white px-4 py-6 shadow-[0_40px_80px_-35px_rgba(15,23,42,0.55)] transition-transform duration-500 hover:-translate-y-1 hover:shadow-[0_45px_90px_-35px_rgba(56,189,248,0.55)] dark:border-neutral-800/80 dark:bg-neutral-950/90 sm:px-6 lg:px-8 lg:py-8 h-72">
+        <div class="grid gap-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-center">
+          <div class="relative overflow-hidden rounded-[20px] bg-neutral-100/80 p-2 dark:bg-neutral-900/80">
+            <div class="absolute inset-0 rounded-[20px] bg-gradient-to-br from-primary/10 via-transparent to-emerald-400/20 opacity-0 transition-opacity duration-700 group-hover:opacity-100" aria-hidden="true" />
+            <Image
+              src={cover}
+              alt={`Cover de ${title}`}
+              inferSize
+              class="relative z-10 h-full w-full rounded-[16px] object-cover shadow-[0_15px_35px_-20px_rgba(15,23,42,0.55)] transition-transform duration-700 group-hover:scale-[1.03]"
+            />
+            {formattedDate && (
+              <span class="absolute bottom-6 left-6 z-20 inline-flex items-center gap-2 rounded-full bg-white/90 px-3 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-neutral-700 shadow-sm backdrop-blur dark:bg-neutral-950/90 dark:text-neutral-200">
+                {formattedDate}
+              </span>
+            )}
+          </div>
+
+          <div class="flex flex-col gap-4">
+            <header class="space-y-2">
+              {primaryTag && (
+                <span class="inline-flex items-center rounded-full border border-primary/30 bg-primary/5 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-primary/90 dark:border-primary/40 dark:bg-primary/10 dark:text-primary/80">
+                  {primaryTag}
+                </span>
+              )}
+              <h3 class="text-xl font-semibold leading-tight text-neutral-900 dark:text-neutral-50 sm:text-2xl">
+                <a
+                  href={projectUrl}
+                  class="inline-flex items-center gap-2 transition-transform duration-200 hover:translate-x-1 hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary/60 dark:hover:text-primary"
+                >
+                  {title}
+                  <svg class="h-5 w-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 6.75L21 10.5m0 0l-3.75 3.75M21 10.5H10.5" />
+                  </svg>
+                </a>
+              </h3>
+            </header>
+
+            <p class="text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">
+              {description}
+            </p>
+
+            {supportingTags.length > 0 && (
+              <ul class="flex flex-wrap gap-2">
+                {supportingTags.map((tag) => (
+                  <li
+                    set:key={tag}
+                    class="rounded-full border border-neutral-200 bg-white px-3 py-1 text-xs font-medium tracking-wide text-neutral-600 shadow-sm transition-colors duration-200 group-hover:border-primary/40 group-hover:text-primary dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200"
+                  >
+                    {tag}
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            {hasLinks && (
+              <div class="flex flex-wrap gap-2 text-sm font-semibold">
+                {demoLink && (
+                  <a
+                    href={demoLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-2 rounded-full bg-primary px-3 py-1.5 text-white shadow-[0_8px_20px_-10px_rgba(59,130,246,0.9)] transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                  >
+                    Ver demo
+                    <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 3h7m0 0v7m0-7L10 14" />
+                    </svg>
+                  </a>
+                )}
+                {repoLink && (
+                  <a
+                    href={repoLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-neutral-700 transition-colors duration-200 hover:border-neutral-400 hover:text-neutral-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-400 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200 dark:hover:border-primary/40"
+                  >
+                    Código fuente
+                    <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 5h8m-8 14h8m-9-7h1m4 0h1m4 0h1" />
+                    </svg>
+                  </a>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+      </article>
+    </div>
 </li>
+
+<style>
+  :global(.project-card-stack) {
+    margin-top: 3.25rem;
+  }
+
+  :global(.project-card-stack:first-child) {
+    margin-top: 0;
+  }
+
+  @media (max-width: 1023px) {
+    :global(.project-card-stack) {
+      margin-top: 2rem !important;
+    }
+    
+    :global(.project-card-stack:first-child) {
+      margin-top: 0 !important;
+    }
+  }
+</style>

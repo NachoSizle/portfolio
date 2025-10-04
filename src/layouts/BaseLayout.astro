@@ -1,5 +1,7 @@
 ---
 import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import BackgroundGradients from '../components/BackgroundGradients.astro';
 import '../styles/global.css';
 
 export interface Props {
@@ -64,10 +66,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <!-- Umami -->
     <script is:inline defer src="https://cloud.umami.is/script.js" data-website-id="7e7bb8f2-01ba-436c-bc5e-8a999ddb1891"></script>
   </head>
-  <body>
+  <body class="bg-gradient-to-br from-gray-50 via-white to-blue-50/30 dark:from-gray-950 dark:via-gray-900 dark:to-blue-950/30">
+    <BackgroundGradients />
     <Header />
-    <main>
+    <main class="relative z-10">
       <slot />
     </main>
+    <Footer />
   </body>
 </html>

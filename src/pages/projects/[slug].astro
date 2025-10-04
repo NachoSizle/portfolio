@@ -22,7 +22,7 @@ const content = project.data;
 ---
 <BaseLayout title={content.title} description={content.description}>
   <Image src={content.cover} alt={`Cover de ${content.title}`} inferSize class="w-full max-w-2xl h-64 object-cover rounded shadow mb-6 mx-auto" />
-  <h1>{content.title}</h1>
+  <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl text-balance md:leading-20">{content.title}</h1>
   <p>{content.description}</p>
   <ul>
     {content.stack.map((tech: string) => (

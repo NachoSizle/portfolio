@@ -1,0 +1,95 @@
+---
+// Background Gradients Component - Efectos de profundidad con gradientes radiales
+---
+
+<div class="fixed inset-0 overflow-hidden pointer-events-none z-0" aria-hidden="true">
+  <!-- Gradientes radiales para profundidad en modo oscuro -->
+  
+  <!-- Hero/Top Section - Azul Primary -->
+  <div 
+    class="absolute top-0 left-1/4 w-[600px] h-[600px] opacity-0 dark:opacity-100 blur-3xl animate-pulse"
+    style="background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);"
+  ></div>
+  
+  <!-- Top Right - Emerald -->
+  <div 
+    class="absolute top-10 right-1/5 w-[500px] h-[500px] opacity-0 dark:opacity-100 blur-3xl animate-pulse"
+    style="background: radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, transparent 70%); animation-delay: 1s;"
+  ></div>
+  
+  <!-- Center Left - Purple -->
+  <div 
+    class="absolute top-1/3 left-10 w-[450px] h-[450px] opacity-0 dark:opacity-100 blur-3xl animate-pulse"
+    style="background: radial-gradient(circle, rgba(168, 85, 247, 0.10) 0%, transparent 70%); animation-delay: 2s;"
+  ></div>
+  
+  <!-- Center - Blue -->
+  <div 
+    class="absolute top-1/2 left-1/2 -translate-x-1/2 w-[400px] h-[400px] opacity-0 dark:opacity-100 blur-3xl animate-pulse"
+    style="background: radial-gradient(circle, rgba(59, 130, 246, 0.12) 0%, transparent 70%); animation-delay: 2.5s;"
+  ></div>
+  
+  <!-- Center Right - Yellow -->
+  <div 
+    class="absolute top-1/2 right-1/4 w-[380px] h-[380px] opacity-0 dark:opacity-100 blur-3xl animate-pulse"
+    style="background: radial-gradient(circle, rgba(234, 179, 8, 0.08) 0%, transparent 70%); animation-delay: 3s;"
+  ></div>
+  
+  <!-- Bottom Left - Emerald -->
+  <div 
+    class="absolute bottom-1/4 left-1/5 w-[420px] h-[420px] opacity-0 dark:opacity-100 blur-3xl animate-pulse"
+    style="background: radial-gradient(circle, rgba(16, 185, 129, 0.10) 0%, transparent 70%); animation-delay: 3.5s;"
+  ></div>
+  
+  <!-- Bottom Center - Primary -->
+  <div 
+    class="absolute bottom-20 left-1/3 w-[350px] h-[350px] opacity-0 dark:opacity-100 blur-3xl animate-pulse"
+    style="background: radial-gradient(circle, rgba(59, 130, 246, 0.14) 0%, transparent 70%); animation-delay: 4s;"
+  ></div>
+  
+  <!-- Bottom Right - Purple -->
+  <div 
+    class="absolute bottom-10 right-1/5 w-[400px] h-[400px] opacity-0 dark:opacity-100 blur-3xl animate-pulse"
+    style="background: radial-gradient(circle, rgba(168, 85, 247, 0.11) 0%, transparent 70%); animation-delay: 4.5s;"
+  ></div>
+  
+  <!-- Mid Right - Pink -->
+  <div 
+    class="absolute top-2/3 right-10 w-[320px] h-[320px] opacity-0 dark:opacity-100 blur-3xl animate-pulse"
+    style="background: radial-gradient(circle, rgba(236, 72, 153, 0.09) 0%, transparent 70%); animation-delay: 5s;"
+  ></div>
+  
+  <!-- Upper Mid - Cyan -->
+  <div 
+    class="absolute top-1/4 right-1/3 w-[360px] h-[360px] opacity-0 dark:opacity-100 blur-3xl animate-pulse"
+    style="background: radial-gradient(circle, rgba(6, 182, 212, 0.10) 0%, transparent 70%); animation-delay: 1.5s;"
+  ></div>
+</div>
+
+<style>
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+  }
+  
+  :global(.dark) .opacity-0 {
+    opacity: 1 !important;
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(0.98);
+      opacity: 0.3;
+    }
+    50% {
+      transform: scale(1.02);
+      opacity: 0.6;
+    }
+  }
+</style>

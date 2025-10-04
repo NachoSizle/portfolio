@@ -2,14 +2,56 @@
 export interface Props {
   projects: any[];
 }
-const { projects } = Astro.props;
 import ProjectCard from './ProjectCard.astro';
+
+const { projects } = Astro.props;
+const totalProjects = projects.length;
 ---
-<section class="mt-8">
-  <h2 class="text-xl font-semibold mb-4">Proyectos destacados</h2>
-  <ul class="space-y-2">
-    {projects.map((project) => (
-      <ProjectCard project={project} />
+
+<section class="relative m-12 mt-0 bg-transparent overflow-hidden" aria-labelledby="projects-section">
+  <!-- Header con animación sutil -->
+  <div class="text-center mb-12 relative z-10">
+    <h2 id="projects-section" class="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl text-balance md:leading-20 mb-4">
+      Proyectos <span class="text-primary">destacados</span>
+    </h2>
+    <p class="text-lg text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto">
+      Una selección de mis trabajos más recientes 🎨.
+      <br />
+      Proyectos significativos como desarrollador frontend 💡.
+    </p>
+  </div>
+
+  <!-- Lista de proyectos usando ProjectCard con sticky scroll -->
+  <ul class="space-y-0">
+    {projects.map((project: any, index: number) => (
+      <ProjectCard 
+        project={project} 
+        index={index} 
+        total={totalProjects}
+      />
     ))}
   </ul>
+
+  <!-- Call to action al final -->
+  <div class="mt-16 text-center">
+    <div class="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-primary/10 to-emerald-500/10 rounded-full border border-primary/20 dark:border-emerald-500/20">
+      <a 
+        href="https://github.com/NachoSizle" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 
+               transition-colors duration-200"
+        aria-label="Ver más proyectos en GitHub"
+      >
+        <span class="text-sm font-medium text-neutral-700 dark:text-neutral-300">
+          ¿Te gusta lo que ves?
+        </span>
+        Ver más en GitHub
+      </a>
+    </div>
+  </div>
 </section>
+
+<style>
+  /* El componente ProjectCard ya maneja el sticky scroll y las animaciones */
+</style>
