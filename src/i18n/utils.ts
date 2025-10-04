@@ -1,5 +1,7 @@
 import { ui, defaultLang } from './ui';
 
+type TranslationParams = Record<string, string | number>;
+
 export function getLangFromUrl(url: URL) {
   // Extraer el path y remover /portfolio
   const pathWithoutBase = url.pathname.replace(/^\/portfolio/, '');
@@ -9,9 +11,17 @@ export function getLangFromUrl(url: URL) {
 }
 
 export function useTranslations(lang: keyof typeof ui) {
-  return function t(key: keyof typeof ui[typeof defaultLang]) {
-    return ui[lang][key] || ui[defaultLang][key];
-  }
+  return function t(key: keyof typeof ui[typeof defaultLang], params?: TranslationParams) {
+    const translation = ui[lang][key] ?? ui[defaultLang][key];
+    if (!translation) return key as string;
+    if (!params) return translation;
+
+    return translation.replace(/\{\{(.*?)\}\}/g, (_, rawKey: string) => {
+      const paramKey = rawKey.trim();
+      const value = params[paramKey];
+      return value !== undefined ? String(value) : '';
+    });
+  };
 }
 
 export function getTranslatedPath(path: string, lang: keyof typeof ui) {

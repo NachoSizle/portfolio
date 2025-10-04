@@ -70,15 +70,15 @@ const quickLinks = [
                 />
               </div>
               <div>
-                <h3 class="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
+                <h3 class="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent select-none">
                   Nacho Sizle
                 </h3>
-                <p class="text-gray-600 dark:text-gray-400 text-sm">{t('footer.role')}</p>
+                <p class="text-gray-600 dark:text-gray-400 text-sm select-none">{t('footer.role')}</p>
               </div>
             </div>
             
             <!-- Description -->
-            <p class="text-gray-700 dark:text-gray-300 leading-relaxed max-w-md">
+            <p class="text-gray-700 dark:text-gray-300 leading-relaxed max-w-md select-none">
               {t('footer.description')}
             </p>
           </div>
@@ -88,12 +88,12 @@ const quickLinks = [
         <div class="space-y-8">
           <!-- Navigation Links - Horizontal -->
           <div class="space-y-4">
-            <h4 class="text-lg font-semibold text-gray-900 dark:text-white">{t('footer.navigation')}</h4>
+            <h4 class="text-lg font-semibold text-gray-900 dark:text-white select-none">{t('footer.navigation')}</h4>
             <nav class="flex flex-wrap gap-x-6 gap-y-2">
               {quickLinks.map((link) => (
                 <a 
                   href={link.url}
-                  class="text-gray-700 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-all duration-300 group"
+                  class="text-gray-700 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-all duration-300 group select-none"
                 >
                   <span class="inline-flex items-center gap-2">
                     <span class="w-1 h-1 bg-primary-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
@@ -106,7 +106,7 @@ const quickLinks = [
 
           <!-- Contact & Social -->
           <div class="space-y-4">
-            <h4 class="text-lg font-semibold text-gray-900 dark:text-white">{t('footer.connect')}</h4>
+            <h4 class="text-lg font-semibold text-gray-900 dark:text-white select-none">{t('footer.connect')}</h4>
             
             <!-- Social Links -->
             <div class="flex flex-wrap gap-4">
@@ -148,18 +148,18 @@ const quickLinks = [
     <!-- Bottom Bar -->
     <div class="border-t border-gray-200 dark:border-gray-800 py-8">
       <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
-        <div class="text-gray-600 dark:text-gray-400 text-sm">
+        <div class="text-gray-600 dark:text-gray-400 text-sm select-none">
           © {currentYear} Nacho Sizle. {t('footer.madeWith')} 
           <span class="text-red-500 mx-1">♥</span> 
           {t('footer.and')} <a href="https://astro.build" class="text-primary-500 hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-300 transition-colors">Astro</a>
         </div>
         
         <div class="flex items-center gap-6 text-sm text-gray-600 dark:text-gray-400">
-          <a href={getTranslatedPath('/privacy', lang)} class="hover:text-gray-900 dark:hover:text-white transition-colors">{t('footer.privacy')}</a>
-          <a href={getTranslatedPath('/terms', lang)} class="hover:text-gray-900 dark:hover:text-white transition-colors">{t('footer.terms')}</a>
+          <a href={getTranslatedPath('/privacy', lang)} class="hover:text-gray-900 dark:hover:text-white transition-colors select-none">{t('footer.privacy')}</a>
+          <a href={getTranslatedPath('/terms', lang)} class="hover:text-gray-900 dark:hover:text-white transition-colors select-none">{t('footer.terms')}</a>
           <div class="flex items-center gap-2">
             <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-            <span>{t('footer.available')}</span>
+            <span class="select-none">{t('footer.available')}</span>
           </div>
         </div>
       </div>
@@ -169,10 +169,10 @@ const quickLinks = [
   <!-- Scroll to top button -->
   <button
     id="scrollToTop"
-    class="fixed bottom-8 right-8 w-12 h-12 bg-primary-500 hover:bg-primary-600 text-white rounded-full shadow-lg hover:shadow-primary/25 transition-all duration-300 opacity-0 pointer-events-none z-50 group"
+    class="fixed bottom-24 right-8 w-12 h-12 bg-primary-500 hover:bg-primary-600 text-white rounded-full shadow-lg hover:shadow-primary/25 transition-all duration-300 opacity-0 pointer-events-none z-50 group border cursor-pointer"
     aria-label={t('footer.scrollTop')}
   >
-    <svg class="w-6 h-6 mx-auto group-hover:-translate-y-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg class="w-6 h-6 mx-auto transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
     </svg>
   </button>

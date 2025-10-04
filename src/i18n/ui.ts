@@ -13,19 +13,19 @@ export const ui = {
     'nav.projects': 'Proyectos',
     'nav.about': 'Nacho',
     'nav.contact': 'Contacto',
-    
+
     // Hero Section
     'hero.greeting': '¡Hola! Soy',
     'hero.title': 'Construyo frontends que cargan en',
     'hero.title.highlight': 'menos de un segundo',
     'hero.description': 'Frontend lover que convierte cada ms en 💰 sin sacrificar código limpio.',
-    'hero.description.line2': 'Rendimiento⚡y DX 🛠️, todo en un mismo commit.',
+    'hero.description.line2': 'Rendimiento y DX 🚀, todo en un mismo commit.',
     'hero.cta.primary': 'Ver Proyectos',
     'hero.cta.cv': 'Descargar CV',
     'hero.social.linkedin': 'LinkedIn',
     'hero.social.threads': 'Threads',
     'hero.social.github': 'GitHub',
-    
+
     // About Section
     'about.title': 'Conoce a Nacho',
     'about.subtitle': 'Desarrollador frontend 💻 apasionado por crear experiencias digitales.<br />Transformo ideas en realidades interactivas 🚀 con código limpio.<br />Diseño intuitivo ✨ que marca la diferencia.',
@@ -34,7 +34,7 @@ export const ui = {
     'about.stats.projects': 'Proyectos completados',
     'about.stats.technologies': 'Tecnologías dominadas',
     'about.stats.passion': 'Pasión por el código',
-    
+
     // Projects Section
     'projects.title': 'Proyectos',
     'projects.titleHighlight': 'destacados',
@@ -46,7 +46,27 @@ export const ui = {
     'projects.technologies': 'Tecnologías',
     'projects.likeWhat': '¿Te gusta lo que ves?',
     'projects.viewMore': 'Ver más en GitHub',
-    
+    'projects.coverAlt': 'Portada de {{title}}',
+    'projects.backToList': 'Volver a proyectos',
+
+    'projects.blog-engine.title': 'Motor de Blog',
+    'projects.blog-engine.description': 'Un motor de blog basado en markdown con soporte para MDX.',
+    'projects.ecommerce-platform.title': 'Plataforma de E-commerce',
+    'projects.ecommerce-platform.description': 'Una plataforma de comercio electrónico moderna con un enfoque en el rendimiento.',
+    'projects.portfolio-website.title': 'Sitio Web de Portfolio',
+    'projects.portfolio-website.description': 'Un portfolio personal construido con Astro.',
+
+    // Theme Toggle
+    'theme.toggle': 'Cambiar tema',
+    'theme.toggle.toLight': 'Cambiar a tema claro',
+    'theme.toggle.toDark': 'Cambiar a tema oscuro',
+
+    // Language Picker
+    'language.change': 'Cambiar idioma',
+
+    // Profile
+    'profile.photoAlt': '{{name}} - Desarrollador Frontend',
+
     // Footer
     'footer.description': 'Desarrollador frontend especializado en crear experiencias web modernas, rápidas y accesibles. Siempre en busca de la perfección técnica y visual.',
     'footer.role': 'Frontend Developer',
@@ -63,7 +83,7 @@ export const ui = {
     'footer.links.projects': 'Proyectos',
     'footer.links.about': 'Sobre mí',
     'footer.links.contact': 'Contacto',
-    
+
     // Common
     'common.loading': 'Cargando...',
     'common.error': 'Error',
@@ -76,28 +96,28 @@ export const ui = {
     'nav.projects': 'Projects',
     'nav.about': 'Nacho',
     'nav.contact': 'Contact',
-    
+
     // Hero Section
-    'hero.greeting': 'Hi! I\'m',
-    'hero.title': 'I build frontends that load in',
+    'hero.greeting': "Hi! I'm",
+    'hero.title': 'Building frontends that load in',
     'hero.title.highlight': 'less than a second',
-    'hero.description': 'Frontend lover who turns every ms into 💰 without sacrificing clean code.',
-    'hero.description.line2': 'Performance⚡and DX 🛠️, all in the same commit.',
+    'hero.description': 'A frontend enthusiast who turns every millisecond into 💰 without compromising on clean code.',
+    'hero.description.line2': 'Performance and DX 🚀, all in one commit.',
     'hero.cta.primary': 'View Projects',
     'hero.cta.cv': 'Download CV',
     'hero.social.linkedin': 'LinkedIn',
     'hero.social.threads': 'Threads',
     'hero.social.github': 'GitHub',
-    
+
     // About Section
-    'about.title': 'Meet Nacho',
-    'about.subtitle': 'Frontend developer 💻 passionate about creating digital experiences.<br />I transform ideas into interactive realities 🚀 with clean code.<br />Intuitive design ✨ that makes a difference.',
-    'about.description': 'Frontend developer specialized in creating modern, fast and accessible web experiences. Always pursuing technical and visual perfection.',
+    'about.title': 'About Me',
+    'about.subtitle': 'A passionate frontend developer 💻 who loves creating digital experiences.<br />I turn ideas into interactive realities 🚀 with clean code.<br />Intuitive design ✨ that makes a difference.',
+    'about.description': 'A frontend developer specializing in creating modern, fast, and accessible web experiences. Always striving for technical and visual perfection.',
     'about.stats.experience': 'Years of experience',
     'about.stats.projects': 'Completed projects',
-    'about.stats.technologies': 'Mastered technologies',
-    'about.stats.passion': 'Passion for code',
-    
+    'about.stats.technologies': 'Technologies mastered',
+    'about.stats.passion': 'Passion for coding',
+
     // Projects Section
     'projects.title': 'Projects',
     'projects.titleHighlight': 'featured',
@@ -109,11 +129,31 @@ export const ui = {
     'projects.technologies': 'Technologies',
     'projects.likeWhat': 'Like what you see?',
     'projects.viewMore': 'View more on GitHub',
-    
+    'projects.coverAlt': 'Cover of {{title}}',
+    'projects.backToList': 'Back to projects',
+
+    'projects.blog-engine.title': 'Blog Engine',
+    'projects.blog-engine.description': 'A markdown-based blog engine with support for MDX.',
+    'projects.ecommerce-platform.title': 'E-commerce Platform',
+    'projects.ecommerce-platform.description': 'A modern e-commerce platform with a focus on performance.',
+    'projects.portfolio-website.title': 'Portfolio Website',
+    'projects.portfolio-website.description': 'A personal portfolio built with Astro.',
+
+    // Theme Toggle
+    'theme.toggle': 'Switch theme',
+    'theme.toggle.toLight': 'Switch to light theme',
+    'theme.toggle.toDark': 'Switch to dark theme',
+
+    // Language Picker
+    'language.change': 'Change language',
+
+    // Profile
+    'profile.photoAlt': '{{name}} - Frontend Developer',
+
     // Footer
-    'footer.description': 'Frontend developer specialized in creating modern, fast and accessible web experiences. Always pursuing technical and visual perfection.',
+    'footer.description': 'A frontend developer specializing in creating modern, fast, and accessible web experiences. Always striving for technical and visual perfection.',
     'footer.role': 'Frontend Developer',
-    'footer.cta': 'Let\'s work together',
+    'footer.cta': "Let's build something together",
     'footer.navigation': 'Navigation',
     'footer.connect': 'Connect with me',
     'footer.madeWith': 'Made with',
@@ -124,9 +164,9 @@ export const ui = {
     'footer.scrollTop': 'Back to top',
     'footer.links.home': 'Home',
     'footer.links.projects': 'Projects',
-    'footer.links.about': 'About',
+    'footer.links.about': 'About Me',
     'footer.links.contact': 'Contact',
-    
+
     // Common
     'common.loading': 'Loading...',
     'common.error': 'Error',

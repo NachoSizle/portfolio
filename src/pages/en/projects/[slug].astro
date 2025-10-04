@@ -22,24 +22,24 @@ const content = project.data;
 ---
 <BaseLayout title={content.title} description={content.description}>
   <Image src={content.cover} alt={`Cover of ${content.title}`} width={1275} height={850} class="w-full max-w-2xl h-64 object-cover rounded shadow mb-6 mx-auto" />
-  <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl text-balance md:leading-20">{content.title}</h1>
-  <p>{content.description}</p>
-  <ul>
+  <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl text-balance md:leading-20 select-none">{content.title}</h1>
+  <p class="select-none">{content.description}</p>
+  <ul class="select-none">
     {content.stack.map((tech: string) => (
       <li>{tech}</li>
     ))}
   </ul>
   {content.demoLink && (
-    <a href={content.demoLink} target="_blank" rel="noopener noreferrer">
+    <a href={content.demoLink} target="_blank" rel="noopener noreferrer" class="select-none">
       View Demo
     </a>
   )}
   {content.repoLink && (
-    <a href={content.repoLink} target="_blank" rel="noopener noreferrer">
+    <a href={content.repoLink} target="_blank" rel="noopener noreferrer" class="select-none">
       View Repository
     </a>
   )}
-  <a href={`${BASE_URL}/en/`} class="block mt-8 text-blue-600 dark:text-blue-400 underline hover:text-blue-800">
+  <a href={`${BASE_URL}/en/`} class="block mt-8 text-blue-600 dark:text-blue-400 underline hover:text-blue-800 select-none">
     ← Back to projects
   </a>
 </BaseLayout>

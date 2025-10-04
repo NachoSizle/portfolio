@@ -9,11 +9,11 @@ const t = useTranslations(lang);
 
 <section class="relative isolate overflow-hidden bg-transparent" aria-labelledby="hero-section">
   <div class="mx-auto max-w-4xl px-6 py-12 sm:py-0 sm:pb-18 text-center relative z-10">
-    <h1 class="text-4xl mt-0 sm:mt-18 font-extrabold tracking-tight sm:text-5xl md:text-6xl text-balance md:leading-20">
+    <h1 class="text-4xl mt-0 sm:mt-18 font-extrabold tracking-tight sm:text-5xl md:text-6xl text-balance md:leading-20 select-none">
       {t('hero.title')} <span class="text-primary">{t('hero.title.highlight')}</span>⚡
     </h1>
 
-    <p class="my-18 mt-10 text-xl max-w-2xl mx-auto leading-8 text-neutral-600 dark:text-neutral-300 text-balance">
+    <p class="my-18 mt-10 text-xl max-w-2xl mx-auto leading-8 text-neutral-600 dark:text-neutral-300 text-balance select-none">
       {t('hero.description')}
       <br />
       {t('hero.description.line2')}
@@ -30,7 +30,7 @@ const t = useTranslations(lang);
         rel="noopener noreferrer"
         class="inline-flex items-center gap-2 rounded-xl border-2 border-emerald-700 hover:bg-emerald-700 hover:text-white dark:border-emerald-500 dark:hover:bg-emerald-500
          px-6 py-3 text-sm font-medium shadow-sm transition hover:bg-primary/10 focus:outline-none
-         focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary"
+         focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary select-none"
       >
         {t('hero.cta.cv')}
       </a>

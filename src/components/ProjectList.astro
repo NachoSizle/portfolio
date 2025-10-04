@@ -15,10 +15,10 @@ const totalProjects = projects.length;
 <section class="relative m-12 mt-0 bg-transparent overflow-hidden" aria-labelledby="projects-section">
   <!-- Header con animación sutil -->
   <div class="text-center mb-12 relative z-10">
-    <h2 id="projects-section" class="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl text-balance md:leading-20 mb-4">
+    <h2 id="projects-section" class="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl text-balance md:leading-20 mb-4 select-none">
       {t('projects.title')} <span class="text-primary">{t('projects.titleHighlight')}</span>
     </h2>
-    <p class="text-lg text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto" set:html={t('projects.subtitle')} />
+    <p class="text-lg text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto select-none" set:html={t('projects.subtitle')} />
   </div>
 
   <!-- Lista de proyectos usando ProjectCard con sticky scroll -->
@@ -40,7 +40,7 @@ const totalProjects = projects.length;
         target="_blank" 
         rel="noopener noreferrer"
         class="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 
-               transition-colors duration-200"
+               transition-colors duration-200 select-none"
         aria-label={t('projects.viewMore')}
       >
         <span class="text-sm font-medium text-neutral-700 dark:text-neutral-300">

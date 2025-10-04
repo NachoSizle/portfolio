@@ -29,7 +29,7 @@ export default function SocialButton(props: { href: string; label: string; iconN
                sm:text-gray-900 dark:text-emerald-400 sm:dark:text-white
                p-3 text-sm font-medium shadow-sm transition-colors focus:outline-none
                focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary 
-               hover:text-emerald-500"
+               hover:text-emerald-500 select-none"
         aria-label={props.label}
       >
         <span class="sr-only">{props.label}</span>
@@ -39,7 +39,7 @@ export default function SocialButton(props: { href: string; label: string; iconN
         <div
           class="absolute top-full left-1/2 z-10 mt-2 -translate-x-1/2 whitespace-nowrap
                  rounded-md bg-gray-900 px-3 py-1.5 text-sm font-semibold text-white shadow-lg
-                 dark:bg-gray-700"
+                 dark:bg-gray-700 select-none"
           role="tooltip"
         >
           {props.label}

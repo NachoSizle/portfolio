@@ -29,7 +29,7 @@ function getAlternateUrl(targetLang: string) {
 <div class="relative inline-block">
   <button
     id="language-toggle"
-    class="flex items-center gap-2 px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
+    class="flex items-center gap-2 px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 select-none"
     aria-label="Change language"
   >
     <svg class="w-5 h-5 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -50,7 +50,7 @@ function getAlternateUrl(targetLang: string) {
     {Object.entries(languages).map(([code, name]) => (
       <a
         href={getAlternateUrl(code)}
-        class={`block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors first:rounded-t-lg last:rounded-b-lg ${
+        class={`block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors first:rounded-t-lg last:rounded-b-lg select-none ${
           code === lang
             ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 font-semibold'
             : 'text-gray-700 dark:text-gray-200'

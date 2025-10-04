@@ -35,13 +35,13 @@ const layerZIndex = 100 - index;
             <div class="absolute inset-0 rounded-[20px] bg-gradient-to-br from-primary/10 via-transparent to-emerald-400/20 opacity-0 transition-opacity duration-700 group-hover:opacity-100" aria-hidden="true" />
             <Image
               src={cover}
-              alt={`Cover de ${title}`}
+              alt={t('projects.coverAlt', { title: t(title) })}
               width={1275}
               height={850}
               class="relative z-10 h-full w-full rounded-[16px] object-cover shadow-[0_15px_35px_-20px_rgba(15,23,42,0.55)] transition-transform duration-700 group-hover:scale-[1.03]"
             />
             {formattedDate && (
-              <span class="absolute bottom-6 left-6 z-20 inline-flex items-center gap-2 rounded-full bg-white/90 px-3 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-neutral-700 shadow-sm backdrop-blur dark:bg-neutral-950/90 dark:text-neutral-200">
+              <span class="absolute bottom-6 left-6 z-20 inline-flex items-center gap-2 rounded-full bg-white/90 px-3 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-neutral-700 shadow-sm backdrop-blur dark:bg-neutral-950/90 dark:text-neutral-200 select-none">
                 {formattedDate}
               </span>
             )}
@@ -50,16 +50,16 @@ const layerZIndex = 100 - index;
           <div class="flex flex-col gap-4">
             <header class="space-y-2">
               {primaryTag && (
-                <span class="inline-flex items-center rounded-full border border-primary/30 bg-primary/5 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-primary/90 dark:border-primary/40 dark:bg-primary/10 dark:text-primary/80">
+                <span class="inline-flex items-center rounded-full border border-primary/30 bg-primary/5 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-primary/90 dark:border-primary/40 dark:bg-primary/10 dark:text-primary/80 select-none">
                   {primaryTag}
                 </span>
               )}
-              <h3 class="text-xl font-semibold leading-tight text-neutral-900 dark:text-neutral-50 sm:text-2xl">
+              <h3 class="text-xl font-semibold leading-tight text-neutral-900 dark:text-neutral-50 sm:text-2xl select-none">
                 <a
                   href={projectUrl}
                   class="inline-flex items-center gap-2 transition-transform duration-200 hover:translate-x-1 hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary/60 dark:hover:text-primary"
                 >
-                  {title}
+                  {t(title)}
                   <svg class="h-5 w-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 6.75L21 10.5m0 0l-3.75 3.75M21 10.5H10.5" />
                   </svg>
@@ -67,8 +67,8 @@ const layerZIndex = 100 - index;
               </h3>
             </header>
 
-            <p class="text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">
-              {description}
+            <p class="text-sm leading-relaxed text-neutral-600 dark:text-neutral-300 select-none">
+              {t(description)}
             </p>
 
             {supportingTags.length > 0 && (
@@ -76,7 +76,7 @@ const layerZIndex = 100 - index;
                 {supportingTags.map((tag) => (
                   <li
                     set:key={tag}
-                    class="rounded-full border border-neutral-200 bg-white px-3 py-1 text-xs font-medium tracking-wide text-neutral-600 shadow-sm transition-colors duration-200 group-hover:border-primary/40 group-hover:text-primary dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200"
+                    class="rounded-full border border-neutral-200 bg-white px-3 py-1 text-xs font-medium tracking-wide text-neutral-600 shadow-sm transition-colors duration-200 group-hover:border-primary/40 group-hover:text-primary dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200 select-none"
                   >
                     {tag}
                   </li>
@@ -91,7 +91,7 @@ const layerZIndex = 100 - index;
                     href={demoLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="inline-flex items-center gap-2 rounded-full bg-primary px-3 py-1.5 text-white shadow-[0_8px_20px_-10px_rgba(59,130,246,0.9)] transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                    class="inline-flex items-center gap-2 rounded-full bg-primary px-3 py-1.5 text-white shadow-[0_8px_20px_-10px_rgba(59,130,246,0.9)] transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary select-none"
                   >
                     {t('projects.viewDemo')}
                     <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -104,7 +104,7 @@ const layerZIndex = 100 - index;
                     href={repoLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-neutral-700 transition-colors duration-200 hover:border-neutral-400 hover:text-neutral-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-400 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200 dark:hover:border-primary/40"
+                    class="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-neutral-700 transition-colors duration-200 hover:border-neutral-400 hover:text-neutral-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-400 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200 dark:hover:border-primary/40 select-none"
                   >
                     {t('projects.viewRepository')}
                     <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">

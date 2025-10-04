@@ -17,10 +17,10 @@ const { stats } = Astro.props;
     {stats.map((stat) => (
       <div class="text-center group">
         <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300 group-hover:scale-105">
-          <div class="text-3xl lg:text-4xl font-bold text-primary-600 dark:text-primary-400 mb-2">
+          <div class="text-3xl lg:text-4xl font-bold text-primary-600 dark:text-primary-400 mb-2 select-none">
             {stat.number}
           </div>
-          <div class="text-sm lg:text-base text-gray-600 dark:text-gray-300 font-medium">
+          <div class="text-sm lg:text-base text-gray-600 dark:text-gray-300 font-medium select-none">
             {stat.label}
           </div>
         </div>
