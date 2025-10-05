@@ -14,6 +14,16 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const { title, description, stack = [], cover, demoLink, repoLink, date } = project.data;
+// Helper: intentar traducir si existe la clave, sino devolver el texto original
+function translateOrRaw(val: unknown) {
+  if (typeof val !== 'string') return String(val);
+  try {
+    // For safety cast t to any to allow runtime attempts without TypeScript complaints
+    return (t as any)(val) ?? val;
+  } catch (e) {
+    return val;
+  }
+}
 const formattedDate = date?.toLocaleDateString(lang === 'es' ? 'es-ES' : 'en-US', {
   month: 'long',
   year: 'numeric',
@@ -106,7 +116,7 @@ const colorScheme = projectColors[index % projectColors.length];
                     aria-label={typeof title === 'string' ? title : String(title)}
                   >
                     <span class={`relative bg-gradient-to-r ${colorScheme.from} ${colorScheme.via} ${colorScheme.to} bg-clip-text text-transparent transition-all duration-500 group-hover/title:tracking-wide leading-12 sm:leading-16`}>
-                      {typeof title === 'string' ? title : String(title)}
+                      {translateOrRaw(title)}
                       <!-- Subrayado animado triple -->
                       <span class={`absolute -bottom-3 left-0 w-0 h-1 bg-gradient-to-r ${colorScheme.from} ${colorScheme.to} transition-all duration-700 group-hover/title:w-full rounded-full`}></span>
                       <span class={`absolute -bottom-3 left-0 w-full h-1 bg-gradient-to-r ${colorScheme.from} ${colorScheme.to} scale-x-0 group-hover/title:scale-x-100 transition-transform duration-500 delay-100 rounded-full opacity-60`}></span>
@@ -147,7 +157,7 @@ const colorScheme = projectColors[index % projectColors.length];
 
               <!-- Descripción con tipografía mejorada -->
               <p class="text-base md:text-xl leading-relaxed text-neutral-600 dark:text-neutral-400 font-medium select-none max-w-2xl">
-                {typeof description === 'string' ? description : String(description)}
+                {translateOrRaw(description)}
               </p>
             </div>
 
