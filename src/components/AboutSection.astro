@@ -16,7 +16,7 @@ const stats = [
 ];
 ---
 
-<section class="relative py-12 pb-32 overflow-hidden bg-transparent" id="about">
+<section class="relative py-12 pb-20 overflow-hidden bg-transparent" id="about">
   <!-- Floating geometric shapes -->
   <div class="absolute inset-0 overflow-hidden">
     <div class="absolute top-1/3 left-1/5 w-4 h-4 bg-primary/20 rounded-full animate-float" style="animation-delay: 1s;"></div>
@@ -25,7 +25,7 @@ const stats = [
   </div>
 
   <!-- Header -->
-  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
     <div class="text-center mb-16">
       <h2 class="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl text-balance md:leading-20 mb-6 select-none">
         <span class="bg-gradient-to-r from-gray-900 via-primary to-gray-900 dark:from-white dark:via-primary-400 dark:to-white bg-clip-text text-transparent">
@@ -37,9 +37,9 @@ const stats = [
   </div>
 
   <!-- Main Content - Profile with Orbiting Tech -->
-  <div class="relative w-full flex flex-col justify-start items-center py-18 min-h-[400px] sm:min-h-[500px]">
+  <div class="relative w-full flex flex-col justify-start items-center min-h-[400px] sm:min-h-[500px]">
     <!-- Container with relative positioning for the orbs -->
-    <div class="relative w-[320px] h-[320px] sm:w-[380px] sm:h-[380px] lg:w-[400px] lg:h-[400px] flex items-center justify-center" style="perspective: 1200px; transform-style: preserve-3d;">
+    <div class="relative w-[420px] h-[420px] flex items-center justify-center orbit-main-container" style="perspective: 1200px; transform-style: preserve-3d;">
       
       <!-- Central Profile Photo -->
       <ProfilePhoto name="Nacho Martinez" />
@@ -66,5 +66,13 @@ const stats = [
   
   .animate-float {
     animation: float 6s ease-in-out infinite;
+  }
+  
+  /* Desde 610px usamos el tamaño grande del contenedor de órbitas */
+  @media (min-width: 610px) {
+    .orbit-main-container {
+      width: 500px !important;
+      height: 500px !important;
+    }
   }
 </style>

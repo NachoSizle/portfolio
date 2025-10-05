@@ -12,7 +12,7 @@ const { projects } = Astro.props;
 const totalProjects = projects.length;
 ---
 
-<section class="relative m-12 mt-0 bg-transparent overflow-hidden" aria-labelledby="projects-section">
+<section class="relative m-6 mb-12 mt-0 bg-transparent overflow-hidden" aria-labelledby="projects-section">
   <!-- Header con animación sutil -->
   <div class="text-center mb-12 relative z-10">
     <h2 id="projects-section" class="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl text-balance md:leading-20 mb-4 select-none">
@@ -34,7 +34,7 @@ const totalProjects = projects.length;
 
   <!-- Call to action al final -->
   <div class="mt-16 text-center">
-    <div class="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-primary/10 to-emerald-500/10 rounded-full border border-primary/20 dark:border-emerald-500/20">
+    <div class="w-full sm:max-w-xs inline-flex items-center justify-center gap-3 px-6 py-3 bg-gradient-to-r from-primary/10 to-emerald-500/10 rounded-full border border-primary/20 dark:border-emerald-500/20">
       <a 
         href="https://github.com/NachoSizle" 
         target="_blank" 

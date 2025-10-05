@@ -31,25 +31,35 @@ const navLinks = [
 
 <header class="sticky top-0 z-200 flex justify-center items-center p-4">
   <nav id="main-nav" class="flex gap-3.5 py-2 px-6 rounded-4xl items-center">
-    {
-      navLinks.map((link) => (
-        <a
-          href={link.href}
-          class="text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100 select-none"
-        >
-          {link.label}
-        </a>
-      ))
-    }
-    <div class="h-6 w-px bg-gray-300 dark:bg-gray-700"></div>
-    <LanguagePicker />
-    <ThemeToggle />
+    <!-- Enlaces de navegación (solo desktop) -->
+    <div class="hidden md:flex gap-3.5 items-center">
+      {
+        navLinks.map((link) => (
+          <a
+            href={link.href}
+            class="text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100 select-none"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </div>
+
+    <!-- Separador (solo desktop) -->
+    <div class="hidden md:block h-6 w-px bg-gray-300 dark:bg-gray-700"></div>
+
+    <!-- Controles (siempre visibles) -->
+    <div class="flex gap-3 items-center">
+      <LanguagePicker />
+      <ThemeToggle />
+    </div>
   </nav>
 </header>
 
 <script is:inline>
   window.addEventListener("scroll", () => {
     const nav = document.getElementById("main-nav");
+    
     if (window.scrollY > 10) {
       nav?.classList.add("scrolled-nav");
     } else {

@@ -1,5 +1,5 @@
 ---
-// Stats Grid Component - Grilla de estadísticas
+// Stats Grid Component - Bento Grid Style
 export interface Stat {
   number: string;
   label: string;
@@ -12,19 +12,130 @@ export interface Props {
 const { stats } = Astro.props;
 ---
 
-<div class="relative z-10 max-w-4xl sm:max-w-6xl mx-auto px-6 lg:px-8">
-  <div class="mt-20 grid grid-cols-2 lg:grid-cols-4 gap-5">
-    {stats.map((stat) => (
-      <div class="text-center group">
-        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300 group-hover:scale-105">
-          <div class="text-3xl lg:text-4xl font-bold text-primary-600 dark:text-primary-400 mb-2 select-none">
-            {stat.number}
+<div class="relative z-10 max-w-5xl mx-auto px-6 lg:px-8 mt-20">
+  <!-- Bento Grid Layout - Diseño asimétrico -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 auto-rows-[180px]">
+    
+    <!-- Card 1: Años de experiencia (tall en desktop, normal en mobile) -->
+    <div class="row-span-1 sm:row-span-2 group">
+      <div class="relative h-full bg-gradient-to-br from-orange-500 via-red-500 to-pink-600 dark:from-orange-600 dark:via-red-600 dark:to-pink-700 rounded-3xl p-8 shadow-xl border border-orange-400/20 dark:border-orange-500/30 hover:shadow-2xl transition-all duration-300 overflow-hidden">
+        <!-- Background decoration -->
+        <div class="absolute inset-0 opacity-10">
+          <div class="absolute top-4 right-4 w-32 h-32 bg-white rounded-full blur-3xl"></div>
+        </div>
+        
+        <div class="relative z-10 h-full flex flex-col justify-between">
+          <div class="flex items-start justify-between">
+            <div>
+              <div class="text-5xl lg:text-6xl font-extrabold text-white mb-3 select-none">
+                {stats[0].number}
+              </div>
+              <div class="text-lg lg:text-xl text-white font-semibold select-none">
+                {stats[0].label}
+              </div>
+            </div>
+            <div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
           </div>
-          <div class="text-sm lg:text-base text-gray-600 dark:text-gray-300 font-medium select-none">
-            {stat.label}
+          <div class="text-sm text-white select-none">
+            Construyendo experiencias digitales desde 2015
           </div>
         </div>
       </div>
-    ))}
+    </div>
+
+    <!-- Card 2: Proyectos completados (normal - 1 row, arriba derecha) -->
+    <div class="row-span-1 group">
+      <div class="relative h-full bg-gradient-to-br from-blue-500 via-cyan-500 to-teal-500 dark:from-blue-600 dark:via-cyan-600 dark:to-teal-600 rounded-3xl p-8 shadow-xl border border-blue-400/20 dark:border-blue-500/30 hover:shadow-2xl transition-all duration-300 overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+          <div class="absolute bottom-4 left-4 w-24 h-24 bg-white rounded-full blur-2xl"></div>
+        </div>
+        
+        <div class="relative z-10 h-full flex flex-col justify-between">
+          <div class="flex items-start justify-between">
+            <div>
+              <div class="text-5xl lg:text-6xl font-extrabold text-white mb-3 select-none">
+                {stats[1].number}
+              </div>
+              <div class="text-lg lg:text-xl text-white font-semibold select-none">
+                {stats[1].label}
+              </div>
+            </div>
+            <div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+          </div>
+          <div class="text-sm text-white select-none">
+            Entregando soluciones de calidad
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3: Tecnologías dominadas (normal - 1 row, abajo derecha) -->
+    <div class="row-span-1 group">
+      <div class="relative h-full bg-gradient-to-br from-purple-500 via-violet-500 to-indigo-600 dark:from-purple-600 dark:via-violet-600 dark:to-indigo-700 rounded-3xl p-8 shadow-xl border border-purple-400/20 dark:border-purple-500/30 hover:shadow-2xl transition-all duration-300 overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+          <div class="absolute top-4 right-4 w-24 h-24 bg-white rounded-full blur-2xl"></div>
+        </div>
+        
+        <div class="relative z-10 h-full flex flex-col justify-between">
+          <div class="flex items-start justify-between">
+            <div>
+              <div class="text-5xl lg:text-6xl font-extrabold text-white mb-3 select-none">
+                {stats[2].number}
+              </div>
+              <div class="text-lg lg:text-xl text-white font-semibold select-none">
+                {stats[2].label}
+              </div>
+            </div>
+            <div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+              </svg>
+            </div>
+          </div>
+          <div class="text-sm text-white select-none">
+            Dominando tecnologías modernas y frameworks
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4: Pasión por el código (wide - 2 columns, fila completa abajo) -->
+    <div class="col-span-1 sm:col-span-2 row-span-1 group">
+      <div class="relative h-full bg-gradient-to-br from-emerald-500 via-green-500 to-teal-600 dark:from-emerald-600 dark:via-green-600 dark:to-teal-700 rounded-3xl p-8 shadow-xl border border-emerald-400/20 dark:border-emerald-500/30 hover:shadow-2xl transition-all duration-300 overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+          <div class="absolute bottom-4 right-4 w-32 h-32 bg-white rounded-full blur-2xl"></div>
+        </div>
+        
+        <div class="relative z-10 h-full flex flex-col justify-between">
+          <div class="flex items-start justify-between">
+            <div>
+              <div class="text-5xl lg:text-6xl font-extrabold text-white mb-3 select-none">
+                {stats[3].number}
+              </div>
+              <div class="text-lg lg:text-xl text-white font-semibold select-none">
+                {stats[3].label}
+              </div>
+            </div>
+            <div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </div>
+          </div>
+          <div class="text-sm text-white select-none">
+            Cada línea de código escrita con amor y dedicación
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>

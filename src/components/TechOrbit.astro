@@ -157,38 +157,38 @@ const technologies = [
 ))}
 
 <style>
-  /* Animación de órbita elíptica para MOBILE - Radio aumentado (180px) */
+  /* Animación de órbita elíptica para MOBILE - Radio 160px */
   @keyframes orbit-saturn-mobile {
     0% {
-      transform: rotateX(20deg) rotateZ(0deg) translateX(180px) rotateZ(0deg) rotateX(-20deg);
+      transform: rotateX(20deg) rotateZ(0deg) translateX(160px) rotateZ(0deg) rotateX(-20deg);
     }
     15% {
-      transform: rotateX(20deg) rotateZ(54deg) translateX(180px) rotateZ(-54deg) rotateX(-20deg);
+      transform: rotateX(20deg) rotateZ(54deg) translateX(160px) rotateZ(-54deg) rotateX(-20deg);
     }
     20% {
-      transform: rotateX(20deg) rotateZ(72deg) translateX(180px) rotateZ(-72deg) rotateX(-20deg);
+      transform: rotateX(20deg) rotateZ(72deg) translateX(160px) rotateZ(-72deg) rotateX(-20deg);
     }
     25% {
-      transform: rotateX(20deg) rotateZ(90deg) translateX(180px) rotateZ(-90deg) rotateX(-20deg);
+      transform: rotateX(20deg) rotateZ(90deg) translateX(160px) rotateZ(-90deg) rotateX(-20deg);
     }
     30% {
-      transform: rotateX(20deg) rotateZ(108deg) translateX(180px) rotateZ(-108deg) rotateX(-20deg);
+      transform: rotateX(20deg) rotateZ(108deg) translateX(160px) rotateZ(-108deg) rotateX(-20deg);
     }
     35% {
-      transform: rotateX(20deg) rotateZ(126deg) translateX(180px) rotateZ(-126deg) rotateX(-20deg);
+      transform: rotateX(20deg) rotateZ(126deg) translateX(160px) rotateZ(-126deg) rotateX(-20deg);
     }
     50% {
-      transform: rotateX(20deg) rotateZ(180deg) translateX(180px) rotateZ(-180deg) rotateX(-20deg);
+      transform: rotateX(20deg) rotateZ(180deg) translateX(160px) rotateZ(-180deg) rotateX(-20deg);
     }
     75% {
-      transform: rotateX(20deg) rotateZ(270deg) translateX(180px) rotateZ(-270deg) rotateX(-20deg);
+      transform: rotateX(20deg) rotateZ(270deg) translateX(160px) rotateZ(-270deg) rotateX(-20deg);
     }
     100% {
-      transform: rotateX(20deg) rotateZ(360deg) translateX(180px) rotateZ(-360deg) rotateX(-20deg);
+      transform: rotateX(20deg) rotateZ(360deg) translateX(160px) rotateZ(-360deg) rotateX(-20deg);
     }
   }
 
-  /* Animación de órbita elíptica para DESKTOP - Radio normal (180px) */
+  /* Animación de órbita elíptica para DESKTOP - Radio normal (220px) */
   @keyframes orbit-saturn {
     0% {
       transform: rotateX(20deg) rotateZ(0deg) translateX(220px) rotateZ(0deg) rotateX(-20deg);
@@ -226,15 +226,15 @@ const technologies = [
     pointer-events: none;
   }
   
-  /* Desktop usa el radio más grande */
-  @media (min-width: 1024px) {
+  .orbit-container > div {
+    pointer-events: auto;
+  }
+  
+  /* Desde 610px usamos el radio más grande */
+  @media (min-width: 610px) {
     .orbit-container {
       animation: orbit-saturn 40s linear infinite;
     }
-  }
-  
-  .orbit-container > div {
-    pointer-events: auto;
   }
   
   /* Delays ajustados para distribuir los orbes uniformemente (13 orbes con 40s de duración) */
@@ -286,7 +286,8 @@ const technologies = [
     height: 40px !important;
   }
 
-  @media (min-width: 1024px) {
+  /* Desde 610px usamos tamaños grandes de orbes */
+  @media (min-width: 610px) {
     .orb-small {
       width: 70px !important;
       height: 70px !important;
