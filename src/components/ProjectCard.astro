@@ -106,7 +106,7 @@ const colorScheme = projectColors[index % projectColors.length];
                     aria-label={typeof title === 'string' ? title : String(title)}
                   >
                     <span class={`relative bg-gradient-to-r ${colorScheme.from} ${colorScheme.via} ${colorScheme.to} bg-clip-text text-transparent transition-all duration-500 group-hover/title:tracking-wide leading-12 sm:leading-16`}>
-                      {typeof title === 'string' ? t(title) : t(String(title))}
+                      {typeof title === 'string' ? title : String(title)}
                       <!-- Subrayado animado triple -->
                       <span class={`absolute -bottom-3 left-0 w-0 h-1 bg-gradient-to-r ${colorScheme.from} ${colorScheme.to} transition-all duration-700 group-hover/title:w-full rounded-full`}></span>
                       <span class={`absolute -bottom-3 left-0 w-full h-1 bg-gradient-to-r ${colorScheme.from} ${colorScheme.to} scale-x-0 group-hover/title:scale-x-100 transition-transform duration-500 delay-100 rounded-full opacity-60`}></span>
@@ -147,7 +147,7 @@ const colorScheme = projectColors[index % projectColors.length];
 
               <!-- Descripción con tipografía mejorada -->
               <p class="text-base md:text-xl leading-relaxed text-neutral-600 dark:text-neutral-400 font-medium select-none max-w-2xl">
-                {t(description as any)}
+                {typeof description === 'string' ? description : String(description)}
               </p>
             </div>
 
@@ -156,8 +156,8 @@ const colorScheme = projectColors[index % projectColors.length];
               
               <!-- Anillos orbitales animados (inspirados en TechOrbit) -->
               <div class="absolute inset-0 -m-8 opacity-0 group-hover:opacity-100 transition-opacity duration-1000">
-                <div class={`absolute inset-0 rounded-full border-2 border-dashed border-current opacity-20 animate-spin-slow`} style={`color: ${colorScheme.from}`}></div>
-                <div class={`absolute inset-4 rounded-full border-2 border-dashed border-current opacity-30 animate-spin-reverse`} style={`color: ${colorScheme.via}`}></div>
+                <div class={`absolute inset-0 rounded-full border-2 border-dashed opacity-20 animate-spin-slow`}></div>
+                <div class={`absolute inset-4 rounded-full border-2 border-dashed opacity-30 animate-spin-reverse`}></div>
               </div>
 
               <!-- Contenedor de imagen con efecto de levitación -->

@@ -7,9 +7,8 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const navLinks = [
-  { href: "#experience", label: t('nav.experience') },
-  { href: "#projects", label: t('nav.projects') },
   { href: "#about", label: t('nav.about') },
+  { href: "#projects", label: t('nav.projects') },
   { href: "#contact", label: t('nav.contact') },
 ];
 ---
@@ -57,13 +56,70 @@ const navLinks = [
 </header>
 
 <script is:inline>
-  window.addEventListener("scroll", () => {
-    const nav = document.getElementById("main-nav");
-    
-    if (window.scrollY > 10) {
-      nav?.classList.add("scrolled-nav");
-    } else {
-      nav?.classList.remove("scrolled-nav");
+  (function () {
+    const NAV_ID = 'main-nav';
+    const nav = document.getElementById(NAV_ID);
+
+    // Toggle scrolled-nav class based on scroll position (existing behaviour)
+    function updateScrolledNav() {
+      if (!nav) return;
+      if (window.scrollY > 10) {
+        nav.classList.add('scrolled-nav');
+      } else {
+        nav.classList.remove('scrolled-nav');
+      }
     }
-  });
+
+    window.addEventListener('scroll', updateScrolledNav, { passive: true });
+    // Run once to set initial state
+    updateScrolledNav();
+
+    // Helper: compute header height (prefer the header element, fall back to nav)
+    function getHeaderHeight() {
+      const headerEl = document.querySelector('header');
+      if (headerEl) return headerEl.getBoundingClientRect().height;
+      return nav ? nav.getBoundingClientRect().height : 0;
+    }
+
+    // Smooth scroll to an element accounting for header height and a small gap
+    function scrollToElementWithOffset(el, pushState = true) {
+      if (!el) return;
+      const headerHeight = getHeaderHeight();
+      const top = el.getBoundingClientRect().top + window.scrollY - headerHeight;
+      // Update URL hash without jumping
+      if (pushState && typeof history !== 'undefined') {
+        try {
+          history.pushState(null, '', `#${el.id}`);
+        } catch (e) {}
+      }
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+
+    // Delegate clicks on in-page anchors inside the nav
+    if (nav) {
+      nav.addEventListener('click', (ev) => {
+        const anchor = ev.target instanceof Element ? ev.target.closest('a[href^="#"]') : null;
+        if (!anchor) return;
+        const href = anchor.getAttribute('href');
+        if (!href || href === '#') return;
+        const id = href.slice(1);
+        const target = document.getElementById(id);
+        if (!target) return; // leave default behaviour if no target
+        ev.preventDefault();
+        scrollToElementWithOffset(target);
+      });
+    }
+
+    // If the page loads with a hash, adjust the initial scroll so the header doesn't cover the title
+    document.addEventListener('DOMContentLoaded', () => {
+      if (location.hash) {
+        const id = location.hash.slice(1);
+        const target = document.getElementById(id);
+        if (target) {
+          // Timeout to allow the browser to finish any native jump before we correct it
+          setTimeout(() => scrollToElementWithOffset(target, false), 50);
+        }
+      }
+    });
+  })();
 </script>
