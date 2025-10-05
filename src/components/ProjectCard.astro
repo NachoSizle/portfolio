@@ -13,7 +13,7 @@ import { getLangFromUrl, useTranslations } from '../i18n/utils';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const { title, description, stack, cover, demoLink, repoLink, date } = project.data;
+const { title, description, stack = [], cover, demoLink, repoLink, date } = project.data;
 const formattedDate = date?.toLocaleDateString(lang === 'es' ? 'es-ES' : 'en-US', {
   month: 'long',
   year: 'numeric',
@@ -103,9 +103,10 @@ const colorScheme = projectColors[index % projectColors.length];
                   <a
                     href={projectUrl}
                     class="group/title relative inline-flex items-center gap-4 transition-all duration-500 hover:gap-6"
+                    aria-label={typeof title === 'string' ? title : String(title)}
                   >
                     <span class={`relative bg-gradient-to-r ${colorScheme.from} ${colorScheme.via} ${colorScheme.to} bg-clip-text text-transparent transition-all duration-500 group-hover/title:tracking-wide leading-12 sm:leading-16`}>
-                      {t(title as any)}
+                      {typeof title === 'string' ? t(title) : t(String(title))}
                       <!-- Subrayado animado triple -->
                       <span class={`absolute -bottom-3 left-0 w-0 h-1 bg-gradient-to-r ${colorScheme.from} ${colorScheme.to} transition-all duration-700 group-hover/title:w-full rounded-full`}></span>
                       <span class={`absolute -bottom-3 left-0 w-full h-1 bg-gradient-to-r ${colorScheme.from} ${colorScheme.to} scale-x-0 group-hover/title:scale-x-100 transition-transform duration-500 delay-100 rounded-full opacity-60`}></span>

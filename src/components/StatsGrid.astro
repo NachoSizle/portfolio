@@ -10,6 +10,12 @@ export interface Props {
 }
 
 const { stats } = Astro.props;
+
+// Guard: asegurar que haya al menos 4 stats para evitar errores en tiempo de ejecución
+const safeStats = Array.isArray(stats) ? stats.slice(0, 4) : [];
+while (safeStats.length < 4) {
+  safeStats.push({ number: '-', label: '-' });
+}
 ---
 
 <div class="relative z-10 max-w-5xl mx-auto px-6 lg:px-8 mt-20">
@@ -28,10 +34,10 @@ const { stats } = Astro.props;
           <div class="flex items-start justify-between">
             <div>
               <div class="text-5xl lg:text-6xl font-extrabold text-white mb-3 select-none">
-                {stats[0].number}
+                {safeStats[0].number}
               </div>
               <div class="text-lg lg:text-xl text-white font-semibold select-none">
-                {stats[0].label}
+                {safeStats[0].label}
               </div>
             </div>
             <div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
@@ -58,10 +64,10 @@ const { stats } = Astro.props;
           <div class="flex items-start justify-between">
             <div>
               <div class="text-5xl lg:text-6xl font-extrabold text-white mb-3 select-none">
-                {stats[1].number}
+                {safeStats[1].number}
               </div>
               <div class="text-lg lg:text-xl text-white font-semibold select-none">
-                {stats[1].label}
+                {safeStats[1].label}
               </div>
             </div>
             <div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
@@ -88,10 +94,10 @@ const { stats } = Astro.props;
           <div class="flex items-start justify-between">
             <div>
               <div class="text-5xl lg:text-6xl font-extrabold text-white mb-3 select-none">
-                {stats[2].number}
+                {safeStats[2].number}
               </div>
               <div class="text-lg lg:text-xl text-white font-semibold select-none">
-                {stats[2].label}
+                {safeStats[2].label}
               </div>
             </div>
             <div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
@@ -118,10 +124,10 @@ const { stats } = Astro.props;
           <div class="flex items-start justify-between">
             <div>
               <div class="text-5xl lg:text-6xl font-extrabold text-white mb-3 select-none">
-                {stats[3].number}
+                {safeStats[3].number}
               </div>
               <div class="text-lg lg:text-xl text-white font-semibold select-none">
-                {stats[3].label}
+                {safeStats[3].label}
               </div>
             </div>
             <div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">

@@ -30,7 +30,9 @@ function getAlternateUrl(targetLang: string) {
   <button
     id="language-toggle"
     class="flex items-center gap-2 px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 select-none"
-    aria-label="Change language"
+    aria-label="Cambiar idioma"
+    aria-haspopup="menu"
+    aria-expanded="false"
   >
     <svg class="w-5 h-5 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
@@ -45,6 +47,8 @@ function getAlternateUrl(targetLang: string) {
 
   <div
     id="language-menu"
+    role="menu"
+    aria-hidden="true"
     class="absolute right-0 mt-2 w-40 rounded-lg bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700 opacity-0 invisible transition-all duration-200 z-50"
   >
     {Object.entries(languages).map(([code, name]) => (
@@ -77,21 +81,30 @@ function getAlternateUrl(targetLang: string) {
   if (toggle && menu && chevron) {
     toggle.addEventListener('click', () => {
       const isVisible = !menu.classList.contains('invisible');
-      
+
       if (isVisible) {
         menu.classList.add('opacity-0', 'invisible');
+        menu.setAttribute('aria-hidden', 'true');
+        toggle.setAttribute('aria-expanded', 'false');
         chevron.style.transform = 'rotate(0deg)';
       } else {
         menu.classList.remove('opacity-0', 'invisible');
+        menu.setAttribute('aria-hidden', 'false');
+        toggle.setAttribute('aria-expanded', 'true');
         chevron.style.transform = 'rotate(180deg)';
       }
     });
 
     // Cerrar al hacer clic fuera
     document.addEventListener('click', (e) => {
-      if (!toggle.contains(e.target as Node) && !menu.contains(e.target as Node)) {
-        menu.classList.add('opacity-0', 'invisible');
-        chevron.style.transform = 'rotate(0deg)';
+      const target = e.target;
+      if (target instanceof Node && !toggle.contains(target) && !menu.contains(target)) {
+        if (!menu.classList.contains('invisible')) {
+          menu.classList.add('opacity-0', 'invisible');
+          menu.setAttribute('aria-hidden', 'true');
+          toggle.setAttribute('aria-expanded', 'false');
+          chevron.style.transform = 'rotate(0deg)';
+        }
       }
     });
   }

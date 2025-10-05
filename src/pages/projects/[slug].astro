@@ -7,39 +7,63 @@ import { BASE_URL } from '../../constants';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
-  return projects.map((project: CollectionEntry<'projects'>) => ({
+  return projects.map((project) => ({
     params: { slug: project.slug },
   }));
 }
 
 const { slug } = Astro.params;
 const projects = await getCollection('projects');
-const project = projects.find((p: CollectionEntry<'projects'>) => p.slug === slug);
-if (!project) {
-  throw new Error('Not Found');
-}
+const project = projects.find((p) => p.slug === slug);
+if (!project) throw new Error('Not Found');
 const content = project.data;
+// Seguridad: asegurar que stack es siempre un array
+const stack = Array.isArray(content.stack) ? content.stack : [];
 ---
 <BaseLayout title={content.title} description={content.description}>
-  <Image src={content.cover} alt={`Cover de ${content.title}`} width={1275} height={850} class="w-full max-w-2xl h-64 object-cover rounded shadow mb-6 mx-auto" />
+  {content.cover && (
+    <Image
+      src={content.cover}
+      alt={`Cover de ${content.title}`}
+      width={1275}
+      height={850}
+      class="w-full max-w-2xl h-64 object-cover rounded shadow mb-6 mx-auto"
+    />
+  )}
   <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl text-balance md:leading-20 select-none">{content.title}</h1>
   <p class="select-none">{content.description}</p>
-  <ul class="select-none">
-    {content.stack.map((tech: string) => (
+  <ul class="select-none" role="list" aria-label={`Stack de ${content.title}`}>
+    {stack.map((tech) => (
       <li>{tech}</li>
     ))}
   </ul>
   {content.demoLink && (
-    <a href={content.demoLink} target="_blank" rel="noopener noreferrer" class="select-none">
+    <a
+      href={content.demoLink}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="select-none"
+      aria-label={`Demo de ${content.title}`}
+    >
       Ver Demo
     </a>
   )}
   {content.repoLink && (
-    <a href={content.repoLink} target="_blank" rel="noopener noreferrer" class="select-none">
+    <a
+      href={content.repoLink}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="select-none"
+      aria-label={`Repositorio de ${content.title}`}
+    >
       Ver Repositorio
     </a>
   )}
-  <a href={`${BASE_URL}/`} class="block mt-8 text-blue-600 dark:text-blue-400 underline hover:text-blue-800 select-none">
+  <a
+    href={`${BASE_URL}/`}
+    class="block mt-8 text-blue-600 dark:text-blue-400 underline hover:text-blue-800 select-none"
+    aria-label="Volver a proyectos"
+  >
     ← Volver a proyectos
   </a>
 </BaseLayout>

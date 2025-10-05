@@ -2,34 +2,40 @@
   id="theme-toggle"
   class="text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800 focus:ring-gray-500"
   aria-label="Cambiar tema"
+  aria-pressed="false"
 >
-  <svg id="theme-toggle-dark-icon" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <svg id="theme-toggle-dark-icon" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
   </svg>
-  <svg id="theme-toggle-light-icon" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <svg id="theme-toggle-light-icon" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
   </svg>
 </button>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const themeToggleBtn = document.getElementById('theme-toggle');
-    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
-    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+  const themeToggleBtn = document.getElementById('theme-toggle');
+  const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+  const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
 
-    if (themeToggleBtn && themeToggleDarkIcon && themeToggleLightIcon) {
+  if (themeToggleBtn && themeToggleDarkIcon && themeToggleLightIcon) {
       // Función para actualizar el estado de los iconos y el aria-label
       function updateTheme() {
         const isDark = document.documentElement.classList.contains('dark');
         const newLabel = `Cambiar a tema ${isDark ? 'claro' : 'oscuro'}`;
-        themeToggleBtn?.setAttribute('aria-label', newLabel);
-        themeToggleBtn?.setAttribute('title', newLabel);
-        if (isDark) {
-          themeToggleDarkIcon?.classList.remove('hidden');
-          themeToggleLightIcon?.classList.add('hidden');
-        } else {
-          themeToggleDarkIcon?.classList.add('hidden');
-          themeToggleLightIcon?.classList.remove('hidden');
+        if (themeToggleBtn) {
+          themeToggleBtn.setAttribute('aria-label', newLabel);
+          themeToggleBtn.setAttribute('title', newLabel);
+          themeToggleBtn.setAttribute('aria-pressed', String(isDark));
+        }
+        if (themeToggleDarkIcon && themeToggleLightIcon) {
+          if (isDark) {
+            themeToggleDarkIcon.classList.remove('hidden');
+            themeToggleLightIcon.classList.add('hidden');
+          } else {
+            themeToggleDarkIcon.classList.add('hidden');
+            themeToggleLightIcon.classList.remove('hidden');
+          }
         }
       }
 
@@ -39,7 +45,7 @@
       themeToggleBtn.addEventListener('click', () => {
         document.documentElement.classList.toggle('dark');
         const newTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-        localStorage.setItem('theme', newTheme);
+        try { localStorage.setItem('theme', newTheme); } catch (e) { /* noop */ }
         updateTheme();
       });
     }

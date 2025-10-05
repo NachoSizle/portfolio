@@ -19,9 +19,9 @@ const { name } = Astro.props;
     <div class="relative w-full h-full bg-gradient-to-br from-white to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-full p-4 shadow-2xl border-1 border-white/50 dark:border-gray-700/50">
       <!-- Profile Image -->
       <div class="w-full h-full rounded-full flex items-center justify-center overflow-hidden shadow-inner">
-        <Image 
-          src={ProfileImage} 
-          alt={`${name} - Desarrollador Frontend`}
+        <Image
+          src={ProfileImage}
+          alt={`${name} — Desarrollador Frontend, Nacho Martinez`}
           class="w-full h-full object-cover"
           loading="eager"
           width={288}
@@ -32,7 +32,7 @@ const { name } = Astro.props;
     
     <!-- Floating name badge -->
     <div class="absolute bottom-2 sm:bottom-0 left-1/2 transform -translate-x-1/2 z-30">
-      <div class="bg-white dark:bg-gray-800 px-4 py-2 sm:px-6 sm:py-3 rounded-full shadow-lg border border-gray-200 dark:border-gray-700">
+      <div class="bg-white dark:bg-gray-800 px-4 py-2 sm:px-6 sm:py-3 rounded-full shadow-lg border border-gray-200 dark:border-gray-700" role="status" aria-label={`Perfil de ${name}`}>
         <p class="text-base sm:text-lg font-semibold text-gray-900 dark:text-white whitespace-nowrap">{name}</p>
       </div>
     </div>

@@ -16,7 +16,9 @@ const stats = [
 ];
 ---
 
-<section class="relative py-12 pb-20 overflow-hidden bg-transparent" id="about">
+<section class="relative py-12 pb-20 overflow-hidden bg-transparent" id="about" aria-labelledby="about-heading">
+  <!-- Anchors compatibles con el nav para accesibilidad (No afectan al diseño) -->
+  <a id="experience" class="sr-only" />
   <!-- Floating geometric shapes -->
   <div class="absolute inset-0 overflow-hidden">
     <div class="absolute top-1/3 left-1/5 w-4 h-4 bg-primary/20 rounded-full animate-float" style="animation-delay: 1s;"></div>
@@ -27,7 +29,7 @@ const stats = [
   <!-- Header -->
   <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
     <div class="text-center mb-16">
-      <h2 class="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl text-balance md:leading-20 mb-6 select-none">
+      <h2 id="about-heading" class="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl text-balance md:leading-20 mb-6 select-none">
         <span class="bg-gradient-to-r from-gray-900 via-primary to-gray-900 dark:from-white dark:via-primary-400 dark:to-white bg-clip-text text-transparent">
           {t('about.title')}
         </span>
