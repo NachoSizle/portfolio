@@ -23,7 +23,7 @@ const t = useTranslations(lang);
     <div
       class="mt-10 flex flex-row items-center gap-4 justify-center"
     >
-      <HeroCTA client:load />
+      <HeroCTA label={t('hero.cta.primary')} ariaLabel={t('hero.cta.primary')} client:load />
       <a aria-label={t('hero.cta.cv')}
         href="https://www.icloud.com/iclouddrive/0013zvwHdziZe1ClzuPRrvbJQ#CV_Nacho_Updated"
         target="_blank"
