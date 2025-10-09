@@ -104,9 +104,15 @@ const navLinks = [
         if (!href || href === '#') return;
         const id = href.slice(1);
         const target = document.getElementById(id);
-        if (!target) return; // leave default behaviour if no target
-        ev.preventDefault();
-        scrollToElementWithOffset(target);
+        if (target) {
+          // Section exists on current page, scroll to it
+          ev.preventDefault();
+          scrollToElementWithOffset(target);
+        } else {
+          // Section not found, redirect to home page with hash
+          ev.preventDefault();
+          window.location.href = '/portfolio/#' + id;
+        }
       });
     }
 

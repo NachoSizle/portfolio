@@ -21,49 +21,89 @@ const content = project.data;
 const stack = Array.isArray(content.stack) ? content.stack : [];
 ---
 <BaseLayout title={content.title} description={content.description}>
-  {content.cover && (
-    <Image
-      src={content.cover}
-      alt={`Cover de ${content.title}`}
-      width={1275}
-      height={850}
-      class="w-full max-w-2xl h-64 object-cover rounded shadow mb-6 mx-auto"
-    />
-  )}
-  <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl text-balance md:leading-20 select-none">{content.title}</h1>
-  <p class="select-none">{content.description}</p>
-  <ul class="select-none" role="list" aria-label={`Stack de ${content.title}`}>
-    {stack.map((tech) => (
-      <li>{tech}</li>
-    ))}
-  </ul>
-  {content.demoLink && (
-    <a
-      href={content.demoLink}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="select-none"
-      aria-label={`Demo de ${content.title}`}
-    >
-      Ver Demo
-    </a>
-  )}
-  {content.repoLink && (
-    <a
-      href={content.repoLink}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="select-none"
-      aria-label={`Repositorio de ${content.title}`}
-    >
-      Ver Repositorio
-    </a>
-  )}
   <a
     href={`${BASE_URL}/`}
-    class="block mt-8 text-blue-600 dark:text-blue-400 underline hover:text-blue-800 select-none"
+    class="fixed top-24 left-6 z-50 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border border-gray-200 dark:border-gray-700 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 hover:text-emerald-800 dark:hover:text-emerald-300 font-medium shadow-lg hover:shadow-xl transition-all duration-300 select-none"
     aria-label="Volver a proyectos"
   >
     ← Volver a proyectos
   </a>
+  <section class="relative isolate overflow-hidden" aria-labelledby="project-section">
+    <div class="mx-auto max-w-4xl px-6 py-24 text-center">
+      {content.cover && (
+        <div class="relative mb-12 group/cover">
+          <div class="absolute -inset-4 bg-gradient-to-r from-emerald-400 via-green-500 to-teal-600 rounded-3xl opacity-20 group-hover/cover:opacity-40 blur-2xl transition-opacity duration-700"></div>
+          <Image
+            src={content.cover}
+            alt={`Cover de ${content.title}`}
+            width={1275}
+            height={850}
+            class="relative w-full max-w-2xl h-80 object-cover rounded-2xl shadow-2xl border-4 border-white/20 dark:border-neutral-800/30 transition-transform duration-700 group-hover/cover:scale-105"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl opacity-0 group-hover/cover:opacity-100 transition-opacity duration-700"></div>
+        </div>
+      )}
+      <div class="space-y-8">
+        <header class="space-y-6">
+          <h1 id="project-section" class="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl text-balance md:leading-20 select-none bg-gradient-to-r from-gray-900 via-emerald-600 to-gray-900 dark:from-white dark:via-emerald-400 dark:to-white bg-clip-text text-transparent">
+            {content.title}
+          </h1>
+          {content.date && (
+            <div class="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-emerald-100 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-700/50 shadow-lg select-none">
+              <svg class="h-6 w-6 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <span class="font-semibold text-emerald-800 dark:text-emerald-200">{content.date.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' })}</span>
+            </div>
+          )}
+        </header>
+        <p class="text-xl leading-8 text-neutral-600 dark:text-neutral-300 max-w-3xl mx-auto select-none">
+          {content.description}
+        </p>
+        {stack.length > 0 && (
+          <div class="space-y-4">
+            <h2 class="text-lg font-semibold text-neutral-900 dark:text-white select-none">Tecnologías Utilizadas</h2>
+            <ul class="flex flex-wrap justify-center gap-3" role="list" aria-label={`Stack de ${content.title}`}>
+              {stack.map((tech, index) => (
+                <li class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-700/30 text-emerald-800 dark:text-emerald-200 font-medium shadow-sm hover:shadow-md transition-shadow duration-300 select-none" style={`animation-delay: ${index * 0.1}s;`}>
+                  <div class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+                  {tech}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        <div class="flex flex-col sm:flex-row gap-4 justify-center pt-8">
+          {content.demoLink && (
+            <a
+              href={content.demoLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-emerald-500 select-none"
+              aria-label={`Demo de ${content.title}`}
+            >
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+              Ver Demo
+            </a>
+          )}
+          {content.repoLink && (
+            <a
+              href={content.repoLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 rounded-xl border-2 border-emerald-600 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-600 hover:text-white dark:hover:text-white px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-emerald-500 select-none"
+              aria-label={`Repositorio de ${content.title}`}
+            >
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+              Ver Repositorio
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
