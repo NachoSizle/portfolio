@@ -51,8 +51,8 @@ export const ui = {
 
     'projects.blog-engine.title': 'Motor de Blog',
     'projects.blog-engine.description': 'Un motor de blog basado en markdown con soporte para MDX.',
-    'projects.ecommerce-platform.title': 'Plataforma de E-commerce',
-    'projects.ecommerce-platform.description': 'Una plataforma de comercio electrónico moderna con un enfoque en el rendimiento.',
+    'projects.japan-2025-trip.title': '🇯🇵 Japan 2025 Trip',
+    'projects.japan-2025-trip.description': 'Experiencia web interactiva para planificar y documentar mi viaje a Japón con PWA, checklist CRUD y guía sin gluten.',
     'projects.portfolio-website.title': 'Sitio Web de Portfolio',
     'projects.portfolio-website.description': 'Un portfolio personal construido con Astro.',
 
@@ -134,8 +134,8 @@ export const ui = {
 
     'projects.blog-engine.title': 'Blog Engine',
     'projects.blog-engine.description': 'A markdown-based blog engine with support for MDX.',
-    'projects.ecommerce-platform.title': 'E-commerce Platform',
-    'projects.ecommerce-platform.description': 'A modern e-commerce platform with a focus on performance.',
+    'projects.japan-2025-trip.title': '🇯🇵 Japan 2025 Trip',
+    'projects.japan-2025-trip.description': 'Interactive web experience to plan and document my Japan trip with PWA, CRUD checklist, and gluten-free guide.',
     'projects.portfolio-website.title': 'Portfolio Website',
     'projects.portfolio-website.description': 'A personal portfolio built with Astro.',
 

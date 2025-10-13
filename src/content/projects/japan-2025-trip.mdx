@@ -1,0 +1,110 @@
+---
+title: "projects.japan-2025-trip.title"
+description: "projects.japan-2025-trip.description"
+stack:
+  - Astro
+  - SolidJS
+  - Tailwind CSS
+  - TypeScript
+cover: "https://placehold.co/1275x850/ff1493/ffffff/png?text=Japan+2025+Trip"
+demoLink: "https://nachosizle.github.io/Japan-2025-Trip/"
+repoLink: "https://github.com/NachoSizle/Japan-2025-Trip"
+date: 2025-07-01
+---
+
+## Sobre el Proyecto
+
+**Japan 2025 Trip** es una experiencia web interactiva diseñada para documentar y planificar mi viaje soñado a Japón (14-28 de agosto de 2025). Combina funcionalidad práctica con un diseño visual impactante inspirado en la estética cyberpunk japonesa.
+
+El proyecto está **virtualmente completo (98%)** y listo para ser la herramienta principal durante el viaje, con todas las funcionalidades críticas implementadas y un diseño responsive fluido.
+
+## Características Principales
+
+### ⚡ Funcionalidad Inteligente
+
+- **Timeline Adaptativo**: El contenido se ajusta automáticamente según la fecha actual (antes, durante y después del viaje)
+- **Contador Regresivo en Tiempo Real**: Aumenta la emoción mostrando cuánto falta para el despegue
+- **Sistema de Filtros Avanzado**: Filtra el itinerario por ciudad, tipo de actividad (Turismo, Sin Gluten, Destacados) y más
+- **✅ Checklist Interactiva**: Sistema CRUD completo para organizar el equipaje con añadir/editar/eliminar ítems, filtros inteligentes y persistencia automática
+- **Widget del Clima**: Muestra el tiempo en tiempo real para la ciudad correspondiente del itinerario usando OpenWeatherMap API
+- **PWA (Progressive Web App)**: Instalable en móviles para acceso offline, ideal para usar en Japón sin conexión
+- **Notificaciones Push**: Alertas y recordatorios de actividades importantes mediante OneSignal
+
+### 🎨 Diseño Visual y UX
+
+- **Tema Japonés Neón**: Estética cyberpunk con gradientes de fucsia, cian y púrpuras sobre fondos oscuros
+- **Modo Claro/Oscuro**: Toggle para cambiar entre temas con adaptación automática en todos los componentes
+- **Animaciones Fluidas**: Efectos de hover, partículas flotantes y transiciones suaves
+- **Diseño 100% Responsive**: Optimizado para navegación perfecta en móviles, tablets y escritorio
+
+### 🌾 Enfoque Especializado: Guía Sin Gluten
+
+Como viajero celíaco, el proyecto incluye una guía completa gluten-free con:
+- Listado de restaurantes certificados sin gluten por ciudad
+- Frases útiles en japonés para comunicar la condición
+- Apps móviles recomendadas (Translation Card, Gluten Free Japan, etc.)
+- Guía de konbinis y productos de emergencia
+- Filtro especial "Sin Gluten" en el itinerario con símbolo 🌾🚫
+
+### 🛠️ Características Técnicas Destacadas
+
+**Checklist Interactiva con CRUD Completo:**
+- Añadir, editar y eliminar ítems personalizados
+- Filtros inteligentes (todos, completados, pendientes)
+- Búsqueda en tiempo real
+- Persistencia en localStorage con sincronización automática
+- Categorías predefinidas (Neceser, Ropa, Medicinas, Electrónica, Documentación, Varios)
+- Adaptación automática de temas con MutationObserver
+- SolidJS Signals para gestión de estado reactivo ultra-eficiente
+
+**Sistema de Filtros del Itinerario:**
+- Filtrado por tipo de actividad y ciudad
+- Visualización de actividades específicas (no días completos)
+- Panel de filtros colapsable
+- Contador de resultados en tiempo real
+- Indicadores visuales claros con estados activo/inactivo
+
+**Arquitectura y Performance:**
+- Generación estática (SSG) con Astro para tiempos de carga mínimos
+- Content Collections con validación mediante Zod
+- Routing optimizado y navegación coherente
+- Bundle optimizado con tree-shaking automático
+- Service Worker funcional con caché inteligente
+
+## Stack Tecnológico Detallado
+
+- **Astro**: Framework SSG elegido por su arquitectura de "islas" que envía HTML puro y carga JavaScript solo para componentes interactivos
+- **SolidJS**: Para componentes reactivos del checklist con signals reactivos ultra-eficientes
+- **Tailwind CSS**: Desarrollo rápido de UI con sistema *utility-first* y tema claro/oscuro integrado
+- **TypeScript**: Tipado estático para mayor robustez del código
+- **Content Collections**: Gestión de datos del itinerario con validación y tipado automático
+- **VitePWA**: Funcionalidad Progressive Web App con caché offline
+- **OneSignal**: Sistema de notificaciones push para recordatorios
+- **OpenWeatherMap API**: Widget de clima en tiempo real
+
+## Desafíos Técnicos Resueltos
+
+1. **Timeline Inteligente**: Lógica condicional compleja que muestra contenido diferente según la fecha actual (previa al viaje, día de salida, durante el viaje, último día, post-viaje)
+
+2. **Checklist con Persistencia**: Implementación de CRUD completo con estado reactivo sincronizado con localStorage, sin conflictos de hidratación
+
+3. **Sistema de Temas Avanzado**: Detección automática de cambios de tema mediante MutationObserver para actualizar estilos dinámicamente sin re-renderizar
+
+4. **Filtrado Avanzado**: Sistema de filtros múltiples que muestra solo actividades relevantes en lugar de días completos, con contadores dinámicos
+
+5. **PWA Offline-First**: Configuración completa de Service Worker, manifest, iconos y página offline personalizada con BASE_URL correctamente configurado
+
+## Datos del Proyecto
+
+- **Duración del viaje**: 14 días (14-28 de agosto de 2025)
+- **Ciudades**: Tokio, Kyoto, Osaka, Nara, Hiroshima
+- **Días del itinerario**: 14 días completos + vuelos
+- **Restaurantes gluten-free**: +30 listados y verificados
+- **Frases útiles en japonés**: +50 con romaji
+- **Estado**: ✅ Listo para el viaje (98% completado)
+
+## Impacto y Resultados
+
+Este proyecto no es solo una herramienta de planificación, sino un **recuerdo digital interactivo** de una aventura soñada. Combina mi pasión por la tecnología web moderna con el amor por la cultura japonesa, creando una experiencia única que será útil antes, durante y después del viaje.
+
+La implementación de funcionalidades avanzadas como PWA, notificaciones push, sistema de checklist CRUD completo y la guía especializada sin gluten demuestra un dominio profundo del stack moderno de desarrollo web y la capacidad de resolver problemas reales con soluciones técnicas elegantes.
