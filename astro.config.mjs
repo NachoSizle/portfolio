@@ -3,7 +3,6 @@ import { defineConfig } from 'astro/config';
 
 import sitemap from '@astrojs/sitemap';
 import compressor from 'astro-compressor';
-import critters from 'astro-critters';
 import mdx from '@astrojs/mdx';
 
 import tailwindcss from '@tailwindcss/vite';
@@ -26,7 +25,6 @@ export default defineConfig({
     mdx(),
     sitemap(),
     compressor(),
-    critters(),
     // `include` fuerza a que el plugin de Solid también transforme los .jsx
     // que vienen sin compilar dentro de `solid-icons`, evitando el error
     // "React is not defined" durante el SSR.

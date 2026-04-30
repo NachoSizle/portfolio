@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "@astrojs/check": "0.9.9",
-    "@astrojs/image": "^0.18.0",
     "@astrojs/mdx": "5.0.4",
     "@astrojs/sitemap": "3.7.2",
     "@astrojs/solid-js": "6.0.1",
@@ -21,7 +20,6 @@
     "@tailwindcss/vite": "^4.1.11",
     "astro": "6.2.1",
     "astro-compressor": "^1.1.1",
-    "astro-critters": "^2.2.1",
     "sharp": "^0.34.4",
     "solid-icons": "^1.1.0",
     "solid-js": "^1.9.7",
