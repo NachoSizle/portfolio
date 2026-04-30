@@ -1,6 +1,6 @@
-import { createSignal, Show } from "solid-js";
-import { Motion } from "@motionone/solid";
-import { SiGithub, SiLinkedin, SiMeta } from "solid-icons/si";
+import { createSignal, Show } from 'solid-js';
+import { Motion } from '@motionone/solid';
+import { SiGithub, SiLinkedin, SiMeta } from 'solid-icons/si';
 
 const iconMap = {
   github: SiGithub,
@@ -8,7 +8,12 @@ const iconMap = {
   threads: SiMeta,
 };
 
-export default function SocialButton(props: { href: string; label: string; iconName: keyof typeof iconMap; iconClassName?: string }) {
+export default function SocialButton(props: {
+  href: string;
+  label: string;
+  iconName: keyof typeof iconMap;
+  iconClassName?: string;
+}) {
   const [isHovered, setIsHovered] = createSignal(false);
   const IconComponent = iconMap[props.iconName];
 

@@ -18,8 +18,8 @@ export default defineConfig({
     locales: ['es', 'en'],
     routing: {
       prefixDefaultLocale: false,
-      redirectToDefaultLocale: false
-    }
+      redirectToDefaultLocale: false,
+    },
   },
   integrations: [
     mdx(),
@@ -39,10 +39,10 @@ export default defineConfig({
     solidJs({ include: ['**/solid-icons/**', '**/*.{jsx,tsx}'] }),
   ],
   build: {
-    inlineStylesheets: "always",
+    inlineStylesheets: 'always',
   },
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [/** @type {any} */ (tailwindcss())],
     resolve: {
       alias: [
         // El export raíz de `solid-icons` resuelve a `index.jsx` sin compilar
@@ -57,14 +57,12 @@ export default defineConfig({
   },
   image: {
     service: {
-      entrypoint: 'astro/assets/services/sharp'
+      entrypoint: 'astro/assets/services/sharp',
     },
-    remotePatterns: [
-      { protocol: 'https', hostname: 'placehold.co', pathname: '/**' },
-    ],
+    remotePatterns: [{ protocol: 'https', hostname: 'placehold.co', pathname: '/**' }],
   },
   cacheDir: '.astro-cache',
   devToolbar: {
-    enabled: false
-  }
+    enabled: false,
+  },
 });

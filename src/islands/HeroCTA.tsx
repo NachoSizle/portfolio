@@ -1,4 +1,4 @@
-import { Motion } from "@motionone/solid";
+import { Motion } from '@motionone/solid';
 
 declare global {
   interface Window {

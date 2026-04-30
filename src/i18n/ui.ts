@@ -30,8 +30,10 @@ export const ui = {
 
     // About Section
     'about.title': 'Conoce a Nacho',
-    'about.subtitle': 'Desarrollador frontend 💻 apasionado por crear experiencias digitales.<br />Transformo ideas en realidades interactivas 🚀 con código limpio.<br />Diseño intuitivo ✨ que marca la diferencia.',
-    'about.description': 'Desarrollador frontend especializado en crear experiencias web modernas, rápidas y accesibles. Siempre en busca de la perfección técnica y visual.',
+    'about.subtitle':
+      'Desarrollador frontend 💻 apasionado por crear experiencias digitales.<br />Transformo ideas en realidades interactivas 🚀 con código limpio.<br />Diseño intuitivo ✨ que marca la diferencia.',
+    'about.description':
+      'Desarrollador frontend especializado en crear experiencias web modernas, rápidas y accesibles. Siempre en busca de la perfección técnica y visual.',
     'about.stats.experience': 'Años de experiencia',
     'about.stats.projects': 'Proyectos completados',
     'about.stats.technologies': 'Tecnologías dominadas',
@@ -40,7 +42,8 @@ export const ui = {
     // Projects Section
     'projects.title': 'Proyectos',
     'projects.titleHighlight': 'destacados',
-    'projects.subtitle': 'Una selección de mis trabajos más recientes 🎨.<br />Proyectos significativos como desarrollador frontend 💡.',
+    'projects.subtitle':
+      'Una selección de mis trabajos más recientes 🎨.<br />Proyectos significativos como desarrollador frontend 💡.',
     'projects.viewDemo': 'Ver Demo',
     'projects.viewCode': 'Ver Código',
     'projects.viewProject': 'Ver Proyecto',
@@ -59,7 +62,8 @@ export const ui = {
     'projects.blog-engine.title': 'Motor de Blog',
     'projects.blog-engine.description': 'Un motor de blog basado en markdown con soporte para MDX.',
     'projects.japan-2025-trip.title': '🇯🇵 Japan 2025 Trip',
-    'projects.japan-2025-trip.description': 'Experiencia web interactiva para planificar y documentar mi viaje a Japón con PWA, checklist CRUD y guía sin gluten.',
+    'projects.japan-2025-trip.description':
+      'Experiencia web interactiva para planificar y documentar mi viaje a Japón con PWA, checklist CRUD y guía sin gluten.',
     'projects.portfolio-website.title': 'Sitio Web de Portfolio',
     'projects.portfolio-website.description': 'Un portfolio personal construido con Astro.',
 
@@ -82,7 +86,8 @@ export const ui = {
     'about.stats.passion.subtitle': 'Cada línea de código escrita con amor y dedicación',
 
     // Footer
-    'footer.description': 'Desarrollador frontend especializado en crear experiencias web modernas, rápidas y accesibles. Siempre en busca de la perfección técnica y visual.',
+    'footer.description':
+      'Desarrollador frontend especializado en crear experiencias web modernas, rápidas y accesibles. Siempre en busca de la perfección técnica y visual.',
     'footer.role': 'Frontend Developer',
     'footer.cta': 'Trabajemos juntos',
     'footer.navigation': 'Navegación',
@@ -107,7 +112,8 @@ export const ui = {
     'seo.404.title': 'Página no encontrada · 404',
     'seo.404.description': 'La página que buscas no existe o se ha movido.',
     'seo.404.heading': 'Esto no estaba en el plan',
-    'seo.404.message': 'La URL no lleva a ningún sitio. Quizá te apetezca volver al inicio o explorar mis proyectos.',
+    'seo.404.message':
+      'La URL no lleva a ningún sitio. Quizá te apetezca volver al inicio o explorar mis proyectos.',
     'seo.404.cta': 'Volver al inicio',
     'seo.404.cta.projects': 'Ver proyectos',
   },
@@ -125,7 +131,8 @@ export const ui = {
     'hero.greeting': "Hi! I'm",
     'hero.title': 'Building frontends that load in',
     'hero.title.highlight': 'less than a second',
-    'hero.description': 'A frontend enthusiast who turns every millisecond into 💰 without compromising on clean code.',
+    'hero.description':
+      'A frontend enthusiast who turns every millisecond into 💰 without compromising on clean code.',
     'hero.description.line2': 'Performance and DX 🚀, all in one commit.',
     'hero.cta.primary': 'View Projects',
     'hero.cta.cv': 'Download CV',
@@ -135,8 +142,10 @@ export const ui = {
 
     // About Section
     'about.title': 'About Me',
-    'about.subtitle': 'A passionate frontend developer 💻 who loves creating digital experiences.<br />I turn ideas into interactive realities 🚀 with clean code.<br />Intuitive design ✨ that makes a difference.',
-    'about.description': 'A frontend developer specializing in creating modern, fast, and accessible web experiences. Always striving for technical and visual perfection.',
+    'about.subtitle':
+      'A passionate frontend developer 💻 who loves creating digital experiences.<br />I turn ideas into interactive realities 🚀 with clean code.<br />Intuitive design ✨ that makes a difference.',
+    'about.description':
+      'A frontend developer specializing in creating modern, fast, and accessible web experiences. Always striving for technical and visual perfection.',
     'about.stats.experience': 'Years of experience',
     'about.stats.projects': 'Completed projects',
     'about.stats.technologies': 'Technologies mastered',
@@ -145,7 +154,8 @@ export const ui = {
     // Projects Section
     'projects.title': 'Projects',
     'projects.titleHighlight': 'featured',
-    'projects.subtitle': 'A selection of my most recent work 🎨.<br />Meaningful projects as a frontend developer 💡.',
+    'projects.subtitle':
+      'A selection of my most recent work 🎨.<br />Meaningful projects as a frontend developer 💡.',
     'projects.viewDemo': 'View Demo',
     'projects.viewCode': 'View Code',
     'projects.viewProject': 'View Project',
@@ -164,7 +174,8 @@ export const ui = {
     'projects.blog-engine.title': 'Blog Engine',
     'projects.blog-engine.description': 'A markdown-based blog engine with support for MDX.',
     'projects.japan-2025-trip.title': '🇯🇵 Japan 2025 Trip',
-    'projects.japan-2025-trip.description': 'Interactive web experience to plan and document my Japan trip with PWA, CRUD checklist, and gluten-free guide.',
+    'projects.japan-2025-trip.description':
+      'Interactive web experience to plan and document my Japan trip with PWA, CRUD checklist, and gluten-free guide.',
     'projects.portfolio-website.title': 'Portfolio Website',
     'projects.portfolio-website.description': 'A personal portfolio built with Astro.',
 
@@ -187,7 +198,8 @@ export const ui = {
     'about.stats.passion.subtitle': 'Every line of code written with love and dedication',
 
     // Footer
-    'footer.description': 'A frontend developer specializing in creating modern, fast, and accessible web experiences. Always striving for technical and visual perfection.',
+    'footer.description':
+      'A frontend developer specializing in creating modern, fast, and accessible web experiences. Always striving for technical and visual perfection.',
     'footer.role': 'Frontend Developer',
     'footer.cta': "Let's build something together",
     'footer.navigation': 'Navigation',

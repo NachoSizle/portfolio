@@ -48,7 +48,7 @@ export function getLangFromUrl(url: URL) {
 }
 
 export function useTranslations(lang: keyof typeof ui) {
-  return function t(key: keyof typeof ui[typeof defaultLang], params?: TranslationParams) {
+  return function t(key: keyof (typeof ui)[typeof defaultLang], params?: TranslationParams) {
     const translation = ui[lang][key] ?? ui[defaultLang][key];
     if (!translation) return key as string;
     if (!params) return translation;
