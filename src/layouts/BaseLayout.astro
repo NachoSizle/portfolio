@@ -24,6 +24,34 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const esUrl = new URL(getTranslatedPath(Astro.url.pathname, 'es'), Astro.site);
 const enUrl = new URL(getTranslatedPath(Astro.url.pathname, 'en'), Astro.site);
 const alternateUrl = lang === 'es' ? enUrl : esUrl;
+
+// JSON-LD: Person + WebSite. Datos centralizados aquí porque BaseLayout es el
+// único punto de entrada SEO para todas las páginas (estáticas y dinámicas).
+const siteOrigin = Astro.site?.toString().replace(/\/+$/, '') ?? '';
+const siteUrl = `${siteOrigin}${withBase('/')}`;
+const personLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Nacho Martínez',
+  alternateName: 'Nacho Sizle',
+  url: siteUrl,
+  image: new URL(withBase('/favicon.png'), Astro.site).toString(),
+  jobTitle: 'Frontend Engineer',
+  description,
+  sameAs: [
+    'https://github.com/NachoSizle',
+    'https://www.linkedin.com/in/nachosizle/',
+    'https://www.threads.net/@nacho.sizle',
+  ],
+};
+const websiteLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Nacho Martínez · Portfolio',
+  url: siteUrl,
+  inLanguage: [lang === 'es' ? 'es-ES' : 'en-US'],
+  author: { '@type': 'Person', name: 'Nacho Martínez' },
+};
 ---
 
 <!doctype html>
@@ -32,6 +60,9 @@ const alternateUrl = lang === 'es' ? enUrl : esUrl;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/png" href={withBase('/favicon.png')} />
+    <link rel="manifest" href={withBase('/manifest.webmanifest')} />
+    <meta name="theme-color" content="#3b82f6" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
     <meta name="generator" content={Astro.generator} />
 
     <script is:inline>
@@ -74,9 +105,15 @@ const alternateUrl = lang === 'es' ? enUrl : esUrl;
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@nachosizle" />
+    <meta name="twitter:creator" content="@nachosizle" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={new URL(image, Astro.site)} />
+
+    <!-- JSON-LD: Person + WebSite -->
+    <script type="application/ld+json" set:html={JSON.stringify(personLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(websiteLd)} />
 
     <!-- Umami -->
     <script is:inline defer src="https://cloud.umami.is/script.js" data-website-id="7e7bb8f2-01ba-436c-bc5e-8a999ddb1891"></script>

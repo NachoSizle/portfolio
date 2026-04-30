@@ -1,0 +1,26 @@
+{
+  "name": "Nacho Martinez · Portfolio",
+  "short_name": "Nacho · Portfolio",
+  "description": "Frontend lover que convierte cada ms en valor sin sacrificar código limpio.",
+  "start_url": "/portfolio/",
+  "scope": "/portfolio/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#3b82f6",
+  "background_color": "#0f172a",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "/portfolio/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/portfolio/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

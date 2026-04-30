@@ -102,6 +102,14 @@ export const ui = {
     'common.loading': 'Cargando...',
     'common.error': 'Error',
     'common.notFound': 'No encontrado',
+
+    // 404
+    'seo.404.title': 'Página no encontrada · 404',
+    'seo.404.description': 'La página que buscas no existe o se ha movido.',
+    'seo.404.heading': 'Esto no estaba en el plan',
+    'seo.404.message': 'La URL no lleva a ningún sitio. Quizá te apetezca volver al inicio o explorar mis proyectos.',
+    'seo.404.cta': 'Volver al inicio',
+    'seo.404.cta.projects': 'Ver proyectos',
   },
   en: {
     // Navigation
@@ -199,5 +207,13 @@ export const ui = {
     'common.loading': 'Loading...',
     'common.error': 'Error',
     'common.notFound': 'Not found',
+
+    // 404
+    'seo.404.title': 'Page not found · 404',
+    'seo.404.description': 'The page you are looking for does not exist or has moved.',
+    'seo.404.heading': 'This wasn’t in the plan',
+    'seo.404.message': 'This URL leads nowhere. Head back home or take a look at my projects.',
+    'seo.404.cta': 'Back to home',
+    'seo.404.cta.projects': 'View projects',
   },
 } as const;

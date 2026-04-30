@@ -23,7 +23,15 @@ export default defineConfig({
   },
   integrations: [
     mdx(),
-    sitemap(),
+    sitemap({
+      i18n: {
+        defaultLocale: 'es',
+        locales: {
+          es: 'es-ES',
+          en: 'en-US',
+        },
+      },
+    }),
     compressor(),
     // `include` fuerza a que el plugin de Solid también transforme los .jsx
     // que vienen sin compilar dentro de `solid-icons`, evitando el error
