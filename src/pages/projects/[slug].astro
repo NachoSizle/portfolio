@@ -47,12 +47,12 @@ const description = translateOrRaw(content.description);
       <a
         href={`${BASE_URL}/`}
         class="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors duration-300 group select-none"
-        aria-label="Volver a proyectos"
+        aria-label={t('projects.backToList')}
       >
         <svg class="w-5 h-5 transition-transform duration-300 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
         </svg>
-        <span class="font-medium">Volver a proyectos</span>
+        <span class="font-medium">{t('projects.backToList')}</span>
       </a>
     </div>
     <div class="mx-auto max-w-4xl px-6 pb-24 text-center">
@@ -61,7 +61,7 @@ const description = translateOrRaw(content.description);
           <div class="absolute -inset-4 bg-gradient-to-r from-emerald-400 via-green-500 to-teal-600 rounded-3xl opacity-20 group-hover/cover:opacity-40 blur-2xl transition-opacity duration-700"></div>
           <Image
             src={content.cover}
-            alt={`Cover de ${title}`}
+            alt={t('projects.coverAlt', { title })}
             width={1275}
             height={850}
             class="relative w-full h-auto object-cover rounded-2xl shadow-2xl border-4 border-white/20 dark:border-neutral-800/30 transition-transform duration-700 group-hover/cover:scale-105"
@@ -81,12 +81,12 @@ const description = translateOrRaw(content.description);
                 <svg class="h-6 w-6 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
-                <span class="font-semibold text-gray-800 dark:text-gray-200">{content.date.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' })}</span>
+                <span class="font-semibold text-gray-800 dark:text-gray-200">{content.date.toLocaleDateString(lang === 'es' ? 'es-ES' : 'en-US', { month: 'long', year: 'numeric' })}</span>
               </div>
             )}
 
             {stack.length > 0 && (
-              <ul class="flex flex-wrap justify-center gap-3" role="list" aria-label={`Stack de ${title}`}>
+              <ul class="flex flex-wrap justify-center gap-3" role="list" aria-label={t('projects.stackOf', { title })}>
                 {stack.map((tech, index) => (
                   <li class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-100 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/30 text-gray-800 dark:text-gray-200 font-medium shadow-sm hover:shadow-md transition-shadow duration-300 select-none" style={`animation-delay: ${index * 0.1}s;`}>
                     <div class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
@@ -105,12 +105,12 @@ const description = translateOrRaw(content.description);
               target="_blank"
               rel="noopener noreferrer"
               class="inline-flex items-center gap-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-emerald-500 select-none"
-              aria-label={`Demo de ${title}`}
+              aria-label={t('projects.demoOf', { title })}
             >
               <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
               </svg>
-              Ver Demo
+              {t('projects.viewDemo')}
             </a>
           )}
           {content.repoLink && (
@@ -119,12 +119,12 @@ const description = translateOrRaw(content.description);
               target="_blank"
               rel="noopener noreferrer"
               class="inline-flex items-center gap-2 rounded-lg border-2 border-emerald-600 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-600 hover:text-white dark:hover:text-white px-6 py-2.5 text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-emerald-500 select-none"
-              aria-label={`Repositorio de ${title}`}
+              aria-label={t('projects.repoOf', { title })}
             >
               <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
               </svg>
-              Ver Repositorio
+              {t('projects.viewRepository')}
             </a>
           )}
         </div>

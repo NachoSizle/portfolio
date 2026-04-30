@@ -48,6 +48,11 @@ export const ui = {
     'projects.viewMore': 'Ver más en GitHub',
     'projects.coverAlt': 'Portada de {{title}}',
     'projects.backToList': 'Volver a proyectos',
+    'projects.newBadge': '✨ Nuevo',
+    'projects.stackTitle': '⚡ Stack tecnológico',
+    'projects.stackOf': 'Stack de {{title}}',
+    'projects.demoOf': 'Demo de {{title}}',
+    'projects.repoOf': 'Repositorio de {{title}}',
 
     'projects.blog-engine.title': 'Motor de Blog',
     'projects.blog-engine.description': 'Un motor de blog basado en markdown con soporte para MDX.',
@@ -66,6 +71,13 @@ export const ui = {
 
     // Profile
     'profile.photoAlt': '{{name}} - Desarrollador Frontend',
+    'profile.badge': 'Perfil de {{name}}',
+
+    // About stats subtitles
+    'about.stats.experience.subtitle': 'Construyendo experiencias digitales desde 2015',
+    'about.stats.projects.subtitle': 'Entregando soluciones de calidad',
+    'about.stats.technologies.subtitle': 'Dominando tecnologías modernas y frameworks',
+    'about.stats.passion.subtitle': 'Cada línea de código escrita con amor y dedicación',
 
     // Footer
     'footer.description': 'Desarrollador frontend especializado en crear experiencias web modernas, rápidas y accesibles. Siempre en busca de la perfección técnica y visual.',
@@ -131,6 +143,11 @@ export const ui = {
     'projects.viewMore': 'View more on GitHub',
     'projects.coverAlt': 'Cover of {{title}}',
     'projects.backToList': 'Back to projects',
+    'projects.newBadge': '✨ New',
+    'projects.stackTitle': '⚡ Tech stack',
+    'projects.stackOf': 'Stack of {{title}}',
+    'projects.demoOf': 'Demo of {{title}}',
+    'projects.repoOf': 'Repository of {{title}}',
 
     'projects.blog-engine.title': 'Blog Engine',
     'projects.blog-engine.description': 'A markdown-based blog engine with support for MDX.',
@@ -149,6 +166,13 @@ export const ui = {
 
     // Profile
     'profile.photoAlt': '{{name}} - Frontend Developer',
+    'profile.badge': 'Profile of {{name}}',
+
+    // About stats subtitles
+    'about.stats.experience.subtitle': 'Building digital experiences since 2015',
+    'about.stats.projects.subtitle': 'Delivering high-quality solutions',
+    'about.stats.technologies.subtitle': 'Mastering modern technologies and frameworks',
+    'about.stats.passion.subtitle': 'Every line of code written with love and dedication',
 
     // Footer
     'footer.description': 'A frontend developer specializing in creating modern, fast, and accessible web experiences. Always striving for technical and visual perfection.',

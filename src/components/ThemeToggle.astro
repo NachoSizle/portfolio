@@ -1,7 +1,20 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const labels = {
+  toggle: t('theme.toggle'),
+  toLight: t('theme.toggle.toLight'),
+  toDark: t('theme.toggle.toDark'),
+};
+---
+
 <button 
   id="theme-toggle"
   class="text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800 focus:ring-gray-500"
-  aria-label="Cambiar tema"
+  aria-label={labels.toggle}
   aria-pressed="false"
 >
   <svg id="theme-toggle-dark-icon" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -12,34 +25,28 @@
   </svg>
 </button>
 
-<script>
+<script is:inline define:vars={{ THEME_LABELS: labels }}>
   document.addEventListener('DOMContentLoaded', () => {
-  const themeToggleBtn = document.getElementById('theme-toggle');
-  const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
-  const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
 
-  if (themeToggleBtn && themeToggleDarkIcon && themeToggleLightIcon) {
-      // Función para actualizar el estado de los iconos y el aria-label
+    if (themeToggleBtn && themeToggleDarkIcon && themeToggleLightIcon) {
       function updateTheme() {
         const isDark = document.documentElement.classList.contains('dark');
-        const newLabel = `Cambiar a tema ${isDark ? 'claro' : 'oscuro'}`;
-        if (themeToggleBtn) {
-          themeToggleBtn.setAttribute('aria-label', newLabel);
-          themeToggleBtn.setAttribute('title', newLabel);
-          themeToggleBtn.setAttribute('aria-pressed', String(isDark));
-        }
-        if (themeToggleDarkIcon && themeToggleLightIcon) {
-          if (isDark) {
-            themeToggleDarkIcon.classList.remove('hidden');
-            themeToggleLightIcon.classList.add('hidden');
-          } else {
-            themeToggleDarkIcon.classList.add('hidden');
-            themeToggleLightIcon.classList.remove('hidden');
-          }
+        const newLabel = isDark ? THEME_LABELS.toLight : THEME_LABELS.toDark;
+        themeToggleBtn.setAttribute('aria-label', newLabel);
+        themeToggleBtn.setAttribute('title', newLabel);
+        themeToggleBtn.setAttribute('aria-pressed', String(isDark));
+        if (isDark) {
+          themeToggleDarkIcon.classList.remove('hidden');
+          themeToggleLightIcon.classList.add('hidden');
+        } else {
+          themeToggleDarkIcon.classList.add('hidden');
+          themeToggleLightIcon.classList.remove('hidden');
         }
       }
 
-      // Actualizar estado al cargar la página
       updateTheme();
 
       themeToggleBtn.addEventListener('click', () => {

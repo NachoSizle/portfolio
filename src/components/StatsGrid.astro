@@ -1,5 +1,7 @@
 ---
 // Stats Grid Component - Bento Grid Style
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
 export interface Stat {
   number: string;
   label: string;
@@ -10,6 +12,15 @@ export interface Props {
 }
 
 const { stats } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const subtitles = [
+  t('about.stats.experience.subtitle'),
+  t('about.stats.projects.subtitle'),
+  t('about.stats.technologies.subtitle'),
+  t('about.stats.passion.subtitle'),
+];
 
 // Guard: asegurar que haya al menos 4 stats para evitar errores en tiempo de ejecución
 const safeStats = Array.isArray(stats) ? stats.slice(0, 4) : [];
@@ -47,7 +58,7 @@ while (safeStats.length < 4) {
             </div>
           </div>
           <div class="text-sm text-white select-none">
-            Construyendo experiencias digitales desde 2015
+            {subtitles[0]}
           </div>
         </div>
       </div>
@@ -77,7 +88,7 @@ while (safeStats.length < 4) {
             </div>
           </div>
           <div class="text-sm text-white select-none">
-            Entregando soluciones de calidad
+            {subtitles[1]}
           </div>
         </div>
       </div>
@@ -107,7 +118,7 @@ while (safeStats.length < 4) {
             </div>
           </div>
           <div class="text-sm text-white select-none">
-            Dominando tecnologías modernas y frameworks
+            {subtitles[2]}
           </div>
         </div>
       </div>
@@ -137,7 +148,7 @@ while (safeStats.length < 4) {
             </div>
           </div>
           <div class="text-sm text-white select-none">
-            Cada línea de código escrita con amor y dedicación
+            {subtitles[3]}
           </div>
         </div>
       </div>

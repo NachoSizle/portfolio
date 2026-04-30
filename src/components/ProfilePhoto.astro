@@ -2,12 +2,17 @@
 // Profile Photo Component - Foto de perfil con badge flotante
 import { Image } from 'astro:assets';
 import ProfileImage from '../assets/profile.png';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
 
 export interface Props {
   name: string;
 }
 
 const { name } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const photoAlt = t('profile.photoAlt', { name });
+const badgeAria = t('profile.badge', { name });
 ---
 
 <div class="relative z-20 profile-photo-container">
@@ -21,7 +26,7 @@ const { name } = Astro.props;
       <div class="w-full h-full rounded-full flex items-center justify-center overflow-hidden shadow-inner">
         <Image
           src={ProfileImage}
-          alt={`${name} — Desarrollador Frontend, Nacho Martinez`}
+          alt={photoAlt}
           class="w-full h-full object-cover"
           loading="eager"
           width={288}
@@ -32,7 +37,7 @@ const { name } = Astro.props;
     
     <!-- Floating name badge -->
     <div class="absolute bottom-2 sm:bottom-0 left-1/2 transform -translate-x-1/2 z-30">
-      <div class="bg-white dark:bg-gray-800 px-4 py-2 sm:px-6 sm:py-3 rounded-full shadow-lg border border-gray-200 dark:border-gray-700" role="status" aria-label={`Perfil de ${name}`}>
+      <div class="bg-white dark:bg-gray-800 px-4 py-2 sm:px-6 sm:py-3 rounded-full shadow-lg border border-gray-200 dark:border-gray-700" role="status" aria-label={badgeAria}>
         <p class="text-base sm:text-lg font-semibold text-gray-900 dark:text-white whitespace-nowrap">{name}</p>
       </div>
     </div>

@@ -148,7 +148,7 @@ const colorScheme = projectColors[index % projectColors.length];
                         <div class="w-2.5 h-2.5 bg-white rounded-full"></div>
                         <div class="absolute inset-0 w-2.5 h-2.5 bg-white rounded-full animate-ping"></div>
                       </div>
-                      <span class="font-black text-white text-xs uppercase tracking-widest">✨ Nuevo</span>
+                        <span class="font-black text-white text-xs uppercase tracking-widest">{t('projects.newBadge')}</span>
                     </div>
                   )}
                 </div>
@@ -179,7 +179,7 @@ const colorScheme = projectColors[index % projectColors.length];
                 <div class="relative rounded-[24px] md:rounded-[32px] overflow-hidden border-2 md:border-4 border-white/50 dark:border-neutral-800/50 shadow-2xl">
                   <Image
                     src={cover}
-                    alt={lang === 'es' ? `Cover de ${title}` : `Cover of ${title}`}
+                    alt={t('projects.coverAlt', { title: typeof title === 'string' ? title : String(title) })}
                     width={1275}
                     height={850}
                     class="w-full h-auto object-cover transition-transform duration-1000 group-hover/image:scale-110"
@@ -196,13 +196,13 @@ const colorScheme = projectColors[index % projectColors.length];
 
           </div>
 
-          <!-- Stack de tecnologías con diseño orbital -->
+          <!-- Tech stack with orbital design -->
           {supportingTags.length > 0 && (
             <div class="w-full space-y-3 md:space-y-2 mt-6">
               <!-- Título y botones -->
               <div class="w-full flex flex-col lg:flex-row items-start lg:items-center justify-between gap-3 md:gap-4">
                 <h4 class={`text-xs md:text-sm font-black uppercase tracking-[0.2em] bg-gradient-to-r ${colorScheme.from} ${colorScheme.to} bg-clip-text text-transparent select-none whitespace-nowrap`}>
-                  ⚡ Stack Tecnológico
+                  {t('projects.stackTitle')}
                 </h4>
                 
                 <!-- Botones de acción (visibles en desktop) -->

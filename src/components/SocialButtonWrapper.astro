@@ -16,5 +16,15 @@ const { href, label, iconName, iconClassName } = Astro.props;
   label={label} 
   iconName={iconName} 
   iconClassName={iconClassName}
-  client:visible 
-/>
+  client:only="solid-js"
+>
+  <a
+    href={href}
+    aria-label={label}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="inline-flex items-center justify-center rounded-full border text-emerald-600 sm:text-gray-900 dark:text-emerald-400 sm:dark:text-white p-3 text-sm font-medium shadow-sm select-none"
+  >
+    <span class="sr-only">{label}</span>
+  </a>
+</SocialButton>
