@@ -2,48 +2,33 @@
 import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import { Image } from 'astro:assets';
-import { BASE_URL } from '../../../constants';
-import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
+import ProjectDetail from '../../../components/ProjectDetail.astro';
+import { useTranslations, getLangFromUrl } from '../../../i18n/utils';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
   return projects.map((project: CollectionEntry<'projects'>) => ({
     params: { slug: project.id },
+    props: { project },
   }));
 }
 
-const { slug } = Astro.params;
-const projects = await getCollection('projects');
-const project = projects.find((p: CollectionEntry<'projects'>) => p.id === slug);
-if (!project) {
-  throw new Error('Not Found');
+interface Props {
+  project: CollectionEntry<'projects'>;
 }
-const content = project.data;
+
+const { project } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-const title = content.title;
+
+const raw = project.data;
+const title = typeof raw.title === 'string' && raw.title.startsWith('projects.')
+  ? (t(raw.title as any) as string) || raw.title
+  : raw.title;
+const description = typeof raw.description === 'string' && raw.description.startsWith('projects.')
+  ? (t(raw.description as any) as string) || raw.description
+  : raw.description;
 ---
-<BaseLayout title={title} description={content.description}>
-  <Image src={content.cover} alt={t('projects.coverAlt', { title })} width={1275} height={850} class="w-full max-w-2xl h-64 object-cover rounded shadow mb-6 mx-auto" />
-  <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl text-balance md:leading-20 select-none">{title}</h1>
-  <p class="select-none">{content.description}</p>
-  <ul class="select-none">
-    {content.stack.map((tech: string) => (
-      <li>{tech}</li>
-    ))}
-  </ul>
-  {content.demoLink && (
-    <a href={content.demoLink} target="_blank" rel="noopener noreferrer" class="select-none" aria-label={t('projects.demoOf', { title })}>
-      {t('projects.viewDemo')}
-    </a>
-  )}
-  {content.repoLink && (
-    <a href={content.repoLink} target="_blank" rel="noopener noreferrer" class="select-none" aria-label={t('projects.repoOf', { title })}>
-      {t('projects.viewRepository')}
-    </a>
-  )}
-  <a href={`${BASE_URL}/en/`} class="block mt-8 text-blue-600 dark:text-blue-400 underline hover:text-blue-800 select-none">
-    ← {t('projects.backToList')}
-  </a>
+<BaseLayout title={title} description={description}>
+  <ProjectDetail project={project} />
 </BaseLayout>
