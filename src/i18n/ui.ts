@@ -13,6 +13,8 @@ export const ui = {
     'nav.projects': 'Proyectos',
     'nav.about': 'Nacho',
     'nav.contact': 'Contacto',
+    'nav.menu.open': 'Abrir menú',
+    'nav.menu.close': 'Cerrar menú',
 
     // Hero Section
     'hero.greeting': '¡Hola! Soy',
@@ -108,6 +110,8 @@ export const ui = {
     'nav.projects': 'Projects',
     'nav.about': 'Nacho',
     'nav.contact': 'Contact',
+    'nav.menu.open': 'Open menu',
+    'nav.menu.close': 'Close menu',
 
     // Hero Section
     'hero.greeting': "Hi! I'm",
