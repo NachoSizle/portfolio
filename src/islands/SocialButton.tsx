@@ -20,6 +20,8 @@ export default function SocialButton(props: { href: string; label: string; iconN
         rel="noopener noreferrer"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
+        onFocus={() => setIsHovered(true)}
+        onBlur={() => setIsHovered(false)}
         animate={{
           scale: isHovered() ? 1.05 : 1,
           y: isHovered() ? -2 : 0,

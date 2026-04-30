@@ -25,14 +25,18 @@ const labels = {
   </svg>
 </button>
 
+<!-- Región viva para anunciar cambios de tema a lectores de pantalla -->
+<span id="theme-toggle-status" class="sr-only" aria-live="polite" aria-atomic="true"></span>
+
 <script is:inline define:vars={{ THEME_LABELS: labels }}>
   document.addEventListener('DOMContentLoaded', () => {
     const themeToggleBtn = document.getElementById('theme-toggle');
     const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
     const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const themeStatus = document.getElementById('theme-toggle-status');
 
     if (themeToggleBtn && themeToggleDarkIcon && themeToggleLightIcon) {
-      function updateTheme() {
+      function updateTheme(announce) {
         const isDark = document.documentElement.classList.contains('dark');
         const newLabel = isDark ? THEME_LABELS.toLight : THEME_LABELS.toDark;
         themeToggleBtn.setAttribute('aria-label', newLabel);
@@ -45,15 +49,18 @@ const labels = {
           themeToggleDarkIcon.classList.add('hidden');
           themeToggleLightIcon.classList.remove('hidden');
         }
+        if (announce && themeStatus) {
+          themeStatus.textContent = newLabel;
+        }
       }
 
-      updateTheme();
+      updateTheme(false);
 
       themeToggleBtn.addEventListener('click', () => {
         document.documentElement.classList.toggle('dark');
         const newTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
         try { localStorage.setItem('theme', newTheme); } catch (e) { /* noop */ }
-        updateTheme();
+        updateTheme(true);
       });
     }
   });

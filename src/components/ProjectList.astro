@@ -15,8 +15,8 @@ const totalProjects = projects.length;
 <section class="relative m-6 mb-12 mt-0 bg-transparent overflow-hidden" aria-labelledby="projects-section" role="region">
   <!-- Header con animación sutil -->
   <div class="text-center mb-12 relative z-10">
-    <!-- Anchor compatible con el nav: #projects (in-page) -->
-    <a id="projects" class="sr-only" />
+    <!-- Ancla in-page compatible con el nav (#projects). Span válido y focusable con tabindex=-1. -->
+    <span id="projects" tabindex="-1" class="sr-only">{t('projects.title')}</span>
     <h2 id="projects-section" class="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl text-balance md:leading-20 mb-4 select-none">
       {t('projects.title')} <span class="text-primary">{t('projects.titleHighlight')}</span>
     </h2>

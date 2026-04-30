@@ -13,8 +13,8 @@ const { socialLinks, quickLinks } = getFooterData(lang);
 ---
 
 <footer class="relative text-gray-900 dark:text-white overflow-hidden border-t-2 border-gray-300 dark:border-gray-700/50 mt-16" role="contentinfo">
-  <!-- Anchor compatible con el nav para que #contact exista en la página -->
-  <a id="contact" class="sr-only" />
+  <!-- Ancla in-page compatible con el nav (#contact). Span válido y focusable con tabindex=-1. -->
+  <span id="contact" tabindex="-1" class="sr-only">{t('footer.links.contact')}</span>
   <!-- Subtle top gradient line -->
   <div class="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary-500/50 dark:via-primary-500/30 to-transparent"></div>
   

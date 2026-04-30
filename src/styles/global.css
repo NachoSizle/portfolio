@@ -22,3 +22,20 @@
     @apply bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-200;
   }
 }
+
+/*
+ * Accesibilidad: respeta la preferencia del usuario por reducir el movimiento.
+ * Desactiva animaciones decorativas (animate-pulse, animate-spin, animate-float,
+ * orbit-saturn, etc.) y reduce transiciones a 0 sin romper estados con focus visible.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
