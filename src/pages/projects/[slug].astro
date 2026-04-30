@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
@@ -9,7 +9,7 @@ import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
   return projects.map((project) => ({
-    params: { slug: project.slug },
+    params: { slug: project.id },
   }));
 }
 
@@ -18,12 +18,12 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const projects = await getCollection('projects');
-const project = projects.find((p) => p.slug === slug);
+const project = projects.find((p) => p.id === slug);
 if (!project) throw new Error('Not Found');
 const content = project.data;
 
-// Renderizar el contenido del MDX
-const { Content } = await project.render();
+// Renderizar el contenido del MDX (Content Layer API).
+const { Content } = await render(project);
 
 // Seguridad: asegurar que stack es siempre un array
 const stack = Array.isArray(content.stack) ? content.stack : [];

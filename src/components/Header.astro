@@ -1,7 +1,7 @@
 ---
 import ThemeToggle from "./ThemeToggle.astro";
 import LanguagePicker from "./LanguagePicker.astro";
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { getLangFromUrl, useTranslations, withBase, getTranslatedPath } from '../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -11,6 +11,9 @@ const navLinks = [
   { href: "#projects", label: t('nav.projects') },
   { href: "#contact", label: t('nav.contact') },
 ];
+
+// URL de la home en el idioma actual (para fallback de smooth scroll cross-page).
+const homeUrl = getTranslatedPath('/', lang);
 ---
 
 <style>
@@ -55,7 +58,7 @@ const navLinks = [
   </nav>
 </header>
 
-<script is:inline>
+<script is:inline define:vars={{ HOME_URL: homeUrl }}>
   (function () {
     const NAV_ID = 'main-nav';
     const nav = document.getElementById(NAV_ID);
@@ -111,7 +114,7 @@ const navLinks = [
         } else {
           // Section not found, redirect to home page with hash
           ev.preventDefault();
-          window.location.href = '/portfolio/#' + id;
+          window.location.href = HOME_URL.replace(/\/$/, '/') + '#' + id;
         }
       });
     }

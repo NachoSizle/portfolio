@@ -22,12 +22,32 @@ export default defineConfig({
       redirectToDefaultLocale: false
     }
   },
-  integrations: [mdx(), sitemap(), compressor(), critters(), solidJs()],
+  integrations: [
+    mdx(),
+    sitemap(),
+    compressor(),
+    critters(),
+    // `include` fuerza a que el plugin de Solid también transforme los .jsx
+    // que vienen sin compilar dentro de `solid-icons`, evitando el error
+    // "React is not defined" durante el SSR.
+    solidJs({ include: ['**/solid-icons/**', '**/*.{jsx,tsx}'] }),
+  ],
   build: {
     inlineStylesheets: "always",
   },
   vite: {
     plugins: [tailwindcss()],
+    resolve: {
+      alias: [
+        // El export raíz de `solid-icons` resuelve a `index.jsx` sin compilar
+        // bajo la condición "astro"/"solid", lo que rompe el SSR de Astro 6
+        // (`React is not defined`). Forzamos la build precompilada `index.js`.
+        {
+          find: /^solid-icons$/,
+          replacement: 'solid-icons/lib/index.js',
+        },
+      ],
+    },
   },
   image: {
     service: {

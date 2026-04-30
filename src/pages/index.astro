@@ -4,7 +4,9 @@ import { getCollection } from 'astro:content';
 import ProjectList from '../components/ProjectList.astro';
 import Hero from '../components/Hero.astro';
 import AboutSection from '../components/AboutSection.astro';
+import { getTranslatedPath } from '../i18n/utils';
 const projects = await getCollection('projects');
+const enHome = getTranslatedPath('/', 'en');
 ---
 
 <BaseLayout title="Portfolio de Nacho Sizle" description="Portfolio de Nacho Sizle, desarrollador de software. Proyectos, artículos y más.">
@@ -13,14 +15,14 @@ const projects = await getCollection('projects');
 	<ProjectList projects={projects} />
 </BaseLayout>
 
-<script>
+<script is:inline define:vars={{ EN_HOME: enHome }}>
 	// Detectar idioma del navegador solo en la primera visita
 	const hasVisited = sessionStorage.getItem('lang-detected');
 	if (!hasVisited) {
 		const browserLang = navigator.language.split('-')[0];
 		if (browserLang === 'en') {
 			sessionStorage.setItem('lang-detected', 'true');
-			window.location.href = '/portfolio/en/';
+			window.location.href = EN_HOME;
 		} else {
 			sessionStorage.setItem('lang-detected', 'true');
 		}

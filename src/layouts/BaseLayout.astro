@@ -2,7 +2,7 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import BackgroundGradients from '../components/BackgroundGradients.astro';
-import { getLangFromUrl } from '../i18n/utils';
+import { getLangFromUrl, getTranslatedPath, withBase } from '../i18n/utils';
 import '../styles/global.css';
 
 export interface Props {
@@ -14,20 +14,15 @@ export interface Props {
 const {
   title,
   description,
-  image = "/portfolio/placeholder-social.jpg",
+  image = withBase('/placeholder-social.jpg'),
 } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-// Extraer el path sin /portfolio y sin idioma
-const basePath = '/portfolio';
-let pathWithoutBase = Astro.url.pathname.replace(/^\/portfolio/, '');
-pathWithoutBase = pathWithoutBase.replace(/^\/(en|es)/, '');
-
 // URLs alternativas para SEO multiidioma
-const esUrl = new URL(`${basePath}${pathWithoutBase}`, Astro.site);
-const enUrl = new URL(`${basePath}/en${pathWithoutBase}`, Astro.site);
+const esUrl = new URL(getTranslatedPath(Astro.url.pathname, 'es'), Astro.site);
+const enUrl = new URL(getTranslatedPath(Astro.url.pathname, 'en'), Astro.site);
 const alternateUrl = lang === 'es' ? enUrl : esUrl;
 ---
 
@@ -36,7 +31,7 @@ const alternateUrl = lang === 'es' ? enUrl : esUrl;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/png" href="/portfolio/favicon.png" />
+    <link rel="icon" type="image/png" href={withBase('/favicon.png')} />
     <meta name="generator" content={Astro.generator} />
 
     <script is:inline>

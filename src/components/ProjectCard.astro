@@ -27,7 +27,7 @@ const formattedDate = date?.toLocaleDateString(lang === 'es' ? 'es-ES' : 'en-US'
   month: 'long',
   year: 'numeric',
 });
-const projectUrl = getTranslatedPath(`/projects/${project.slug}`, lang);
+const projectUrl = getTranslatedPath(`/projects/${project.id}`, lang);
 const hasLinks = demoLink || repoLink;
 const [primaryTag, ...restStack] = stack;
 const supportingTags = restStack.length > 0 ? restStack : stack.slice(1);

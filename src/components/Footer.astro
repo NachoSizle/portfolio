@@ -2,41 +2,14 @@
 // Footer component - Diseño impactante y moderno
 import { Image } from 'astro:assets';
 import ProfileImage from '../assets/profile.png';
-import { getLangFromUrl, useTranslations, getTranslatedPath } from '../i18n/utils';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { getFooterData } from './footer.data';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const currentYear = new Date().getFullYear();
-const socialLinks = [
-  {
-    name: 'GitHub',
-    url: 'https://github.com/NachoSizle',
-    icon: 'github'
-  },
-  {
-    name: 'LinkedIn',
-    url: 'https://linkedin.com/in/nachosizle',
-    icon: 'linkedin'
-  },
-  {
-    name: 'Twitter',
-    url: 'https://twitter.com/nachosizle',
-    icon: 'twitter'
-  },
-  {
-    name: 'Email',
-    url: 'mailto:hola@nachosizle.dev',
-    icon: 'email'
-  }
-];
-
-const quickLinks = [
-  { name: t('footer.links.home'), url: getTranslatedPath('/', lang) },
-  { name: t('footer.links.projects'), url: getTranslatedPath('/projects', lang) },
-  { name: t('footer.links.about'), url: getTranslatedPath('/about', lang) },
-  { name: t('footer.links.contact'), url: getTranslatedPath('/contact', lang) }
-];
+const { socialLinks, quickLinks } = getFooterData(lang);
 ---
 
 <footer class="relative text-gray-900 dark:text-white overflow-hidden border-t-2 border-gray-300 dark:border-gray-700/50 mt-16" role="contentinfo">
@@ -131,11 +104,6 @@ const quickLinks = [
                     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                   </svg>
                 )}
-                {social.icon === 'twitter' && (
-                  <svg class="w-6 h-6 text-gray-600 dark:text-gray-400 group-hover:text-primary-500 transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
-                  </svg>
-                )}
                 {social.icon === 'email' && (
                   <svg class="w-6 h-6 text-gray-600 dark:text-gray-400 group-hover:text-primary-500 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -158,8 +126,6 @@ const quickLinks = [
         </div>
         
         <div class="flex items-center gap-6 text-sm text-gray-600 dark:text-gray-400">
-          <a href={getTranslatedPath('/privacy', lang)} class="hover:text-gray-900 dark:hover:text-white transition-colors select-none">{t('footer.privacy')}</a>
-          <a href={getTranslatedPath('/terms', lang)} class="hover:text-gray-900 dark:hover:text-white transition-colors select-none">{t('footer.terms')}</a>
           <div class="flex items-center gap-2">
             <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
             <span class="select-none">{t('footer.available')}</span>

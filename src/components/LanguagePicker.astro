@@ -1,28 +1,12 @@
 ---
-import { languages } from '../i18n/ui';
-import { getLangFromUrl } from '../i18n/utils';
+import { languages, ui } from '../i18n/ui';
+import { getLangFromUrl, getTranslatedPath, useTranslations } from '../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
-const currentPath = Astro.url.pathname;
+const t = useTranslations(lang);
 
-// Función para obtener la ruta en el otro idioma
 function getAlternateUrl(targetLang: string) {
-  const basePath = '/portfolio';
-  
-  // Remover /portfolio y el idioma actual del path
-  let pathWithoutBase = currentPath.replace(/^\/portfolio/, '');
-  pathWithoutBase = pathWithoutBase.replace(/^\/(en|es)/, '');
-  
-  // Si el path está vacío, usar /
-  if (!pathWithoutBase) {
-    pathWithoutBase = '/';
-  }
-  
-  // Construir la nueva URL
-  if (targetLang === 'es') {
-    return `${basePath}${pathWithoutBase}`;
-  }
-  return `${basePath}/${targetLang}${pathWithoutBase}`;
+  return getTranslatedPath(Astro.url.pathname, targetLang as keyof typeof ui);
 }
 ---
 

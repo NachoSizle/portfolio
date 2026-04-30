@@ -8,13 +8,13 @@ import { BASE_URL } from '../../../constants';
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
   return projects.map((project: CollectionEntry<'projects'>) => ({
-    params: { slug: project.slug },
+    params: { slug: project.id },
   }));
 }
 
 const { slug } = Astro.params;
 const projects = await getCollection('projects');
-const project = projects.find((p: CollectionEntry<'projects'>) => p.slug === slug);
+const project = projects.find((p: CollectionEntry<'projects'>) => p.id === slug);
 if (!project) {
   throw new Error('Not Found');
 }

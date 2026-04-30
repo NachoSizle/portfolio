@@ -6,22 +6,29 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "check": "astro check",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.4",
+    "@astrojs/check": "0.9.9",
     "@astrojs/image": "^0.18.0",
-    "@astrojs/mdx": "^4.3.1",
-    "@astrojs/sitemap": "^3.4.2",
-    "@astrojs/solid-js": "^5.1.0",
+    "@astrojs/mdx": "5.0.4",
+    "@astrojs/sitemap": "3.7.2",
+    "@astrojs/solid-js": "6.0.1",
     "@motionone/solid": "^10.16.4",
     "@tailwindcss/vite": "^4.1.11",
-    "astro": "^5.12.7",
+    "astro": "6.2.1",
     "astro-compressor": "^1.1.1",
     "astro-critters": "^2.2.1",
     "sharp": "^0.34.4",
     "solid-icons": "^1.1.0",
     "solid-js": "^1.9.7",
     "typescript": "^5.9.2"
+  },
+  "devDependencies": {
+    "@vitest/ui": "^4.1.5",
+    "vitest": "^4.1.5"
   }
 }
