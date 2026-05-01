@@ -1,5 +1,6 @@
 import { ui, defaultLang } from '../i18n/ui';
 import { useTranslations, getTranslatedPath } from '../i18n/utils';
+import { SOCIAL_LINKS, CONTACT } from '../constants';
 
 /**
  * Iconos sociales soportados actualmente por <SocialButton /> y por el render
@@ -50,9 +51,9 @@ export function getFooterData(lang: keyof typeof ui = defaultLang): FooterData {
   ];
 
   const socialLinks: SocialLink[] = [
-    { name: 'GitHub', url: 'https://github.com/NachoSizle', icon: 'github' },
-    { name: 'LinkedIn', url: 'https://linkedin.com/in/nachosizle', icon: 'linkedin' },
-    { name: 'Email', url: 'mailto:hola@nachosizle.dev', icon: 'email' },
+    { name: 'GitHub', url: SOCIAL_LINKS.github, icon: 'github' },
+    { name: 'LinkedIn', url: SOCIAL_LINKS.linkedin, icon: 'linkedin' },
+    { name: 'Email', url: CONTACT.mailto, icon: 'email' },
   ];
 
   return { quickLinks, socialLinks };

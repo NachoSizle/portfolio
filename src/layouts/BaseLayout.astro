@@ -3,6 +3,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import BackgroundGradients from '../components/BackgroundGradients.astro';
 import { getLangFromUrl, getTranslatedPath, withBase } from '../i18n/utils';
+import { SOCIAL_LINKS } from '../constants';
 import '../styles/global.css';
 
 export interface Props {
@@ -38,11 +39,7 @@ const personLd = {
   image: new URL(withBase('/favicon.png'), Astro.site).toString(),
   jobTitle: 'Frontend Engineer',
   description,
-  sameAs: [
-    'https://github.com/NachoSizle',
-    'https://www.linkedin.com/in/nachosizle/',
-    'https://www.threads.net/@nacho.sizle',
-  ],
+  sameAs: [SOCIAL_LINKS.github, SOCIAL_LINKS.linkedin, SOCIAL_LINKS.threads],
 };
 const websiteLd = {
   '@context': 'https://schema.org',

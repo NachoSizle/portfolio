@@ -1,6 +1,7 @@
 ---
 import SocialButton from './SocialButton.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { SOCIAL_LINKS } from '../constants';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -46,19 +47,19 @@ const t = useTranslations(lang);
     <!-- Social buttons -->
     <div class="mt-12 flex flex-wrap justify-center gap-4">
       <SocialButton
-        href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=nacho-marmo"
+        href={SOCIAL_LINKS.linkedin}
         label={t('hero.social.linkedin')}
         iconName="linkedin"
         iconClassName="h-8 w-8"
       />
       <SocialButton
-        href="https://www.threads.com/@nachosizle"
+        href={SOCIAL_LINKS.threads}
         label={t('hero.social.threads')}
         iconName="threads"
         iconClassName="h-8 w-8"
       />
       <SocialButton
-        href="https://github.com/NachoSizle"
+        href={SOCIAL_LINKS.github}
         label={t('hero.social.github')}
         iconName="github"
         iconClassName="h-8 w-8"
