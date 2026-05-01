@@ -18,11 +18,13 @@ export const ui = {
 
     // Hero Section
     'hero.greeting': '¡Hola! Soy',
-    'hero.title': 'Construyo frontends que cargan en',
-    'hero.title.highlight': 'menos de un segundo',
-    'hero.description': 'Frontend lover que convierte cada ms en 💰 sin sacrificar código limpio.',
-    'hero.description.line2': 'Rendimiento y DX 🚀, todo en un mismo commit.',
-    'hero.cta.primary': 'Ver Proyectos',
+    'hero.title': 'Construyo productos web',
+    'hero.title.highlight': 'rápidos, útiles y mantenibles',
+    'hero.description':
+      'Product Engineer con una base sólida en Frontend. Combino arquitectura web, criterio de producto y automatización para convertir ideas ambiguas en soluciones reales.',
+    'hero.description.line2':
+      'Performance, DX y calidad técnica como base para ejecutar con consistencia.',
+    'hero.cta.primary': 'Ver proyectos',
     'hero.cta.cv': 'Descargar CV',
     'hero.social.linkedin': 'LinkedIn',
     'hero.social.threads': 'Threads',
@@ -30,13 +32,12 @@ export const ui = {
 
     // About Section
     'about.title': 'Conoce a Nacho',
-    'about.subtitle':
-      'Desarrollador frontend 💻 apasionado por crear experiencias digitales.<br />Transformo ideas en realidades interactivas 🚀 con código limpio.<br />Diseño intuitivo ✨ que marca la diferencia.',
+    'about.subtitle': '11+ años construyendo producto web con una base Frontend fuerte.',
     'about.description':
-      'Desarrollador frontend especializado en crear experiencias web modernas, rápidas y accesibles. Siempre en busca de la perfección técnica y visual.',
-    'about.stats.experience': 'Años de experiencia',
-    'about.stats.projects': 'Proyectos completados',
-    'about.stats.technologies': 'Tecnologías dominadas',
+      'Mi forma de trabajar está cada vez más cerca del Product Engineering: entender bien el problema, tomar decisiones técnicas razonables y construir soluciones mantenibles que aporten impacto real.<br /><br />Me interesa especialmente la intersección entre producto, arquitectura Frontend, automatización, IA aplicada y experiencia de usuario.',
+    'about.stats.experience': 'Años construyendo producto web',
+    'about.stats.projects': 'Producto, DX y ejecución',
+    'about.stats.technologies': 'Stack moderno aplicado a producto',
     'about.stats.languages': 'Idiomas',
 
     // Projects Section
@@ -60,12 +61,14 @@ export const ui = {
     'projects.repoOf': 'Repositorio de {{title}}',
 
     'projects.blog-engine.title': 'Motor de Blog',
-    'projects.blog-engine.description': 'Un motor de blog basado en markdown con soporte para MDX.',
+    'projects.blog-engine.description':
+      'Sistema modular de contenido con Markdown/MDX para publicar contenido técnico de forma mantenible.',
     'projects.japan-2025-trip.title': '🇯🇵 Japan 2025 Trip',
     'projects.japan-2025-trip.description':
-      'Experiencia web interactiva para planificar y documentar mi viaje a Japón con PWA, checklist CRUD y guía sin gluten.',
+      'PWA offline-first para planificar un viaje real en móvil, con itinerario, clima, checklist y recordatorios sin depender siempre de conexión.',
     'projects.portfolio-website.title': 'Sitio Web de Portfolio',
-    'projects.portfolio-website.description': 'Un portfolio personal construido con Astro.',
+    'projects.portfolio-website.description':
+      'Portfolio profesional orientado a performance, SEO, accesibilidad y posicionamiento técnico con arquitectura limpia y bilingüe.',
 
     // Theme Toggle
     'theme.toggle': 'Cambiar tema',
@@ -76,19 +79,22 @@ export const ui = {
     'language.change': 'Cambiar idioma',
 
     // Profile
-    'profile.photoAlt': '{{name}} - Desarrollador Frontend',
+    'profile.photoAlt': '{{name}} - Product Engineer · Frontend Specialist',
     'profile.badge': 'Perfil de {{name}}',
 
     // About stats subtitles
-    'about.stats.experience.subtitle': 'Construyendo experiencias digitales desde 2015',
-    'about.stats.projects.subtitle': 'Entregando soluciones de calidad',
-    'about.stats.technologies.subtitle': 'Dominando tecnologías modernas y frameworks',
-    'about.stats.languages.subtitle': 'Portfolio disponible en español e inglés',
+    // Referencia temporal para PRF-13: desde 2015 / since 2015
+    'about.stats.experience.subtitle': 'Experiencia combinando Frontend, arquitectura y ejecución.',
+    'about.stats.projects.subtitle':
+      'Proyectos pensados para resolver problemas reales, no solo para verse bien.',
+    'about.stats.technologies.subtitle':
+      'Tecnología al servicio de rendimiento, mantenibilidad e impacto.',
+    'about.stats.languages.subtitle': 'Comunicación clara en equipos técnicos y de negocio.',
 
     // Footer
     'footer.description':
-      'Desarrollador frontend especializado en crear experiencias web modernas, rápidas y accesibles. Siempre en busca de la perfección técnica y visual.',
-    'footer.role': 'Frontend Developer',
+      'Construyo productos web rápidos, mantenibles y orientados a impacto, combinando Frontend moderno, criterio de producto y automatización cuando aporta valor real.',
+    'footer.role': 'Product Engineer · Frontend Specialist',
     'footer.cta': 'Trabajemos juntos',
     'footer.navigation': 'Navegación',
     'footer.connect': 'Conecta conmigo',
@@ -129,11 +135,12 @@ export const ui = {
 
     // Hero Section
     'hero.greeting': "Hi! I'm",
-    'hero.title': 'Building frontends that load in',
-    'hero.title.highlight': 'less than a second',
+    'hero.title': 'I build web products',
+    'hero.title.highlight': 'that are fast, useful, and maintainable',
     'hero.description':
-      'A frontend enthusiast who turns every millisecond into 💰 without compromising on clean code.',
-    'hero.description.line2': 'Performance and DX 🚀, all in one commit.',
+      'Product Engineer with deep Frontend expertise. I combine web architecture, product judgment, and automation to turn ambiguous ideas into real solutions.',
+    'hero.description.line2':
+      'Performance, DX, and technical quality as the foundation for consistent execution.',
     'hero.cta.primary': 'View Projects',
     'hero.cta.cv': 'Download CV',
     'hero.social.linkedin': 'LinkedIn',
@@ -142,13 +149,12 @@ export const ui = {
 
     // About Section
     'about.title': 'About Me',
-    'about.subtitle':
-      'A passionate frontend developer 💻 who loves creating digital experiences.<br />I turn ideas into interactive realities 🚀 with clean code.<br />Intuitive design ✨ that makes a difference.',
+    'about.subtitle': '11+ years building web products with a strong Frontend foundation.',
     'about.description':
-      'A frontend developer specializing in creating modern, fast, and accessible web experiences. Always striving for technical and visual perfection.',
-    'about.stats.experience': 'Years of experience',
-    'about.stats.projects': 'Completed projects',
-    'about.stats.technologies': 'Technologies mastered',
+      'My work has evolved toward Product Engineering: understanding the problem, making pragmatic technical decisions, and building maintainable solutions that create real impact.<br /><br />I am especially interested in the intersection of product, Frontend architecture, automation, applied AI, and user experience.',
+    'about.stats.experience': 'Years building web products',
+    'about.stats.projects': 'Product, DX, and execution',
+    'about.stats.technologies': 'Modern stack applied to product',
     'about.stats.languages': 'Languages',
 
     // Projects Section
@@ -172,12 +178,14 @@ export const ui = {
     'projects.repoOf': 'Repository of {{title}}',
 
     'projects.blog-engine.title': 'Blog Engine',
-    'projects.blog-engine.description': 'A markdown-based blog engine with support for MDX.',
+    'projects.blog-engine.description':
+      'Modular Markdown/MDX content system to publish technical writing with strong maintainability.',
     'projects.japan-2025-trip.title': '🇯🇵 Japan 2025 Trip',
     'projects.japan-2025-trip.description':
-      'Interactive web experience to plan and document my Japan trip with PWA, CRUD checklist, and gluten-free guide.',
+      'Offline-first PWA for real trip planning on mobile, with itinerary, weather, checklist, and reminders that remain useful without constant connectivity.',
     'projects.portfolio-website.title': 'Portfolio Website',
-    'projects.portfolio-website.description': 'A personal portfolio built with Astro.',
+    'projects.portfolio-website.description':
+      'Professional portfolio product focused on performance, SEO, accessibility, and strategic positioning with a clean bilingual architecture.',
 
     // Theme Toggle
     'theme.toggle': 'Switch theme',
@@ -188,19 +196,21 @@ export const ui = {
     'language.change': 'Change language',
 
     // Profile
-    'profile.photoAlt': '{{name}} - Frontend Developer',
+    'profile.photoAlt': '{{name}} - Product Engineer · Frontend Specialist',
     'profile.badge': 'Profile of {{name}}',
 
     // About stats subtitles
-    'about.stats.experience.subtitle': 'Building digital experiences since 2015',
-    'about.stats.projects.subtitle': 'Delivering high-quality solutions',
-    'about.stats.technologies.subtitle': 'Mastering modern technologies and frameworks',
-    'about.stats.languages.subtitle': 'Portfolio available in Spanish and English',
+    'about.stats.experience.subtitle': 'Experience across Frontend, architecture, and execution.',
+    'about.stats.projects.subtitle':
+      'Projects designed to solve real problems, not just look polished.',
+    'about.stats.technologies.subtitle':
+      'Technology used for performance, maintainability, and impact.',
+    'about.stats.languages.subtitle': 'Clear communication across technical and business contexts.',
 
     // Footer
     'footer.description':
-      'A frontend developer specializing in creating modern, fast, and accessible web experiences. Always striving for technical and visual perfection.',
-    'footer.role': 'Frontend Developer',
+      'I build fast, maintainable, impact-driven web products, combining modern Frontend, product judgment, and automation when it brings real value.',
+    'footer.role': 'Product Engineer · Frontend Specialist',
     'footer.cta': "Let's build something together",
     'footer.navigation': 'Navigation',
     'footer.connect': 'Connect with me',

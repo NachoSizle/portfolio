@@ -13,56 +13,42 @@ date: 2025-07-01
 
 ## Sobre el Proyecto
 
-Portfolio personal construido con **Astro 5** y **Tailwind CSS**, diseñado para ser ultrarrápido, accesible y visualmente atractivo. Este proyecto representa mi espacio digital profesional, donde muestro mis habilidades, proyectos y experiencia como desarrollador.
+Este portfolio está planteado como un producto profesional, no solo como una web de presentación. El objetivo es comunicar mi perfil técnico con claridad, cargar rápido y mantenerse fácil de evolucionar.
+
+Lo diseñé para que la experiencia de quien lo visita (recruiter, manager o equipo técnico) sea directa: entender quién soy, qué construyo y cómo trabajo.
 
 ## Características Principales
 
-### ⚡ Rendimiento Excepcional
-- **Puntuación perfecta en Lighthouse**: 100% en Performance, Accesibilidad, Best Practices y SEO
-- Generación de sitios estáticos (SSG) para tiempos de carga mínimos
-- Optimización automática de imágenes con soporte para AVIF/WebP
+### Qué problema resolvía
 
-### ♿ Accesibilidad (WCAG 2.1)
-- Componentes auditados con herramientas de accesibilidad
-- Navegación completa por teclado
-- Soporte para lectores de pantalla
-- Contraste de colores optimizado para modo claro y oscuro
+- Presentar marca personal y capacidad técnica sin ruido ni fricción.
+- Evitar un portfolio centrado en "stack" y llevarlo hacia una narrativa más útil para contratación.
+- Mantener una base que pueda evolucionar rápido con nuevo contenido.
 
-### 🎨 Diseño y UX
-- Sistema de tema claro/oscuro con persistencia en localStorage
-- Animaciones fluidas y naturales con Motion One
-- Diseño responsive desde 320px hasta pantallas 4K
-- Componentes interactivos con Solid.js para islas de hidratación selectiva
+### Qué decisiones tomé
 
-### 🌐 Internacionalización
-- Sistema completo de i18n con soporte para español e inglés
-- Cambio de idioma dinámico sin recargar la página
-- Rutas traducidas automáticamente
+- **Performance como requisito de producto**: páginas estáticas, assets optimizados y carga rápida en móvil.
+- **SEO y accesibilidad como estándar**: no como checklist de cierre.
+- **Bilingüe desde arquitectura**: contenido y navegación preparados para ES/EN.
+- **DX y mantenibilidad**: estructura clara para iterar narrativa y proyectos sin romper el sitio.
+- **Métricas como referencia**: Lighthouse y Core Web Vitals como señal objetiva de calidad técnica.
 
-### 🚀 Despliegue Continuo
-- CI/CD configurado con GitHub Actions
-- Deploy automático en GitHub Pages
-- Optimización de assets en tiempo de build
+### Qué construí
 
-## Stack Tecnológico
+- Sitio en Astro con generación estática y estructura modular.
+- Sistema i18n con rutas y copy en español e inglés.
+- Base SEO (meta, canonical, sitemap) y buenas prácticas de accesibilidad.
+- Secciones de home y proyectos enfocadas en comunicar perfil técnico y criterio de producto.
+- Pipeline de build/deploy preparado para publicación continua.
+- Pipeline con GitHub Actions y Bun para checks, test y build en cada iteración.
 
-El proyecto utiliza tecnologías modernas y optimizadas:
+## Impacto y aprendizaje
 
-- **Astro 5**: Framework para sitios estáticos ultrarrápidos
-- **Tailwind CSS**: Sistema de diseño con clases de utilidad
-- **TypeScript**: Tipado estático para mayor robustez
-- **Solid.js**: Para componentes interactivos con hidratación selectiva
-- **Motion One**: Animaciones de alto rendimiento
-- **Bun**: Runtime y gestor de paquetes para desarrollo veloz
+- Validé que el diseño y el contenido también son decisiones de producto.
+- Confirmé que una arquitectura limpia mejora la velocidad de ejecución y la claridad del mensaje.
+- Aprendí a tratar el portfolio como un producto vivo, con iteración continua.
 
-## Desafíos Técnicos
+## Stack (soporte)
 
-Durante el desarrollo del proyecto, resolví varios desafíos interesantes:
-
-1. **Optimización de imágenes remotas**: Configuración de dominios permitidos para soporte de imágenes externas
-2. **Sistema de navegación inteligente**: Scroll automático con offset para compensar el header fijo
-3. **Performance**: Lazy loading de componentes y code splitting automático
-
-## Resultados
-
-Este portfolio no es solo un showcase de proyectos, sino también una demostración práctica de mis habilidades técnicas y atención al detalle en el desarrollo web moderno.
+- Astro, Tailwind CSS, TypeScript y Bun.
+- i18n, optimización de imágenes y pipeline de despliegue en GitHub Pages.

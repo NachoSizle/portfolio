@@ -11,4 +11,38 @@ repoLink: "https://github.com/example/blog-engine"
 date: 2025-05-20
 ---
 
-Un motor de blogs basado en markdown con soporte para MDX, ideal para escritores técnicos.
+## Sobre el Proyecto
+
+**Blog Engine** es un sistema modular de contenido pensado para publicar documentación y artículos técnicos sin complicar el flujo editorial.
+
+No busca solo "mostrar posts": separa contenido y presentación para facilitar mantenimiento y evolución.
+
+## Qué problema resolvía
+
+- Evitar que cada nuevo artículo implique tocar plantillas o lógica de UI.
+- Estandarizar cómo se estructura y renderiza contenido técnico.
+- Mantener velocidad de publicación con una base consistente.
+
+## Qué decisiones tomé
+
+- Markdown/MDX como formato fuente para priorizar escritura y versionado.
+- Estructura de contenido desacoplada de la capa visual.
+- Convenciones de frontmatter para mantener orden editorial.
+- Frontmatter tipado para mantener metadatos consistentes entre entradas.
+
+## Qué construí
+
+- Pipeline de contenido basado en Markdown/MDX.
+- Renderizado consistente de entradas con componentes reutilizables.
+- Base simple para crecer en categorías y formatos cuando haga falta.
+- Reutilización de componentes MDX para mantener presentación coherente sin duplicar lógica.
+
+## Impacto y aprendizaje
+
+- Mejor DX para escribir y mantener contenido técnico.
+- Menor coste de evolución cuando cambia el diseño del sitio.
+- Aprendizaje clave: en productos de contenido, la arquitectura editorial pesa tanto como la interfaz.
+
+## Stack (soporte)
+
+- Astro, MDX y Tailwind CSS.
