@@ -20,3 +20,13 @@ export const CONTACT = {
   email: 'hola@nachosizle.dev',
   mailto: 'mailto:hola@nachosizle.dev',
 } as const;
+
+/**
+ * Currículum hosteado como asset propio en `public/cv/`. El path es relativo a
+ * `BASE_URL`; los consumidores DEBEN componer la URL final como
+ * `${BASE_URL}${CV.path}` para respetar el `base` de Astro en GitHub Pages.
+ */
+export const CV = {
+  path: '/cv/Nacho_Martinez_CV.pdf',
+  filename: 'Nacho_Martinez_CV.pdf',
+} as const;
