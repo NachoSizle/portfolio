@@ -144,6 +144,19 @@ const homeUrl = getTranslatedPath('/', lang);
       return nav ? nav.getBoundingClientRect().height : 0;
     }
 
+    // Resuelve el comportamiento de scroll respetando prefers-reduced-motion.
+    // Devuelve 'auto' (salto inmediato sin animación) cuando el usuario lo
+    // tiene activado en su sistema; 'smooth' en caso contrario.
+    function getScrollBehavior() {
+      try {
+        if (typeof window !== 'undefined' && typeof window.matchMedia === 'function') {
+          const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          return prefersReducedMotion ? 'auto' : 'smooth';
+        }
+      } catch (e) {}
+      return 'smooth';
+    }
+
     // Smooth scroll to an element accounting for header height and a small gap
     function scrollToElementWithOffset(el, pushState = true) {
       if (!el) return;
@@ -155,7 +168,7 @@ const homeUrl = getTranslatedPath('/', lang);
           history.pushState(null, '', `#${el.id}`);
         } catch (e) {}
       }
-      window.scrollTo({ top, behavior: 'smooth' });
+      window.scrollTo({ top, behavior: getScrollBehavior() });
     }
 
     // Delegate clicks on in-page anchors inside the nav
