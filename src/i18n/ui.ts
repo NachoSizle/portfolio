@@ -37,7 +37,7 @@ export const ui = {
     'about.stats.experience': 'Años de experiencia',
     'about.stats.projects': 'Proyectos completados',
     'about.stats.technologies': 'Tecnologías dominadas',
-    'about.stats.passion': 'Pasión por el código',
+    'about.stats.languages': 'Idiomas',
 
     // Projects Section
     'projects.title': 'Proyectos',
@@ -83,7 +83,7 @@ export const ui = {
     'about.stats.experience.subtitle': 'Construyendo experiencias digitales desde 2015',
     'about.stats.projects.subtitle': 'Entregando soluciones de calidad',
     'about.stats.technologies.subtitle': 'Dominando tecnologías modernas y frameworks',
-    'about.stats.passion.subtitle': 'Cada línea de código escrita con amor y dedicación',
+    'about.stats.languages.subtitle': 'Portfolio disponible en español e inglés',
 
     // Footer
     'footer.description':
@@ -149,7 +149,7 @@ export const ui = {
     'about.stats.experience': 'Years of experience',
     'about.stats.projects': 'Completed projects',
     'about.stats.technologies': 'Technologies mastered',
-    'about.stats.passion': 'Passion for coding',
+    'about.stats.languages': 'Languages',
 
     // Projects Section
     'projects.title': 'Projects',
@@ -195,7 +195,7 @@ export const ui = {
     'about.stats.experience.subtitle': 'Building digital experiences since 2015',
     'about.stats.projects.subtitle': 'Delivering high-quality solutions',
     'about.stats.technologies.subtitle': 'Mastering modern technologies and frameworks',
-    'about.stats.passion.subtitle': 'Every line of code written with love and dedication',
+    'about.stats.languages.subtitle': 'Portfolio available in Spanish and English',
 
     // Footer
     'footer.description':

@@ -1,18 +1,25 @@
 ---
 // About Section - Sección principal con composición de componentes
+import { getCollection } from 'astro:content';
 import ProfilePhoto from './ProfilePhoto.astro';
 import TechOrbit from './TechOrbit.astro';
 import StatsGrid from './StatsGrid.astro';
+import { CAREER_START_YEAR, LANGUAGES, TECHNOLOGIES } from '../constants';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
+// Métricas verificables (PRF-13). Cada número se deriva de una fuente real
+// del repo en build-time, eliminando los valores marketing-fluff anteriores.
+const yearsOfExperience = new Date().getFullYear() - CAREER_START_YEAR;
+const projects = await getCollection('projects');
+
 const stats = [
-  { number: '10+', label: t('about.stats.experience') },
-  { number: '50+', label: t('about.stats.projects') },
-  { number: '15+', label: t('about.stats.technologies') },
-  { number: '100%', label: t('about.stats.passion') }
+  { number: `${yearsOfExperience}+`, label: t('about.stats.experience') },
+  { number: `${projects.length}`, label: t('about.stats.projects') },
+  { number: `${TECHNOLOGIES.length}`, label: t('about.stats.technologies') },
+  { number: `${LANGUAGES.length}`, label: t('about.stats.languages') },
 ];
 ---
 

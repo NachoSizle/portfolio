@@ -99,7 +99,7 @@ describe('i18n: required keys exist in both locales', () => {
     'about.stats.experience.subtitle',
     'about.stats.projects.subtitle',
     'about.stats.technologies.subtitle',
-    'about.stats.passion.subtitle',
+    'about.stats.languages.subtitle',
   ];
 
   for (const key of REQUIRED_KEYS) {
