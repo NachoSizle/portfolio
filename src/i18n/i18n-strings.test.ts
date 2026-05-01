@@ -1,6 +1,6 @@
-import { describe, it, expect } from 'vitest';
-import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
+import { readFileSync, readdirSync, statSync } from 'node:fs';
+import { describe, it, expect } from 'vitest';
 import { ui } from './ui';
 
 const ROOT = new URL('../../', import.meta.url).pathname;
@@ -70,7 +70,7 @@ describe('i18n: no hardcoded strings in components/pages', () => {
       const offenders: string[] = [];
       for (const file of files) {
         const rel = relative(ROOT, file);
-        if (allowed && allowed.some((rx) => rx.test(rel))) continue;
+        if (allowed?.some((rx) => rx.test(rel))) continue;
         const content = readFileSync(file, 'utf8');
         if (content.includes(needle)) offenders.push(rel);
       }

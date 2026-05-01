@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { getLangFromUrl, getTranslatedPath, useTranslations, withBase } from './utils';
 
 // Stub BASE_URL para que el test sea determinista independiente de astro.config

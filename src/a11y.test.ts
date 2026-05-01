@@ -1,6 +1,6 @@
-import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { describe, expect, it } from 'vitest';
 
 const root = resolve(__dirname, '..');
 const aboutSection = readFileSync(resolve(root, 'src/components/AboutSection.astro'), 'utf-8');
@@ -56,6 +56,6 @@ describe('GYM-104: prefers-reduced-motion respetado globalmente', () => {
   it('reduce desactiva animaciones decorativas (animation: none)', () => {
     const block = globalCss.match(/@media\s*\(prefers-reduced-motion:\s*reduce\)\s*\{[\s\S]*?\n\}/);
     expect(block).not.toBeNull();
-    expect(block![0]).toMatch(/animation:\s*none/);
+    expect(block?.[0]).toMatch(/animation:\s*none/);
   });
 });

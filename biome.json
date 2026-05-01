@@ -14,10 +14,10 @@
       "**/*.mjs",
       "**/*.cjs",
       "**/*.json",
-      "!**/dist/**",
-      "!**/.astro/**",
-      "!**/node_modules/**",
-      "!**/.astro-cache/**"
+      "!**/dist",
+      "!**/.astro",
+      "!**/node_modules",
+      "!**/.astro-cache"
     ]
   },
   "formatter": {
