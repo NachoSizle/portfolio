@@ -2,18 +2,9 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-const deploy = readFileSync(
-  resolve(__dirname, '../.github/workflows/deploy.yml'),
-  'utf8',
-);
-const ci = readFileSync(
-  resolve(__dirname, '../.github/workflows/ci.yml'),
-  'utf8',
-);
-const gitignore = readFileSync(
-  resolve(__dirname, '../.gitignore'),
-  'utf8',
-);
+const deploy = readFileSync(resolve(__dirname, '../.github/workflows/deploy.yml'), 'utf8');
+const ci = readFileSync(resolve(__dirname, '../.github/workflows/ci.yml'), 'utf8');
+const gitignore = readFileSync(resolve(__dirname, '../.gitignore'), 'utf8');
 
 describe('GYM-121: pipeline GitHub Pages endurecido', () => {
   it('deploy.yml usa withastro/action y Bun', () => {

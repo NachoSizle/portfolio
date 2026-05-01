@@ -3,10 +3,7 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { getTranslatedPath } from './utils';
 
-const themeToggle = readFileSync(
-  resolve(__dirname, '../components/ThemeToggle.astro'),
-  'utf8',
-);
+const themeToggle = readFileSync(resolve(__dirname, '../components/ThemeToggle.astro'), 'utf8');
 
 describe('GYM-116: hreflang seguro frente a rutas exóticas', () => {
   it('rutas como /energy o /estado NO se confunden con prefijo de idioma', () => {
