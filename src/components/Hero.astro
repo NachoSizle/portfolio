@@ -1,6 +1,5 @@
 ---
-import HeroCTA from "../islands/HeroCTA.tsx";
-import SocialButtonWrapper from './SocialButtonWrapper.astro';
+import SocialButton from './SocialButton.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
@@ -23,7 +22,15 @@ const t = useTranslations(lang);
     <div
       class="mt-10 flex flex-row items-center gap-4 justify-center"
     >
-      <HeroCTA label={t('hero.cta.primary')} ariaLabel={t('hero.cta.primary')} client:load />
+      <a
+        href="#projects"
+        aria-label={t('hero.cta.primary')}
+        data-umami-event="cta-click"
+        data-umami-event-location="hero"
+        class="inline-flex items-center gap-2 rounded-xl bg-emerald-700 px-6 py-3 text-sm font-semibold text-white shadow-lg transition-transform duration-200 ease-out hover:scale-105 active:scale-[0.97] hover:bg-emerald-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-emerald-500 dark:bg-emerald-500 dark:hover:bg-emerald-500 border-2 border-emerald-700 dark:border-emerald-500 select-none"
+      >
+        {t('hero.cta.primary')}
+      </a>
       <a aria-label={t('hero.cta.cv')}
         href="https://www.icloud.com/iclouddrive/0013zvwHdziZe1ClzuPRrvbJQ#CV_Nacho_Updated"
         target="_blank"
@@ -38,19 +45,19 @@ const t = useTranslations(lang);
 
     <!-- Social buttons -->
     <div class="mt-12 flex flex-wrap justify-center gap-4">
-      <SocialButtonWrapper
+      <SocialButton
         href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=nacho-marmo"
         label={t('hero.social.linkedin')}
         iconName="linkedin"
         iconClassName="h-8 w-8"
       />
-      <SocialButtonWrapper
+      <SocialButton
         href="https://www.threads.com/@nachosizle"
         label={t('hero.social.threads')}
         iconName="threads"
         iconClassName="h-8 w-8"
       />
-      <SocialButtonWrapper
+      <SocialButton
         href="https://github.com/NachoSizle"
         label={t('hero.social.github')}
         iconName="github"

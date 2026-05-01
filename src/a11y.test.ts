@@ -8,7 +8,7 @@ const projectList = readFileSync(resolve(root, 'src/components/ProjectList.astro
 const footer = readFileSync(resolve(root, 'src/components/Footer.astro'), 'utf-8');
 const profilePhoto = readFileSync(resolve(root, 'src/components/ProfilePhoto.astro'), 'utf-8');
 const themeToggle = readFileSync(resolve(root, 'src/components/ThemeToggle.astro'), 'utf-8');
-const socialButton = readFileSync(resolve(root, 'src/islands/SocialButton.tsx'), 'utf-8');
+const socialButton = readFileSync(resolve(root, 'src/components/SocialButton.astro'), 'utf-8');
 const globalCss = readFileSync(resolve(root, 'src/styles/global.css'), 'utf-8');
 
 describe('GYM-104: anchors in-page válidos (no <a self-closing sin href>)', () => {
@@ -42,9 +42,9 @@ describe('GYM-104: ThemeToggle anuncia cambios a screen reader', () => {
 });
 
 describe('GYM-104: SocialButton tooltip accesible por teclado', () => {
-  it('muestra el tooltip también en focus, no sólo en hover', () => {
-    expect(socialButton).toMatch(/onFocus/);
-    expect(socialButton).toMatch(/onBlur/);
+  it('muestra el tooltip también en focus, no sólo en hover (CSS group-hover + group-focus-within)', () => {
+    expect(socialButton).toMatch(/group-hover/);
+    expect(socialButton).toMatch(/group-focus-within|group-focus|focus-within|focus-visible/);
   });
 });
 
