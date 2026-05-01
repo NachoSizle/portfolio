@@ -4,7 +4,11 @@ import { getLangFromUrl, getTranslatedPath, useTranslations, withBase } from './
 // Stub BASE_URL para que el test sea determinista independiente de astro.config
 // `import.meta.env.BASE_URL` durante los tests vendrá de Vite y será '/' por defecto.
 // Forzamos el valor sobreescribiendo el env de import.meta antes de cargar el módulo.
-const BASE = import.meta.env.BASE_URL.replace(/\/$/, '') || '';
+const BASE =
+  ((import.meta as unknown as { env?: { BASE_URL?: string } }).env?.BASE_URL ?? '/').replace(
+    /\/+$/,
+    ''
+  ) || '';
 
 describe('withBase', () => {
   it('antepone BASE_URL a un path absoluto', () => {

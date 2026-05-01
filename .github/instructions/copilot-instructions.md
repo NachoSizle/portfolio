@@ -8,35 +8,29 @@ applyTo: '**'
 Estas directrices están diseñadas para que los agentes de IA sean productivos y mantengan la coherencia del proyecto. Actúa como si fueras el DevOps & Frontend lead: ejecuta cada paso, confirma con logs y reporta métricas de rendimiento tras el primer deploy.
 
 # Objetivo  
-Crear un portfolio estático en **Astro 4** que actúe como hub central de mi marca personal (posts de LinkedIn & dev.to, proyectos de GitHub, formulario de contacto y métricas en tiempo real). Debe desplegarse gratis en **GitHub Pages** y medir Core Web Vitals por debajo de los umbrales recomendados.
+Crear un portfolio estático en **Astro 6** que actúe como hub central de mi marca personal (posts de LinkedIn & dev.to, proyectos de GitHub, formulario de contacto y métricas en tiempo real). Debe desplegarse gratis en **GitHub Pages** y medir Core Web Vitals por debajo de los umbrales recomendados.
 
 
 ## 🏗️ Tech Stack
 
 | Capa | Elección | Motivo |
 |------|----------|--------|
-| **Runtime & PM** | **Bun v1.x** | • Arranca Astro con `--bun` para un dev-server ultrarrápido :contentReference[oaicite:0]{index=0} |
-| **Framework** | **Astro 4** (Islands) | HTML estático + JS parcial; carga inicial <1 s :contentReference[oaicite:1]{index=1} |
-| **CSS** | Tailwind via `@astrojs/tailwind` | DX veloz y purge autom. en build :contentReference[oaicite:2]{index=2} |
-| **Imágenes** | `@astrojs/image` | AVIF/WebP + `srcset` autom. :contentReference[oaicite:3]{index=3} |
-| **Contenido** | Content Collections + MDX | Tipado, validación y queries a `.md` :contentReference[oaicite:4]{index=4} |
-| **Analítica** | Plausible (cloud) o Umami (self-host) | Scripts <1 KB, sin cookies :contentReference[oaicite:5]{index=5} |
-| **Deploy** | **withastro/action → gh-pages** | CI/CD simplificado en GitHub Actions :contentReference[oaicite:6]{index=6} |
-| **Optimización** | `astro-compressor` + `@astrojs/sitemap` | Gzip/Brotli pre-build y sitemap XML :contentReference[oaicite:7]{index=7} |
+| **Runtime & PM** | **Bun v1.x** | Arranca Astro con `--bun` para un dev-server ultrarrápido y ejecuta los tests con `bun test`. |
+| **Framework** | **Astro 6** (Islands) | HTML estático + JS parcial; carga inicial <1 s. |
+| **CSS** | **Tailwind v4** vía `@tailwindcss/vite` (CSS-first config) | DX veloz, sin `tailwind.config.*` JS y purge autom. en build. |
+| **Imágenes** | `astro:assets` + `sharp` | AVIF/WebP + `srcset` autom. sin necesidad de `@astrojs/image`. |
+| **Contenido** | Content Collections + MDX | Tipado, validación y queries a `.md`. |
+| **Analítica** | **Umami** (self-host) | Script <2 KB, sin cookies, eventos declarativos `data-umami-event`. |
+| **Deploy** | **withastro/action → gh-pages** | CI/CD simplificado en GitHub Actions. |
+| **Optimización** | `astro-compressor` + `@astrojs/sitemap` | Gzip/Brotli pre-build y sitemap XML. |
 
 
 Analítica ligera
 ---
-// src/layouts/Base.astro
-import Plausible from '@plausible/astro'; // o script Umami clásico
----
-<html lang="es">
-  <head>
-    <Plausible domain="tudominio.com" />
-  </head>
-</html>
+// src/layouts/BaseLayout.astro
+<script defer src="https://cloud.umami.is/script.js" data-website-id="…"></script>
 
-Plausible empieza a reportar en tiempo real sin cookies
+Umami reporta en tiempo real sin cookies y respeta DNT.
 
 ## 📁 Directorio de Documentación
 

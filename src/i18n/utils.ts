@@ -7,7 +7,9 @@ type TranslationParams = Record<string, string | number>;
  * Ej: '/portfolio' o '' para raíz.
  * Se obtiene de `import.meta.env.BASE_URL` (inyectado por Vite/Astro).
  */
-const BASE = (import.meta.env.BASE_URL ?? '/').replace(/\/+$/, '');
+const BASE = (
+  (import.meta as unknown as { env?: { BASE_URL?: string } }).env?.BASE_URL ?? '/'
+).replace(/\/+$/, '');
 
 /**
  * Antepone BASE_URL a un path absoluto sin duplicarla ni dejar dobles barras.

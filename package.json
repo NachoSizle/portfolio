@@ -8,8 +8,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
-    "test": "vitest run",
-    "test:watch": "vitest",
+    "test": "bun test",
+    "test:watch": "bun test --watch",
     "lint": "biome lint .",
     "format": "biome format --write .",
     "format:check": "biome format ."
