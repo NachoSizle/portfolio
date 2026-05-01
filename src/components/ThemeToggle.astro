@@ -29,39 +29,60 @@ const labels = {
 <span id="theme-toggle-status" class="sr-only" aria-live="polite" aria-atomic="true"></span>
 
 <script is:inline define:vars={{ THEME_LABELS: labels }}>
-  document.addEventListener('DOMContentLoaded', () => {
+  // Anti-flicker (GYM-116): este script va inmediatamente después del botón
+  // en el DOM, así que puede ejecutarse sin esperar DOMContentLoaded y
+  // sincronizar los iconos con la clase `dark` ya aplicada por el script
+  // inline de BaseLayout, evitando el parpadeo del icono incorrecto.
+  (function () {
     const themeToggleBtn = document.getElementById('theme-toggle');
     const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
     const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
     const themeStatus = document.getElementById('theme-toggle-status');
 
-    if (themeToggleBtn && themeToggleDarkIcon && themeToggleLightIcon) {
-      function updateTheme(announce) {
-        const isDark = document.documentElement.classList.contains('dark');
-        const newLabel = isDark ? THEME_LABELS.toLight : THEME_LABELS.toDark;
-        themeToggleBtn.setAttribute('aria-label', newLabel);
-        themeToggleBtn.setAttribute('title', newLabel);
-        themeToggleBtn.setAttribute('aria-pressed', String(isDark));
-        if (isDark) {
-          themeToggleDarkIcon.classList.remove('hidden');
-          themeToggleLightIcon.classList.add('hidden');
-        } else {
-          themeToggleDarkIcon.classList.add('hidden');
-          themeToggleLightIcon.classList.remove('hidden');
-        }
-        if (announce && themeStatus) {
-          themeStatus.textContent = newLabel;
-        }
+    if (!themeToggleBtn || !themeToggleDarkIcon || !themeToggleLightIcon) return;
+
+    function updateTheme(announce) {
+      const isDark = document.documentElement.classList.contains('dark');
+      const newLabel = isDark ? THEME_LABELS.toLight : THEME_LABELS.toDark;
+      themeToggleBtn.setAttribute('aria-label', newLabel);
+      themeToggleBtn.setAttribute('title', newLabel);
+      themeToggleBtn.setAttribute('aria-pressed', String(isDark));
+      if (isDark) {
+        themeToggleDarkIcon.classList.remove('hidden');
+        themeToggleLightIcon.classList.add('hidden');
+      } else {
+        themeToggleDarkIcon.classList.add('hidden');
+        themeToggleLightIcon.classList.remove('hidden');
       }
+      if (announce && themeStatus) {
+        themeStatus.textContent = newLabel;
+      }
+    }
 
-      updateTheme(false);
+    // Sincroniza iconos inmediatamente (sin DOMContentLoaded).
+    updateTheme(false);
 
-      themeToggleBtn.addEventListener('click', () => {
-        document.documentElement.classList.toggle('dark');
-        const newTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-        try { localStorage.setItem('theme', newTheme); } catch (e) { /* noop */ }
+    themeToggleBtn.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      const newTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+      try { localStorage.setItem('theme', newTheme); } catch (e) { /* noop */ }
+      updateTheme(true);
+    });
+
+    // Si el usuario no ha forzado tema explícito, sigue la preferencia del sistema.
+    try {
+      const mql = window.matchMedia('(prefers-color-scheme: dark)');
+      mql.addEventListener('change', (ev) => {
+        let stored = null;
+        try { stored = localStorage.getItem('theme'); } catch (e) { /* noop */ }
+        if (stored) return; // El usuario tiene override manual; no tocar.
+        if (ev.matches) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
         updateTheme(true);
       });
-    }
-  });
+    } catch (e) { /* noop */ }
+  })();
 </script>
