@@ -13,18 +13,16 @@ function getAlternateUrl(targetLang: string) {
 <div class="relative inline-block">
   <button
     id="language-toggle"
-    class="flex items-center gap-2 px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 select-none"
+    class="flex items-center gap-2 px-3 py-2 min-h-[44px] border border-[#1F2630] bg-[#11151A] text-slate-400 hover:text-[#5EE6A8] hover:border-[#5EE6A8]/40 font-mono text-xs uppercase tracking-widest transition-all duration-150 select-none focus:outline-none focus-visible:ring-1 focus-visible:ring-[#5EE6A8]"
     aria-label={t('language.change')}
     aria-haspopup="menu"
     aria-expanded="false"
   >
-    <svg class="w-5 h-5 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
     </svg>
-    <span class="text-sm font-medium text-gray-700 dark:text-gray-200 uppercase">
-      {lang}
-    </span>
-    <svg class="w-4 h-4 text-gray-600 dark:text-gray-300 transition-transform duration-200" id="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <span>{lang}</span>
+    <svg class="w-3 h-3 shrink-0 transition-transform duration-150" id="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
     </svg>
   </button>
@@ -33,25 +31,23 @@ function getAlternateUrl(targetLang: string) {
     id="language-menu"
     role="menu"
     aria-hidden="true"
-    class="absolute right-0 mt-2 w-40 rounded-lg bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700 opacity-0 invisible transition-all duration-200 z-50"
+    class="absolute right-0 mt-1 w-36 border border-[#1F2630] bg-[#11151A] shadow-[2px_2px_0_#000] opacity-0 invisible transition-all duration-150 z-50"
   >
     {Object.entries(languages).map(([code, name]) => (
       <a
         href={getAlternateUrl(code)}
-        class={`block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors first:rounded-t-lg last:rounded-b-lg select-none ${
+        class={`flex items-center justify-between px-3 py-2.5 font-mono text-xs uppercase tracking-widest transition-colors duration-100 select-none focus:outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-[#5EE6A8] ${
           code === lang
-            ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 font-semibold'
-            : 'text-gray-700 dark:text-gray-200'
+            ? 'text-[#5EE6A8] bg-[#161B22]'
+            : 'text-slate-400 hover:text-[#5EE6A8] hover:bg-[#161B22]'
         }`}
       >
-        <div class="flex items-center justify-between">
-          <span>{name}</span>
-          {code === lang && (
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-            </svg>
-          )}
-        </div>
+        <span>{name}</span>
+        {code === lang && (
+          <svg class="w-3 h-3 text-[#5EE6A8]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+          </svg>
+        )}
       </a>
     ))}
   </div>

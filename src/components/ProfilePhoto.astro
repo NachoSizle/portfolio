@@ -1,5 +1,5 @@
 ---
-// Profile Photo Component - Foto de perfil con badge flotante
+// Profile Photo Component - Foto de perfil estilo Neo 8-bit
 import { Image } from 'astro:assets';
 import ProfileImage from '../assets/profile.png';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
@@ -15,47 +15,48 @@ const photoAlt = t('profile.photoAlt', { name });
 const badgeAria = t('profile.badge', { name });
 ---
 
-<div class="relative z-20 profile-photo-container">
-  <div class="relative w-56 h-56 profile-photo-size">
-    <!-- Outer glow ring -->
-    <div class="absolute inset-0 bg-gradient-to-r from-primary/30 via-emerald-500/30 to-primary/30 rounded-full blur-xl animate-pulse"></div>
-    
-    <!-- Main profile container -->
-    <div class="relative w-full h-full bg-gradient-to-br from-white to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-full p-4 shadow-2xl border-1 border-white/50 dark:border-gray-700/50">
-      <!-- Profile Image -->
-      <div class="w-full h-full rounded-full flex items-center justify-center overflow-hidden shadow-inner">
-        <Image
-          src={ProfileImage}
-          alt={photoAlt}
-          class="w-full h-full object-cover"
-          loading="eager"
-          width={288}
-          height={288}
-        />
-      </div>
-    </div>
-    
-    <!-- Floating name badge -->
-    <div class="absolute bottom-2 sm:bottom-0 left-1/2 transform -translate-x-1/2 z-30">
-      <div class="bg-white dark:bg-gray-800 px-4 py-2 sm:px-6 sm:py-3 rounded-full shadow-lg border border-gray-200 dark:border-gray-700" aria-label={badgeAria}>
-        <p class="text-base sm:text-lg font-semibold text-gray-900 dark:text-white whitespace-nowrap">{name}</p>
-      </div>
+<div class="relative z-20">
+  <!-- Contenedor Neo 8-bit: rectangular, bordes nítidos -->
+  <div class="relative profile-photo-size border border-[#1F2630] bg-[#11151A] shadow-[4px_4px_0_#000] overflow-hidden">
+    <!-- Esquinas decorativas Neo 8-bit -->
+    <div class="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-[#5EE6A8] z-10 pointer-events-none"></div>
+    <div class="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-[#5EE6A8] z-10 pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-[#5EE6A8] z-10 pointer-events-none"></div>
+    <div class="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-[#5EE6A8] z-10 pointer-events-none"></div>
+
+    <!-- Foto de perfil -->
+    <Image
+      src={ProfileImage}
+      alt={photoAlt}
+      class="w-full h-full object-cover"
+      loading="eager"
+      width={288}
+      height={288}
+    />
+  </div>
+
+  <!-- Badge estilo terminal -->
+  <div class="absolute -bottom-3 left-0 right-0 flex justify-center z-30">
+    <div
+      class="border border-[#1F2630] bg-[#0B0D10] px-3 py-1 shadow-[2px_2px_0_#000]"
+      aria-label={badgeAria}
+    >
+      <p class="font-mono text-xs text-[#5EE6A8] whitespace-nowrap tracking-tight">$ {name}</p>
     </div>
   </div>
 </div>
 
 <style>
-  /* El contenedor de la foto debe tener z-index medio y un fondo que tape */
-  .profile-photo-container {
-    position: relative;
-    z-index: 15;
+  .profile-photo-size {
+    width: 224px;
+    height: 224px;
   }
-  
+
   /* Desde 610px usamos el tamaño grande de foto de perfil */
   @media (min-width: 610px) {
     .profile-photo-size {
-      width: 288px !important;
-      height: 288px !important;
+      width: 288px;
+      height: 288px;
     }
   }
 </style>
