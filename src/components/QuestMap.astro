@@ -1,0 +1,552 @@
+---
+import { getCollection } from 'astro:content';
+import { getLangFromUrl, useTranslations, withBase } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+type TranslationKey = Parameters<typeof t>[0];
+
+const projects = (await getCollection('projects')).sort((a, b) => {
+  if (a.data.featured && !b.data.featured) return -1;
+  if (!a.data.featured && b.data.featured) return 1;
+  return b.data.date.getTime() - a.data.date.getTime();
+});
+
+function translateOrRaw(value: string): string {
+  if (value.startsWith('projects.')) return t(value as TranslationKey) || value;
+  return value;
+}
+
+const projectPositions = [
+  { x: 68, y: 26 },
+  { x: 52, y: 62 },
+  { x: 78, y: 70 },
+];
+
+const staticNodes = [
+  {
+    id: 'lab',
+    kind: 'lab',
+    href: '#about',
+    label: t('game.zone.lab'),
+    kicker: t('game.zone.lab.kicker'),
+    badge: t('game.badge.start'),
+    dialog: t('game.zone.lab.dialog'),
+    x: 18,
+    y: 30,
+  },
+  {
+    id: 'skills',
+    kind: 'gym',
+    href: '#about',
+    label: t('game.zone.skills'),
+    kicker: t('game.zone.skills.kicker'),
+    badge: t('game.badge.skill'),
+    dialog: t('game.zone.skills.dialog'),
+    x: 36,
+    y: 58,
+  },
+  {
+    id: 'board',
+    kind: 'board',
+    href: '#projects',
+    label: t('game.zone.board'),
+    kicker: t('game.zone.board.kicker'),
+    badge: t('game.badge.main'),
+    dialog: t('game.zone.board.dialog'),
+    x: 58,
+    y: 44,
+  },
+  {
+    id: 'contact',
+    kind: 'save',
+    href: '#contact',
+    label: t('game.zone.contact'),
+    kicker: t('game.zone.contact.kicker'),
+    badge: t('game.badge.save'),
+    dialog: t('game.zone.contact.dialog'),
+    x: 88,
+    y: 38,
+  },
+];
+
+const projectNodes = projects.slice(0, 3).map((project, index) => {
+  const title = translateOrRaw(project.data.title);
+  const status = project.data.status ?? 'prod';
+  const statusKey = `game.status.${status}` as TranslationKey;
+  const position = projectPositions[index] ?? projectPositions[0];
+
+  return {
+    id: `project-${project.id}`,
+    kind: project.data.featured ? 'featured' : 'quest',
+    href: lang === 'en' ? withBase(`/en/projects/${project.id}`) : withBase(`/projects/${project.id}`),
+    label: title,
+    kicker: t(statusKey),
+    badge: project.data.featured ? t('game.badge.featured') : t('game.badge.project'),
+    dialog: t('game.project.dialog', { title }),
+    x: position.x,
+    y: position.y,
+  };
+});
+
+const routeNodes = [...staticNodes, ...projectNodes];
+const tiles = Array.from({ length: 64 }, (_, index) => {
+  if (index % 11 === 0 || index % 13 === 0) return 'grass';
+  if (index % 17 === 0) return 'water';
+  if (index % 5 === 0 || index % 7 === 0) return 'path';
+  return 'field';
+});
+---
+
+<section id="quest-map" class="quest-map" aria-labelledby="quest-map-title" data-quest-map>
+  <div class="quest-map__hud">
+    <span class="quest-map__eyebrow">{t('game.hud.eyebrow')}</span>
+    <h2 id="quest-map-title" class="quest-map__title">{t('game.hud.title')}</h2>
+    <p class="quest-map__description">{t('game.hud.description')}</p>
+  </div>
+
+  <div class="quest-map__shell">
+    <div class="quest-map__screen" aria-describedby="quest-map-help">
+      <p id="quest-map-help" class="sr-only">{t('game.help')}</p>
+
+      <div class="quest-map__tiles" aria-hidden="true">
+        {tiles.map((tile) => <span class={`quest-map__tile quest-map__tile--${tile}`} />)}
+      </div>
+
+      <div class="quest-map__path quest-map__path--one" aria-hidden="true"></div>
+      <div class="quest-map__path quest-map__path--two" aria-hidden="true"></div>
+
+      <div class="quest-avatar" aria-hidden="true" data-quest-avatar>
+        <span class="quest-avatar__head"></span>
+        <span class="quest-avatar__body"></span>
+        <span class="quest-avatar__feet"></span>
+      </div>
+
+      <nav class="quest-map__route" aria-label={t('game.map.navLabel')}>
+        {routeNodes.map((node, index) => (
+          <a
+            class={`quest-node quest-node--${node.kind}`}
+            href={node.href}
+            style={`--quest-x: ${node.x}%; --quest-y: ${node.y}%;`}
+            data-quest-node
+            data-dialog={node.dialog}
+            data-index={index}
+          >
+            <span class="quest-node__sprite" aria-hidden="true">
+              <span class="quest-node__pixel"></span>
+            </span>
+            <span class="quest-node__copy">
+              <span class="quest-node__badge">{node.badge}</span>
+              <span class="quest-node__label">{node.label}</span>
+              <span class="quest-node__kicker">{node.kicker}</span>
+            </span>
+          </a>
+        ))}
+      </nav>
+    </div>
+
+    <div class="quest-dialog" role="status" aria-live="polite" aria-atomic="true">
+      <span class="quest-dialog__speaker">{t('game.dialog.speaker')}</span>
+      <p class="quest-dialog__text" data-quest-dialog>{t('game.dialog.default')}</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  const questMap = document.querySelector('[data-quest-map]');
+
+  if (questMap) {
+    const nodes = Array.from(questMap.querySelectorAll('[data-quest-node]'));
+    const avatar = questMap.querySelector('[data-quest-avatar]');
+    const dialog = questMap.querySelector('[data-quest-dialog]');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    const setActiveNode = (node: Element) => {
+      if (!(node instanceof HTMLElement)) return;
+
+      nodes.forEach((item) => item.removeAttribute('aria-current'));
+      node.setAttribute('aria-current', 'location');
+
+      if (dialog instanceof HTMLElement) {
+        dialog.textContent = node.dataset.dialog || dialog.textContent;
+      }
+
+      if (avatar instanceof HTMLElement) {
+        avatar.style.setProperty('--avatar-x', node.style.getPropertyValue('--quest-x'));
+        avatar.style.setProperty('--avatar-y', node.style.getPropertyValue('--quest-y'));
+        avatar.dataset.motion = reduceMotion.matches ? 'reduced' : 'active';
+      }
+    };
+
+    nodes.forEach((node, index) => {
+      node.addEventListener('focus', () => setActiveNode(node));
+      node.addEventListener('pointerenter', () => setActiveNode(node));
+      node.addEventListener('click', () => setActiveNode(node));
+
+      node.addEventListener('keydown', (event) => {
+        if (!(event instanceof KeyboardEvent)) return;
+
+        const keyMap: Record<string, number> = {
+          ArrowRight: index + 1,
+          ArrowDown: index + 1,
+          ArrowLeft: index - 1,
+          ArrowUp: index - 1,
+          Home: 0,
+          End: nodes.length - 1,
+        };
+
+        const nextIndex = keyMap[event.key];
+        if (typeof nextIndex !== 'number') return;
+
+        event.preventDefault();
+        const nextNode = nodes.at((nextIndex + nodes.length) % nodes.length);
+        if (nextNode instanceof HTMLElement) nextNode.focus();
+      });
+    });
+
+    const initialNode = nodes[0];
+    if (initialNode instanceof HTMLElement) setActiveNode(initialNode);
+  }
+</script>
+
+<style>
+  .quest-map {
+    --map-border: var(--theme-border);
+    --map-surface: var(--theme-surface);
+    --map-surface-2: var(--theme-surface-2);
+    --map-shadow: var(--theme-hard-shadow);
+    --map-tile-field: #dceadf;
+    --map-tile-grass: #bdd8bc;
+    --map-tile-path: #eadab8;
+    --map-tile-water: #b8d7e8;
+    display: grid;
+    gap: 1rem;
+  }
+
+  :global(.dark) .quest-map {
+    --map-tile-field: #13231b;
+    --map-tile-grass: #1b3a2a;
+    --map-tile-path: #2d271c;
+    --map-tile-water: #14273b;
+  }
+
+  .quest-map__hud {
+    display: grid;
+    gap: 0.45rem;
+  }
+
+  .quest-map__eyebrow,
+  .quest-node__badge,
+  .quest-dialog__speaker {
+    color: var(--theme-accent-dim);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 800;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .quest-map__title {
+    color: var(--theme-text);
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 1.1;
+  }
+
+  .quest-map__description {
+    color: var(--theme-text-secondary);
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    max-width: 34rem;
+  }
+
+  .quest-map__shell {
+    border: 1px solid var(--map-border);
+    background: var(--map-surface);
+    box-shadow: 4px 4px 0 var(--map-shadow);
+    padding: 0.5rem;
+  }
+
+  .quest-map__screen {
+    position: relative;
+    min-height: 22rem;
+    overflow: hidden;
+    border: 1px solid var(--map-border);
+    background-color: var(--map-tile-field);
+    isolation: isolate;
+  }
+
+  .quest-map__tiles {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    display: grid;
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    grid-template-rows: repeat(8, minmax(0, 1fr));
+  }
+
+  .quest-map__tile {
+    border-right: 1px solid rgba(var(--theme-muted-rgb), 0.14);
+    border-bottom: 1px solid rgba(var(--theme-muted-rgb), 0.14);
+    background-color: var(--map-tile-field);
+  }
+
+  .quest-map__tile--grass {
+    background-color: var(--map-tile-grass);
+  }
+
+  .quest-map__tile--path {
+    background-color: var(--map-tile-path);
+  }
+
+  .quest-map__tile--water {
+    background-color: var(--map-tile-water);
+  }
+
+  .quest-map__path {
+    position: absolute;
+    z-index: -1;
+    background-color: rgba(var(--theme-amber-rgb), 0.22);
+    image-rendering: pixelated;
+  }
+
+  .quest-map__path--one {
+    left: 16%;
+    top: 38%;
+    width: 74%;
+    height: 1.15rem;
+  }
+
+  .quest-map__path--two {
+    left: 34%;
+    top: 39%;
+    width: 1.15rem;
+    height: 34%;
+  }
+
+  .quest-map__route {
+    position: absolute;
+    inset: 0;
+  }
+
+  .quest-node {
+    position: absolute;
+    left: var(--quest-x);
+    top: var(--quest-y);
+    display: grid;
+    width: min(12rem, calc(100% - 2rem));
+    min-height: 4.7rem;
+    transform: translate(-50%, -50%);
+    grid-template-columns: 2.1rem minmax(0, 1fr);
+    gap: 0.55rem;
+    align-items: center;
+    border: 2px solid var(--map-border);
+    background: var(--map-surface);
+    color: var(--theme-text);
+    padding: 0.55rem;
+    text-decoration: none;
+    box-shadow: 3px 3px 0 var(--map-shadow);
+    transition: transform 0.16s ease, border-color 0.16s ease, box-shadow 0.16s ease;
+  }
+
+  .quest-node:hover,
+  .quest-node:focus-visible,
+  .quest-node[aria-current='location'] {
+    border-color: var(--theme-accent);
+    outline: none;
+    transform: translate(calc(-50% - 2px), calc(-50% - 2px));
+    box-shadow: 5px 5px 0 var(--map-shadow);
+  }
+
+  .quest-node:focus-visible {
+    outline: 2px solid var(--theme-accent);
+    outline-offset: 3px;
+  }
+
+  .quest-node__sprite {
+    position: relative;
+    display: grid;
+    width: 2rem;
+    height: 2rem;
+    place-items: center;
+    border: 2px solid currentColor;
+    background: var(--map-surface-2);
+    color: var(--theme-accent);
+    image-rendering: pixelated;
+  }
+
+  .quest-node__pixel,
+  .quest-node__pixel::before,
+  .quest-node__pixel::after {
+    display: block;
+    width: 0.55rem;
+    height: 0.55rem;
+    background: currentColor;
+    content: '';
+  }
+
+  .quest-node__pixel::before {
+    transform: translate(-0.45rem, 0.45rem);
+  }
+
+  .quest-node__pixel::after {
+    transform: translate(0.45rem, -0.1rem);
+  }
+
+  .quest-node--gym .quest-node__sprite,
+  .quest-node--featured .quest-node__sprite {
+    color: var(--theme-amber);
+  }
+
+  .quest-node--save .quest-node__sprite {
+    color: var(--theme-info);
+  }
+
+  .quest-node__copy {
+    display: grid;
+    min-width: 0;
+    gap: 0.22rem;
+  }
+
+  .quest-node__label {
+    overflow: hidden;
+    color: var(--theme-text);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 900;
+    line-height: 1.2;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .quest-node__kicker {
+    overflow: hidden;
+    color: var(--theme-text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    line-height: 1.2;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .quest-avatar {
+    --avatar-x: 18%;
+    --avatar-y: 30%;
+    position: absolute;
+    left: var(--avatar-x);
+    top: calc(var(--avatar-y) + 3.8rem);
+    z-index: 3;
+    display: grid;
+    width: 1.35rem;
+    height: 2rem;
+    transform: translate(-50%, -50%);
+    justify-items: center;
+    transition: left 0.18s steps(3), top 0.18s steps(3);
+    image-rendering: pixelated;
+    pointer-events: none;
+  }
+
+  .quest-avatar__head {
+    width: 0.95rem;
+    height: 0.75rem;
+    border: 2px solid var(--theme-text);
+    background: var(--theme-accent);
+  }
+
+  .quest-avatar__body {
+    width: 1.2rem;
+    height: 0.75rem;
+    border-inline: 2px solid var(--theme-text);
+    background: var(--theme-info);
+  }
+
+  .quest-avatar__feet {
+    width: 1rem;
+    height: 0.35rem;
+    background: var(--theme-text);
+  }
+
+  .quest-dialog {
+    display: grid;
+    gap: 0.45rem;
+    margin-top: 0.5rem;
+    border: 2px solid var(--theme-text);
+    background: var(--map-surface);
+    box-shadow: inset 0 0 0 3px var(--map-surface), inset 0 0 0 4px var(--map-border);
+    padding: 0.9rem 1rem;
+  }
+
+  .quest-dialog__text {
+    min-height: 2.8rem;
+    color: var(--theme-text-secondary);
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+
+  :global(html:not(.dark)) .quest-map__screen,
+  :global(html:not(.dark)) .quest-map__path {
+    background-image: none;
+  }
+
+  @media (max-width: 720px) {
+    .quest-map__screen {
+      min-height: 38rem;
+    }
+
+    .quest-node {
+      width: min(13rem, calc(100% - 2rem));
+    }
+
+    .quest-node:nth-child(1) {
+      left: 28%;
+      top: 13%;
+    }
+
+    .quest-node:nth-child(2) {
+      left: 68%;
+      top: 26%;
+    }
+
+    .quest-node:nth-child(3) {
+      left: 30%;
+      top: 39%;
+    }
+
+    .quest-node:nth-child(4) {
+      left: 70%;
+      top: 52%;
+    }
+
+    .quest-node:nth-child(5) {
+      left: 50%;
+      top: 65%;
+    }
+
+    .quest-node:nth-child(6) {
+      left: 50%;
+      top: 78%;
+    }
+
+    .quest-node:nth-child(7) {
+      left: 50%;
+      top: 91%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .quest-node,
+    .quest-avatar {
+      transition: none;
+    }
+
+    .quest-node:hover,
+    .quest-node:focus-visible,
+    .quest-node[aria-current='location'] {
+      transform: translate(-50%, -50%);
+    }
+  }
+</style>

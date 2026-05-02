@@ -1,6 +1,6 @@
 ---
 import SocialButton from './SocialButton.astro';
-import SystemStatusPanel from './SystemStatusPanel.astro';
+import QuestMap from './QuestMap.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
 import { BASE_URL, CV, SOCIAL_LINKS } from '../constants';
 
@@ -12,7 +12,7 @@ const t = useTranslations(lang);
   <div class="mx-auto max-w-6xl px-4 sm:px-6 py-6 sm:py-10 lg:py-12 relative z-10">
 
     <!-- Layout 2 columnas en desktop -->
-    <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_auto] gap-8 sm:gap-10 lg:gap-12 items-center">
+    <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,0.85fr)_minmax(24rem,1fr)] gap-8 sm:gap-10 lg:gap-12 items-center">
 
       <!-- Columna izquierda: texto -->
       <div class="space-y-5 sm:space-y-6">
@@ -44,13 +44,13 @@ const t = useTranslations(lang);
         <!-- CTAs: touch targets mínimo 44px, full-width en mobile -->
         <div class="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 pt-1">
           <a
-            href="#projects"
-            aria-label={t('hero.cta.primary')}
+            href="#quest-map"
+            aria-label={t('game.cta.start')}
             data-umami-event="cta-click"
             data-umami-event-location="hero"
             class="hero-btn-primary inline-flex items-center justify-center gap-2 px-6 py-3 min-h-[44px] text-sm font-bold font-mono text-[#0B0D10] bg-[#5EE6A8] border border-[#5EE6A8] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[4px_4px_0_#3DB882] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5EE6A8] select-none uppercase"
           >
-            {t('hero.cta.primary')} →
+            {t('game.cta.start')} →
           </a>
           <a
             aria-label={t('hero.cta.cv')}
@@ -89,9 +89,9 @@ const t = useTranslations(lang);
         </div>
       </div>
 
-      <!-- Columna derecha: SystemStatusPanel — solo visible en lg+ -->
-      <div class="hidden lg:flex justify-end">
-        <SystemStatusPanel />
+      <!-- Columna derecha: mapa interactivo inspirado en RPG portátil clásico -->
+      <div class="min-w-0">
+        <QuestMap />
       </div>
 
     </div>

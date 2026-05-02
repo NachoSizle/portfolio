@@ -36,8 +36,8 @@ describe('GYM-106: Hero sin islas Solid innecesarias', () => {
     }
   });
 
-  it('Hero.astro renderiza un CTA #projects con tracking umami inline', () => {
-    expect(hero).toMatch(/href=["']#projects["']/);
+  it('Hero.astro renderiza un CTA al mapa interactivo con tracking umami inline', () => {
+    expect(hero).toMatch(/href=["']#quest-map["']/);
     expect(hero).toMatch(/data-umami-event=["']cta-click["']/);
   });
 });
@@ -61,6 +61,15 @@ describe('GYM-106: dependencias Motion/solid-icons fuera del primer paint', () =
   it('ningún componente .astro/.ts/.tsx en uso importa solid-icons', () => {
     const offenders = srcFiles.filter((f) =>
       /from\s+["']solid-icons/.test(readFileSync(f, 'utf-8'))
+    );
+    expect(offenders).toEqual([]);
+  });
+
+  it('el mapa interactivo no importa motores de juego pesados en el MVP', () => {
+    const offenders = srcFiles.filter((f) =>
+      /from\s+["'](?:phaser|kaboom|pixi\.js|three|@react-three\/fiber)/.test(
+        readFileSync(f, 'utf-8')
+      )
     );
     expect(offenders).toEqual([]);
   });

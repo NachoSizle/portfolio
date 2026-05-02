@@ -30,6 +30,46 @@ export const ui = {
     'hero.social.threads': 'Threads',
     'hero.social.github': 'GitHub',
 
+    // Game-like navigation
+    'game.hud.eyebrow': 'Ruta Nacho · Guardado 01',
+    'game.hud.title': 'Elige tu próxima misión',
+    'game.hud.description':
+      'Explora el mapa como en un RPG portátil clásico: habla con cada zona, revisa misiones y entra en los case studies cuando estés listo.',
+    'game.help':
+      'Mapa interactivo con enlaces. Usa Tab para recorrer zonas, Enter para abrir una ruta y las flechas para cambiar el foco entre nodos.',
+    'game.map.navLabel': 'Mapa de misiones del portfolio',
+    'game.cta.start': 'Iniciar ruta',
+    'game.dialog.speaker': 'PROF. NACHO',
+    'game.dialog.default':
+      'Te doy la bienvenida a Ruta Nacho. Elige una zona y te cuento qué puedes descubrir allí.',
+    'game.zone.lab': 'Laboratorio',
+    'game.zone.lab.kicker': 'Origen y método',
+    'game.zone.lab.dialog':
+      'En el laboratorio tienes contexto sobre mi forma de trabajar, criterio de producto y base frontend.',
+    'game.zone.skills': 'Gimnasio Skills',
+    'game.zone.skills.kicker': 'Stack entrenado',
+    'game.zone.skills.dialog':
+      'Aquí están las habilidades desbloqueadas: arquitectura, performance, DX, automatización y ejecución.',
+    'game.zone.board': 'Tablón de misiones',
+    'game.zone.board.kicker': 'Case studies',
+    'game.zone.board.dialog':
+      'El tablón reúne proyectos reales con objetivo, solución, stack y señal de impacto.',
+    'game.zone.contact': 'Centro contacto',
+    'game.zone.contact.kicker': 'Save point',
+    'game.zone.contact.dialog':
+      'Este punto de guardado te lleva al contacto para hablar de producto, frontend o una nueva misión.',
+    'game.badge.start': 'START',
+    'game.badge.skill': 'BADGE',
+    'game.badge.main': 'MAIN',
+    'game.badge.save': 'SAVE',
+    'game.badge.featured': 'RARE',
+    'game.badge.project': 'QUEST',
+    'game.status.prod': 'Producción',
+    'game.status.experiment': 'Experimento',
+    'game.status.archived': 'Archivado',
+    'game.project.dialog':
+      'Misión desbloqueada: {{title}}. Abre el case study para ver objetivo, solución e impacto.',
+
     // About Section
     'about.title': 'Conoce a Nacho',
     'about.subtitle': '11+ años construyendo producto web con una base Frontend fuerte.',
@@ -147,6 +187,46 @@ export const ui = {
     'hero.social.linkedin': 'LinkedIn',
     'hero.social.threads': 'Threads',
     'hero.social.github': 'GitHub',
+
+    // Game-like navigation
+    'game.hud.eyebrow': 'Nacho Route · Save 01',
+    'game.hud.title': 'Choose your next mission',
+    'game.hud.description':
+      'Explore the map like a classic handheld RPG: talk to each zone, inspect missions, and enter the case studies when you are ready.',
+    'game.help':
+      'Interactive map with links. Use Tab to browse zones, Enter to open a route, and arrow keys to move focus between nodes.',
+    'game.map.navLabel': 'Portfolio mission map',
+    'game.cta.start': 'Start route',
+    'game.dialog.speaker': 'PROF. NACHO',
+    'game.dialog.default':
+      'Welcome to Nacho Route. Choose a zone and I will tell you what you can discover there.',
+    'game.zone.lab': 'Lab',
+    'game.zone.lab.kicker': 'Origin and method',
+    'game.zone.lab.dialog':
+      'The lab gives you context about how I work, my product judgment, and my frontend foundation.',
+    'game.zone.skills': 'Skills Gym',
+    'game.zone.skills.kicker': 'Trained stack',
+    'game.zone.skills.dialog':
+      'These are the unlocked skills: architecture, performance, DX, automation, and execution.',
+    'game.zone.board': 'Mission board',
+    'game.zone.board.kicker': 'Case studies',
+    'game.zone.board.dialog':
+      'The board gathers real projects with objective, solution, stack, and impact signal.',
+    'game.zone.contact': 'Contact center',
+    'game.zone.contact.kicker': 'Save point',
+    'game.zone.contact.dialog':
+      'This save point takes you to contact so we can talk product, frontend, or a new mission.',
+    'game.badge.start': 'START',
+    'game.badge.skill': 'BADGE',
+    'game.badge.main': 'MAIN',
+    'game.badge.save': 'SAVE',
+    'game.badge.featured': 'RARE',
+    'game.badge.project': 'QUEST',
+    'game.status.prod': 'Production',
+    'game.status.experiment': 'Experiment',
+    'game.status.archived': 'Archived',
+    'game.project.dialog':
+      'Mission unlocked: {{title}}. Open the case study to inspect goal, solution, and impact.',
 
     // About Section
     'about.title': 'About Me',
