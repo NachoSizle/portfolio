@@ -9,47 +9,79 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const { projects } = Astro.props;
+
+const featuredProject = projects.find((p: any) => p.data.featured);
+const otherProjects = projects.filter((p: any) => !p.data.featured);
 const totalProjects = projects.length;
 ---
 
-<section class="relative m-6 mb-12 mt-0 bg-transparent overflow-hidden" aria-labelledby="projects-section" role="region">
-  <!-- Header con animación sutil -->
-  <div class="text-center mb-12 relative z-10">
-    <!-- Ancla in-page compatible con el nav (#projects). Span válido y focusable con tabindex=-1. -->
+<section class="relative mx-auto max-w-6xl px-6 mb-16 mt-0 bg-transparent" aria-labelledby="projects-section" role="region">
+
+  <!-- Header terminal -->
+  <div class="mb-10 relative z-10">
     <span id="projects" tabindex="-1" class="sr-only">{t('projects.title')}</span>
-    <h2 id="projects-section" class="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl text-balance md:leading-20 mb-4 select-none">
-      {t('projects.title')} <span class="text-primary">{t('projects.titleHighlight')}</span>
+    <div class="flex items-center gap-3 mb-2">
+      <span class="font-mono text-xs text-[#3DB882] tracking-widest uppercase select-none">// PROJECTS</span>
+      <div class="h-px flex-1 bg-[#1F2630]"></div>
+      <span class="font-mono text-xs text-[#3D4B5A] select-none">{totalProjects} entries</span>
+    </div>
+    <h2
+      id="projects-section"
+      class="text-3xl sm:text-4xl font-extrabold font-mono tracking-tight text-slate-100 select-none"
+    >
+      {t('projects.title')} <span style="color: #5EE6A8;">{t('projects.titleHighlight')}</span>
     </h2>
-    <p class="text-lg text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto select-none" set:html={t('projects.subtitle')} />
+    <p class="mt-2 text-sm text-slate-500 font-mono max-w-2xl select-none" set:html={t('projects.subtitle')} />
   </div>
 
-  <!-- Lista de proyectos usando ProjectCard con sticky scroll -->
-  <ul class="space-y-0" role="list">
-    {projects.map((project: any, index: number) => (
+  <!-- Featured project (si existe) -->
+  {featuredProject && (
+    <div class="mb-8">
+      <div class="flex items-center gap-2 mb-3">
+        <span class="px-2 py-0.5 text-xs font-mono font-bold text-[#F5B36B] border border-[#F5B36B]/40 bg-[rgba(245,179,107,0.08)] select-none tracking-widest">
+          [FEATURED]
+        </span>
+        <div class="h-px flex-1 bg-[#1F2630]"></div>
+      </div>
       <ProjectCard
-        project={project}
-        index={index}
+        project={featuredProject}
+        index={0}
         total={totalProjects}
       />
-    ))}
-  </ul>
-
-  <!-- Call to action al final -->
-  <div class="mt-16 text-center">
-    <div class="w-full sm:max-w-xs inline-flex items-center justify-center gap-3 px-6 py-3 bg-gradient-to-r from-primary/10 to-emerald-500/10 rounded-full border border-primary/20 dark:border-emerald-500/20">
-      <a 
-        href="https://github.com/NachoSizle" 
-        target="_blank" 
-        rel="noopener noreferrer"
-        class="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 
-               transition-colors duration-200 select-none"
-        aria-label={t('projects.viewMore')}
-      >
-        <span class="text-sm font-medium text-neutral-700 dark:text-neutral-300">
-          {t('projects.likeWhat')}
-        </span>
-        {t('projects.viewMore')}
-      </a>
     </div>
+  )}
+
+  <!-- Resto de proyectos -->
+  {otherProjects.length > 0 && (
+    <div>
+      {featuredProject && (
+        <div class="flex items-center gap-2 mb-3">
+          <span class="font-mono text-xs text-[#3D4B5A] select-none tracking-widest">// OTHER PROJECTS</span>
+          <div class="h-px flex-1 bg-[#1F2630]"></div>
+        </div>
+      )}
+      <ul class="space-y-4" role="list">
+        {otherProjects.map((project: any, index: number) => (
+          <ProjectCard
+            project={project}
+            index={featuredProject ? index + 1 : index}
+            total={totalProjects}
+          />
+        ))}
+      </ul>
+    </div>
+  )}
+
+  <!-- CTA GitHub -->
+  <div class="mt-12 flex justify-center">
+    <a
+      href="https://github.com/NachoSizle"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-mono font-bold text-[#5EE6A8] border border-[#5EE6A8]/40 bg-transparent transition-all duration-150 hover:border-[#5EE6A8] hover:-translate-y-0.5 hover:shadow-[2px_2px_0_#3DB882] focus:outline-none focus-visible:ring-1 focus-visible:ring-[#5EE6A8] select-none uppercase"
+      aria-label={t('projects.viewMore')}
+    >
+      {t('projects.likeWhat')} → {t('projects.viewMore')} ↗
+    </a>
   </div>
 </section>

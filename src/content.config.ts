@@ -11,6 +11,11 @@ const projects = defineCollection({
     demoLink: z.string().url().optional(),
     repoLink: z.string().url().optional(),
     date: z.date(),
+    featured: z.boolean().default(false),
+    status: z.enum(['prod', 'experiment', 'archived']).default('prod'),
+    problem: z.string().optional(),
+    solution: z.string().optional(),
+    impact: z.string().optional(),
   }),
 });
 

@@ -1,67 +1,36 @@
 ---
-// Background Gradients Component - Efectos de profundidad con gradientes radiales
-// Sólo visibles en dark mode. Cinco blobs cuidadosamente distribuidos para
-// reducir el coste de paint frente a la versión anterior (10 blobs + hack global).
+// Background Técnico Neo 8-bit — Grid de puntos + gradiente sutil
+// Siempre oscuro, sin blobs de colores vibrantes
 ---
 
 <div
-  class="absolute inset-0 overflow-hidden pointer-events-none z-0 max-w-full hidden dark:block"
+  class="fixed inset-0 overflow-hidden pointer-events-none z-0"
   aria-hidden="true"
 >
-  <!-- Hero/Top Section - Azul Primary -->
+  <!-- Grid de puntos técnico (estilo PCB/terminal) -->
   <div
-    class="bg-blob absolute top-0 left-1/4 w-[300px] md:w-[600px] h-[300px] md:h-[600px] blur-3xl"
-    style="background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);"
+    class="absolute inset-0"
+    style="background-image: radial-gradient(circle, rgba(94, 230, 168, 0.12) 1px, transparent 1px); background-size: 28px 28px;"
   ></div>
 
-  <!-- Top Right - Emerald -->
+  <!-- Gradiente de vignette para dar profundidad -->
   <div
-    class="bg-blob absolute top-10 right-1/5 w-[250px] md:w-[500px] h-[250px] md:h-[500px] blur-3xl"
-    style="background: radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, transparent 70%); animation-delay: 1s;"
+    class="absolute inset-0"
+    style="background: radial-gradient(ellipse at center, transparent 40%, rgba(11, 13, 16, 0.7) 100%);"
   ></div>
 
-  <!-- Center - Purple -->
+  <!-- Línea de grid horizontal sutil -->
   <div
-    class="bg-blob absolute top-1/2 left-1/2 -translate-x-1/2 w-[225px] md:w-[450px] h-[225px] md:h-[450px] blur-3xl"
-    style="background: radial-gradient(circle, rgba(168, 85, 247, 0.11) 0%, transparent 70%); animation-delay: 2s;"
-  ></div>
-
-  <!-- Bottom Left - Emerald -->
-  <div
-    class="bg-blob absolute bottom-1/4 left-1/5 w-[210px] md:w-[420px] h-[210px] md:h-[420px] blur-3xl"
-    style="background: radial-gradient(circle, rgba(16, 185, 129, 0.10) 0%, transparent 70%); animation-delay: 3s;"
-  ></div>
-
-  <!-- Bottom Right - Pink -->
-  <div
-    class="bg-blob absolute bottom-10 right-1/5 w-[200px] md:w-[400px] h-[200px] md:h-[400px] blur-3xl"
-    style="background: radial-gradient(circle, rgba(236, 72, 153, 0.10) 0%, transparent 70%); animation-delay: 4s;"
+    class="absolute inset-0 opacity-20"
+    style="background-image: linear-gradient(rgba(94, 230, 168, 0.05) 1px, transparent 1px); background-size: 100% 56px;"
   ></div>
 </div>
 
 <style>
-  .bg-blob {
-    will-change: transform, opacity;
-    animation: blob-pulse 6s ease-in-out infinite;
-  }
-
-  @keyframes blob-pulse {
-    0%,
-    100% {
-      transform: scale(0.98);
-      opacity: 0.45;
-    }
-    50% {
-      transform: scale(1.02);
-      opacity: 0.75;
-    }
-  }
-
-  /* Respetar preferencia del usuario por movimiento reducido (WCAG 2.3.3) */
+  /* Respetar preferencia de movimiento reducido (WCAG 2.3.3) */
   @media (prefers-reduced-motion: reduce) {
-    .bg-blob {
+    div {
       animation: none !important;
-      transform: none !important;
     }
   }
 </style>

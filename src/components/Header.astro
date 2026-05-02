@@ -17,29 +17,35 @@ const homeUrl = getTranslatedPath('/', lang);
 ---
 
 <style>
-  :root.dark .scrolled-nav {
-    background: rgba(30, 41, 59, 1);
-    box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.85);
-    transition:
-      background 0.2s,
-      box-shadow 0.2s;
+  #main-nav {
+    border-bottom: 1px solid #1F2630;
+    background: rgba(11, 13, 16, 0.9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: border-color 0.2s, box-shadow 0.2s;
   }
 
-  :root:not(.dark) .scrolled-nav {
-    background: rgba(255, 255, 255, 1);
-    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.85);
+  #main-nav.scrolled-nav {
+    border-bottom-color: #2D3A48;
+    box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.6);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #main-nav {
+      transition: none;
+    }
   }
 </style>
 
-<header class="sticky top-0 z-200 flex justify-center items-center p-4">
-  <nav id="main-nav" class="flex gap-3.5 py-2 px-6 rounded-4xl items-center" role="navigation" aria-label="Main navigation">
+<header class="sticky top-0 z-200 w-full">
+  <nav id="main-nav" class="flex gap-3.5 py-3 px-6 items-center w-full" role="navigation" aria-label="Main navigation">
     <!-- Enlaces de navegación (solo desktop) -->
-    <div class="hidden md:flex gap-3.5 items-center">
+    <div class="hidden md:flex gap-1 items-center">
       {
         navLinks.map((link) => (
           <a
             href={link.href}
-            class="text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100 select-none"
+            class="px-3 py-1.5 font-mono text-xs font-bold tracking-widest uppercase text-slate-400 hover:text-[#5EE6A8] transition-colors duration-150 select-none focus:outline-none focus-visible:ring-1 focus-visible:ring-[#5EE6A8]"
           >
             {link.label}
           </a>
@@ -47,8 +53,11 @@ const homeUrl = getTranslatedPath('/', lang);
       }
     </div>
 
+    <!-- Spacer -->
+    <div class="flex-1"></div>
+
     <!-- Separador (solo desktop) -->
-    <div class="hidden md:block h-6 w-px bg-gray-300 dark:bg-gray-700"></div>
+    <div class="hidden md:block h-4 w-px bg-[#1F2630] mx-1"></div>
 
     <!-- Controles (siempre visibles) -->
     <div class="flex gap-3 items-center">
@@ -59,7 +68,7 @@ const homeUrl = getTranslatedPath('/', lang);
       <button
         id="mobile-menu-toggle"
         type="button"
-        class="md:hidden inline-flex items-center justify-center w-9 h-9 rounded-full text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+        class="md:hidden inline-flex items-center justify-center w-9 h-9 border border-[#1F2630] bg-transparent text-slate-400 hover:text-[#5EE6A8] hover:border-[#5EE6A8]/40 focus:outline-none focus-visible:ring-1 focus-visible:ring-[#5EE6A8] transition-colors duration-150"
         aria-controls="mobile-menu"
         aria-expanded="false"
         aria-label={t('nav.menu.open')}
@@ -82,22 +91,22 @@ const homeUrl = getTranslatedPath('/', lang);
   id="mobile-menu"
   data-open="false"
   hidden
-  class="md:hidden fixed inset-0 z-150 bg-black/40 dark:bg-black/60 backdrop-blur-sm transition-opacity duration-200 ease-out opacity-0 data-[open=true]:opacity-100"
+  class="md:hidden fixed top-0 left-0 right-0 z-150 bg-black/60 backdrop-blur-sm transition-opacity duration-200 ease-out opacity-0 data-[open=true]:opacity-100"
   aria-hidden="true"
 >
   <div
     role="dialog"
     aria-modal="true"
     aria-label={t('nav.menu.open')}
-    class="absolute top-20 left-1/2 -translate-x-1/2 w-[min(92vw,360px)] rounded-3xl bg-white dark:bg-gray-900 shadow-2xl ring-1 ring-black/5 dark:ring-white/10 p-6 transition-transform duration-200 ease-out -translate-y-2 data-[open=true]:translate-y-0"
+    class="absolute top-16 left-0 right-0 border border-[#1F2630] border-t-0 bg-[#0B0D10] p-4 transition-transform duration-200 ease-out -translate-y-2 data-[open=true]:translate-y-0"
     data-mobile-panel
   >
-    <ul class="flex flex-col gap-2" role="list">
+    <ul class="flex flex-col gap-1" role="list">
       {navLinks.map((link) => (
         <li>
           <a
             href={link.href}
-            class="block w-full px-4 py-3 rounded-xl text-base font-medium text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+            class="block w-full px-4 py-3 font-mono text-xs font-bold tracking-widest uppercase text-slate-400 hover:text-[#5EE6A8] hover:bg-[#11151A] focus:outline-none focus-visible:ring-1 focus-visible:ring-[#5EE6A8] transition-colors duration-150"
             data-mobile-link
           >
             {link.label}
@@ -123,10 +132,10 @@ const homeUrl = getTranslatedPath('/', lang);
     const NAV_ID = 'main-nav';
     const nav = document.getElementById(NAV_ID);
 
-    // Toggle scrolled-nav class based on scroll position (existing behaviour)
+    // Toggle scrolled-nav class based on scroll position
     function updateScrolledNav() {
       if (!nav) return;
-      if (window.scrollY > 10) {
+      if (window.scrollY > 4) {
         nav.classList.add('scrolled-nav');
       } else {
         nav.classList.remove('scrolled-nav');

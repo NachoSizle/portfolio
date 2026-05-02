@@ -1,5 +1,6 @@
 ---
 import SocialButton from './SocialButton.astro';
+import SystemStatusPanel from './SystemStatusPanel.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
 import { BASE_URL, CV, SOCIAL_LINKS } from '../constants';
 
@@ -7,66 +8,92 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<section class="relative isolate overflow-hidden bg-transparent" aria-labelledby="hero-section">
-  <div class="mx-auto max-w-4xl px-6 py-12 sm:py-0 sm:pb-18 text-center relative z-10">
-    <h1 id="hero-section" class="text-4xl mt-0 sm:mt-18 font-extrabold tracking-tight sm:text-5xl md:text-6xl text-balance md:leading-20 select-none">
-      {t('hero.title')} <span class="text-primary">{t('hero.title.highlight')}</span>⚡
-    </h1>
+<section class="relative isolate overflow-visible" aria-labelledby="hero-section">
+  <div class="mx-auto max-w-6xl px-6 py-16 sm:py-24 relative z-10">
 
-    <p class="my-18 mt-10 text-xl max-w-2xl mx-auto leading-8 text-neutral-600 dark:text-neutral-300 text-balance select-none">
-      {t('hero.description')}
-      <br />
-      {t('hero.description.line2')}
-    </p>
+    <!-- Layout 2 columnas en desktop -->
+    <div class="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 lg:gap-16 items-center">
 
-    <!-- CTAs -->
-    <div
-      class="mt-10 flex flex-row items-center gap-4 justify-center"
-    >
-      <a
-        href="#projects"
-        aria-label={t('hero.cta.primary')}
-        data-umami-event="cta-click"
-        data-umami-event-location="hero"
-        class="inline-flex items-center gap-2 rounded-xl bg-emerald-700 px-6 py-3 text-sm font-semibold text-white shadow-lg transition-transform duration-200 ease-out hover:scale-105 active:scale-[0.97] hover:bg-emerald-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-emerald-500 dark:bg-emerald-500 dark:hover:bg-emerald-500 border-2 border-emerald-700 dark:border-emerald-500 select-none"
-      >
-        {t('hero.cta.primary')}
-      </a>
-      <a aria-label={t('hero.cta.cv')}
-        href={`${BASE_URL}${CV.path}`}
-        download="Nacho_Martinez_CV.pdf"
-        target="_blank"
-        rel="noopener noreferrer"
-        data-umami-event="cv-download"
-        data-umami-event-lang={lang}
-        class="inline-flex items-center gap-2 rounded-xl border-2 border-emerald-700 hover:text-white dark:border-emerald-500 dark:hover:bg-emerald-500
-         px-6 py-3 text-sm font-medium shadow-sm transition hover:bg-primary/10 focus:outline-none
-         focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary select-none"
-      >
-        {t('hero.cta.cv')}
-      </a>
-    </div>
+      <!-- Columna izquierda: texto -->
+      <div class="space-y-8">
 
-    <!-- Social buttons -->
-    <div class="mt-12 flex flex-wrap justify-center gap-4">
-      <SocialButton
-        href={SOCIAL_LINKS.linkedin}
-        label={t('hero.social.linkedin')}
-        iconName="linkedin"
-        iconClassName="h-8 w-8"
-      />
-      <SocialButton
-        href={SOCIAL_LINKS.threads}
-        label={t('hero.social.threads')}
-        iconName="threads"
-        iconClassName="h-8 w-8"
-      />
-      <SocialButton
-        href={SOCIAL_LINKS.github}
-        label={t('hero.social.github')}
-        iconName="github"
-        iconClassName="h-8 w-8"
-      />
+        <!-- Badge de estado "disponible" -->
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 border border-[#1F2630] bg-[#11151A] font-mono text-xs text-[#5EE6A8] tracking-widest">
+          <span class="w-2 h-2 rounded-full bg-[#5EE6A8] inline-block animate-pulse"></span>
+          PRODUCT ENGINEER · AVAILABLE
+        </div>
+
+        <!-- H1 alineado a la izquierda -->
+        <h1
+          id="hero-section"
+          class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight text-slate-100 select-none font-mono"
+        >
+          {t('hero.title')}
+          <br />
+          <span style="color: #5EE6A8;">{t('hero.title.highlight')}</span>
+        </h1>
+
+        <!-- Descripción -->
+        <p class="text-base sm:text-lg leading-relaxed text-slate-400 max-w-xl select-none">
+          {t('hero.description')}
+        </p>
+        <p class="text-sm leading-relaxed text-slate-500 max-w-xl select-none font-mono">
+          {t('hero.description.line2')}
+        </p>
+
+        <!-- CTAs: esquinas cortadas estilo terminal -->
+        <div class="flex flex-wrap items-center gap-4 pt-2">
+          <a
+            href="#projects"
+            aria-label={t('hero.cta.primary')}
+            data-umami-event="cta-click"
+            data-umami-event-location="hero"
+            class="hero-btn-primary inline-flex items-center gap-2 px-6 py-3 text-sm font-bold font-mono tracking-widest text-[#0B0D10] bg-[#5EE6A8] border border-[#5EE6A8] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[4px_4px_0_#3DB882] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5EE6A8] select-none uppercase"
+          >
+            {t('hero.cta.primary')} →
+          </a>
+          <a
+            aria-label={t('hero.cta.cv')}
+            href={`${BASE_URL}${CV.path}`}
+            download="Nacho_Martinez_CV.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-umami-event="cv-download"
+            data-umami-event-lang={lang}
+            class="hero-btn-secondary inline-flex items-center gap-2 px-6 py-3 text-sm font-bold font-mono tracking-widest text-[#5EE6A8] bg-transparent border border-[#5EE6A8] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#5EE6A8]/10 hover:shadow-[4px_4px_0_#3DB882] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5EE6A8] select-none uppercase"
+          >
+            {t('hero.cta.cv')} ↓
+          </a>
+        </div>
+
+        <!-- Social buttons -->
+        <div class="flex flex-wrap gap-3 pt-2">
+          <SocialButton
+            href={SOCIAL_LINKS.linkedin}
+            label={t('hero.social.linkedin')}
+            iconName="linkedin"
+            iconClassName="h-5 w-5"
+          />
+          <SocialButton
+            href={SOCIAL_LINKS.threads}
+            label={t('hero.social.threads')}
+            iconName="threads"
+            iconClassName="h-5 w-5"
+          />
+          <SocialButton
+            href={SOCIAL_LINKS.github}
+            label={t('hero.social.github')}
+            iconName="github"
+            iconClassName="h-5 w-5"
+          />
+        </div>
+      </div>
+
+      <!-- Columna derecha: SystemStatusPanel -->
+      <div class="flex justify-center lg:justify-end">
+        <SystemStatusPanel />
+      </div>
+
     </div>
   </div>
 </section>
