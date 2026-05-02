@@ -39,10 +39,22 @@
 }
 
 @layer base {
+  /* Evita auto-zoom en inputs en iOS (mínimo 16px) y mejora tap latency */
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    touch-action: manipulation;
+  }
   body {
     background-color: #0B0D10;
     color: #e2e8f0;
     font-family: var(--font-sans);
+    /* Scroll momentum suave en iOS */
+    -webkit-overflow-scrolling: touch;
+  }
+  /* Touch target mínimo para elementos interactivos (WCAG 2.5.5) */
+  button, [role="button"], a, input, select, textarea {
+    touch-action: manipulation;
   }
 }
 

@@ -68,7 +68,7 @@ const homeUrl = getTranslatedPath('/', lang);
       <button
         id="mobile-menu-toggle"
         type="button"
-        class="md:hidden inline-flex items-center justify-center w-9 h-9 border border-[#1F2630] bg-transparent text-slate-400 hover:text-[#5EE6A8] hover:border-[#5EE6A8]/40 focus:outline-none focus-visible:ring-1 focus-visible:ring-[#5EE6A8] transition-colors duration-150"
+        class="md:hidden inline-flex items-center justify-center w-11 h-11 border border-[#1F2630] bg-transparent text-slate-400 hover:text-[#5EE6A8] hover:border-[#5EE6A8]/40 focus:outline-none focus-visible:ring-1 focus-visible:ring-[#5EE6A8] transition-colors duration-150"
         aria-controls="mobile-menu"
         aria-expanded="false"
         aria-label={t('nav.menu.open')}
@@ -101,12 +101,12 @@ const homeUrl = getTranslatedPath('/', lang);
     class="absolute top-16 left-0 right-0 border border-[#1F2630] border-t-0 bg-[#0B0D10] p-4 transition-transform duration-200 ease-out -translate-y-2 data-[open=true]:translate-y-0"
     data-mobile-panel
   >
-    <ul class="flex flex-col gap-1" role="list">
+    <ul class="flex flex-col" role="list">
       {navLinks.map((link) => (
         <li>
           <a
             href={link.href}
-            class="block w-full px-4 py-3 font-mono text-xs font-bold tracking-widest uppercase text-slate-400 hover:text-[#5EE6A8] hover:bg-[#11151A] focus:outline-none focus-visible:ring-1 focus-visible:ring-[#5EE6A8] transition-colors duration-150"
+            class="flex items-center w-full min-h-[48px] px-4 py-3 font-mono text-xs font-bold tracking-widest uppercase text-slate-400 hover:text-[#5EE6A8] hover:bg-[#11151A] focus:outline-none focus-visible:ring-1 focus-visible:ring-[#5EE6A8] transition-colors duration-150"
             data-mobile-link
           >
             {link.label}
@@ -114,6 +114,11 @@ const homeUrl = getTranslatedPath('/', lang);
         </li>
       ))}
     </ul>
+    <!-- Controles de idioma/tema accesibles en mobile -->
+    <div class="mt-1 pt-3 border-t border-[#1F2630] flex items-center gap-3 px-4 pb-1">
+      <LanguagePicker />
+      <ThemeToggle />
+    </div>
   </div>
 </div>
 

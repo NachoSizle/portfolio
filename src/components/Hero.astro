@@ -9,13 +9,13 @@ const t = useTranslations(lang);
 ---
 
 <section class="relative isolate overflow-visible" aria-labelledby="hero-section">
-  <div class="mx-auto max-w-6xl px-6 py-16 sm:py-24 relative z-10">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 py-10 sm:py-16 lg:py-24 relative z-10">
 
     <!-- Layout 2 columnas en desktop -->
-    <div class="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 lg:gap-16 items-center">
+    <div class="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 sm:gap-12 lg:gap-16 items-center">
 
       <!-- Columna izquierda: texto -->
-      <div class="space-y-8">
+      <div class="space-y-5 sm:space-y-7">
 
         <!-- Badge de estado "disponible" -->
         <div class="inline-flex items-center gap-2 px-3 py-1.5 border border-[#1F2630] bg-[#11151A] font-mono text-xs text-[#5EE6A8] tracking-widest">
@@ -23,10 +23,10 @@ const t = useTranslations(lang);
           PRODUCT ENGINEER · AVAILABLE
         </div>
 
-        <!-- H1 alineado a la izquierda -->
+        <!-- H1 alineado a la izquierda — tipografía fluida -->
         <h1
           id="hero-section"
-          class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight text-slate-100 select-none font-mono"
+          class="font-extrabold tracking-tight leading-[1.1] text-slate-100 select-none font-mono hero-title"
         >
           {t('hero.title')}
           <br />
@@ -34,21 +34,21 @@ const t = useTranslations(lang);
         </h1>
 
         <!-- Descripción -->
-        <p class="text-base sm:text-lg leading-relaxed text-slate-400 max-w-xl select-none">
+        <p class="text-sm sm:text-base leading-relaxed text-slate-400 max-w-xl select-none">
           {t('hero.description')}
         </p>
-        <p class="text-sm leading-relaxed text-slate-500 max-w-xl select-none font-mono">
+        <p class="text-xs sm:text-sm leading-relaxed text-slate-500 max-w-xl select-none font-mono">
           {t('hero.description.line2')}
         </p>
 
-        <!-- CTAs: esquinas cortadas estilo terminal -->
-        <div class="flex flex-wrap items-center gap-4 pt-2">
+        <!-- CTAs: touch targets mínimo 44px, full-width en mobile -->
+        <div class="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 pt-1">
           <a
             href="#projects"
             aria-label={t('hero.cta.primary')}
             data-umami-event="cta-click"
             data-umami-event-location="hero"
-            class="hero-btn-primary inline-flex items-center gap-2 px-6 py-3 text-sm font-bold font-mono tracking-widest text-[#0B0D10] bg-[#5EE6A8] border border-[#5EE6A8] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[4px_4px_0_#3DB882] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5EE6A8] select-none uppercase"
+            class="hero-btn-primary inline-flex items-center justify-center gap-2 px-6 py-3 min-h-[44px] text-sm font-bold font-mono tracking-widest text-[#0B0D10] bg-[#5EE6A8] border border-[#5EE6A8] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[4px_4px_0_#3DB882] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5EE6A8] select-none uppercase"
           >
             {t('hero.cta.primary')} →
           </a>
@@ -60,14 +60,14 @@ const t = useTranslations(lang);
             rel="noopener noreferrer"
             data-umami-event="cv-download"
             data-umami-event-lang={lang}
-            class="hero-btn-secondary inline-flex items-center gap-2 px-6 py-3 text-sm font-bold font-mono tracking-widest text-[#5EE6A8] bg-transparent border border-[#5EE6A8] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#5EE6A8]/10 hover:shadow-[4px_4px_0_#3DB882] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5EE6A8] select-none uppercase"
+            class="hero-btn-secondary inline-flex items-center justify-center gap-2 px-6 py-3 min-h-[44px] text-sm font-bold font-mono tracking-widest text-[#5EE6A8] bg-transparent border border-[#5EE6A8] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#5EE6A8]/10 hover:shadow-[4px_4px_0_#3DB882] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5EE6A8] select-none uppercase"
           >
             {t('hero.cta.cv')} ↓
           </a>
         </div>
 
         <!-- Social buttons -->
-        <div class="flex flex-wrap gap-3 pt-2">
+        <div class="flex flex-wrap gap-3">
           <SocialButton
             href={SOCIAL_LINKS.linkedin}
             label={t('hero.social.linkedin')}
@@ -89,11 +89,30 @@ const t = useTranslations(lang);
         </div>
       </div>
 
-      <!-- Columna derecha: SystemStatusPanel -->
-      <div class="flex justify-center lg:justify-end">
+      <!-- Columna derecha: SystemStatusPanel — solo visible en lg+ -->
+      <div class="hidden lg:flex justify-end">
         <SystemStatusPanel />
       </div>
 
     </div>
   </div>
 </section>
+
+<style>
+  /* Tipografía fluida para el H1: de 28px (mobile 360px) a 60px (desktop 1200px) */
+  .hero-title {
+    font-size: clamp(1.75rem, 5vw + 0.5rem, 3.75rem);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-btn-primary,
+    .hero-btn-secondary {
+      transition: none;
+    }
+    .hero-btn-primary:hover,
+    .hero-btn-secondary:hover {
+      transform: none;
+      box-shadow: none;
+    }
+  }
+</style>

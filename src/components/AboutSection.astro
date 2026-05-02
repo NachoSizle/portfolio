@@ -30,16 +30,16 @@ const loopSteps = [
 ---
 
 <section
-  class="relative py-16 pb-20 overflow-hidden bg-transparent"
+  class="relative py-10 sm:py-16 pb-12 sm:pb-20 overflow-hidden bg-transparent"
   id="about"
   aria-labelledby="about-heading"
 >
   <span id="experience" tabindex="-1" class="sr-only">{t('about.title')}</span>
 
-  <div class="relative z-10 max-w-6xl mx-auto px-6">
+  <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
 
     <!-- Header -->
-    <div class="mb-12">
+    <div class="mb-8 sm:mb-12">
       <div class="flex items-center gap-3 mb-2">
         <span class="font-mono text-xs text-[#3DB882] tracking-widest uppercase select-none">// ABOUT</span>
         <div class="h-px flex-1 bg-[#1F2630]"></div>
@@ -54,7 +54,7 @@ const loopSteps = [
     </div>
 
     <!-- Layout: foto + loop + stats -->
-    <div class="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-10 lg:gap-16 items-start">
+    <div class="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-8 sm:gap-10 lg:gap-16 items-start">
 
       <!-- Foto de perfil -->
       <div class="flex justify-center lg:justify-start">
@@ -158,13 +158,36 @@ const loopSteps = [
     .loop-steps {
       flex-direction: column;
       align-items: flex-start;
-      gap: 0.25rem;
+      gap: 0;
     }
     .loop-connector {
-      transform: rotate(90deg);
+      padding: 0;
+      width: 40px;
+      height: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding-left: 0.75rem;
+    }
+    .loop-connector span {
+      display: none;
+    }
+    .loop-connector::after {
+      content: '';
+      display: block;
+      width: 2px;
+      height: 1.5rem;
+      background: #2D3A48;
+      margin-left: 0.25rem;
     }
     .loop-back {
       display: none;
+    }
+    .step-box {
+      min-width: 80px;
+      flex-direction: row;
+      gap: 0.5rem;
+      padding: 0.5rem 0.75rem;
     }
   }
 

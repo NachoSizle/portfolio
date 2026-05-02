@@ -11,11 +11,11 @@ const currentYear = new Date().getFullYear();
 const { socialLinks, quickLinks } = getFooterData(lang);
 ---
 
-<footer class="relative text-slate-300 overflow-hidden border-t border-[#1F2630] bg-[#0B0D10] mt-16" role="contentinfo">
+<footer class="relative text-slate-300 overflow-hidden border-t border-[#1F2630] bg-[#0B0D10] mt-12 sm:mt-16 footer-safe" role="contentinfo">
   <span id="contact" tabindex="-1" class="sr-only">{t('footer.links.contact')}</span>
 
-  <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 my-10">
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 my-8 sm:my-10">
 
       <!-- Brand Section -->
       <div class="space-y-6">
@@ -65,7 +65,7 @@ const { socialLinks, quickLinks } = getFooterData(lang);
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="group inline-flex items-center justify-center w-10 h-10 border border-[#1F2630] bg-[#11151A] text-slate-400 hover:text-[#5EE6A8] hover:border-[#5EE6A8]/40 hover:shadow-[2px_2px_0_#0B0D10] transition-all duration-150"
+                class="group inline-flex items-center justify-center w-11 h-11 border border-[#1F2630] bg-[#11151A] text-slate-400 hover:text-[#5EE6A8] hover:border-[#5EE6A8]/40 hover:shadow-[2px_2px_0_#0B0D10] transition-all duration-150"
                 aria-label={social.name}
               >
                 {social.icon === 'github' && (
@@ -108,7 +108,7 @@ const { socialLinks, quickLinks } = getFooterData(lang);
   <!-- Scroll to top button -->
   <button
     id="scrollToTop"
-    class="fixed bottom-24 right-8 w-10 h-10 border border-[#1F2630] bg-[#11151A] text-slate-400 hover:text-[#5EE6A8] hover:border-[#5EE6A8]/40 hover:shadow-[4px_4px_0_#000] transition-all duration-150 opacity-0 pointer-events-none z-50 cursor-pointer"
+    class="fixed bottom-6 right-4 sm:bottom-8 sm:right-6 w-11 h-11 border border-[#1F2630] bg-[#11151A] text-slate-400 hover:text-[#5EE6A8] hover:border-[#5EE6A8]/40 hover:shadow-[4px_4px_0_#000] transition-all duration-150 opacity-0 pointer-events-none z-50 cursor-pointer"
     aria-label={t('footer.scrollTop')}
     type="button"
   >
@@ -138,6 +138,9 @@ const { socialLinks, quickLinks } = getFooterData(lang);
 </script>
 
 <style>
+  .footer-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
   @media (prefers-reduced-motion: reduce) {
     #scrollToTop { transition: none; }
   }

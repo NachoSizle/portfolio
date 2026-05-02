@@ -31,15 +31,15 @@ const projectNum = String(index + 1).padStart(2, '0');
     aria-label={title}
   >
     <!-- HEADER -->
-    <div class="flex items-center justify-between gap-4 px-5 py-3 border-b border-[#1F2630] bg-[#0D1117]">
-      <div class="flex items-center gap-3">
-        <span class="font-mono text-xs text-[#3DB882] tracking-widest select-none">#{projectNum}</span>
-        <h3 class="font-mono text-base font-bold text-slate-100 leading-tight">
+    <div class="flex items-center justify-between gap-2 sm:gap-4 px-4 sm:px-5 py-3 border-b border-[#1F2630] bg-[#0D1117]">
+      <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+        <span class="shrink-0 font-mono text-xs text-[#3DB882] tracking-widest select-none">#{projectNum}</span>
+        <h3 class="font-mono text-sm sm:text-base font-bold text-slate-100 leading-tight truncate">
           {title}
         </h3>
       </div>
       <span
-        class="shrink-0 px-2 py-0.5 text-xs font-mono font-bold tracking-widest border select-none"
+        class="shrink-0 px-2 py-0.5 text-xs font-mono font-bold tracking-widest border select-none whitespace-nowrap"
         style={`color: ${currentStatus.color}; border-color: ${currentStatus.color}40; background: ${currentStatus.bg};`}
       >
         [{currentStatus.label}]
@@ -47,7 +47,7 @@ const projectNum = String(index + 1).padStart(2, '0');
     </div>
 
     <!-- BODY -->
-    <div class="px-5 py-4 space-y-4">
+    <div class="px-4 sm:px-5 py-4 space-y-4">
       {problem && (
         <div class="space-y-1">
           <div class="font-mono text-xs text-[#3DB882] tracking-widest uppercase select-none">PROBLEM</div>
@@ -82,20 +82,20 @@ const projectNum = String(index + 1).padStart(2, '0');
     </div>
 
     <!-- FOOTER -->
-    <div class="flex items-center justify-between gap-4 px-5 py-3 border-t border-[#1F2630] bg-[#0D1117]">
+    <div class="flex flex-col xs:flex-row sm:flex-row items-start sm:items-center justify-between gap-3 px-4 sm:px-5 py-3 border-t border-[#1F2630] bg-[#0D1117]">
       <time
         datetime={date.toISOString()}
         class="font-mono text-xs text-[#3D4B5A] select-none"
       >
         {date.toISOString().split('T')[0]}
       </time>
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-2 sm:gap-3 flex-wrap">
         {demoLink && (
           <a
             href={demoLink}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono font-bold text-[#0B0D10] bg-[#5EE6A8] border border-[#5EE6A8] transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[2px_2px_0_#3DB882] focus:outline-none focus-visible:ring-1 focus-visible:ring-[#5EE6A8] select-none uppercase"
+            class="inline-flex items-center gap-1.5 px-3 py-2 min-h-[44px] text-xs font-mono font-bold text-[#0B0D10] bg-[#5EE6A8] border border-[#5EE6A8] transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[2px_2px_0_#3DB882] focus:outline-none focus-visible:ring-1 focus-visible:ring-[#5EE6A8] select-none uppercase"
             aria-label={`${t('projects.viewDemo')}: ${title}`}
           >
             {t('projects.viewDemo')} ↗
@@ -106,7 +106,7 @@ const projectNum = String(index + 1).padStart(2, '0');
             href={repoLink}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono font-bold text-[#5EE6A8] bg-transparent border border-[#5EE6A8]/40 transition-all duration-150 hover:border-[#5EE6A8] hover:-translate-y-0.5 hover:shadow-[2px_2px_0_#3DB882] focus:outline-none focus-visible:ring-1 focus-visible:ring-[#5EE6A8] select-none uppercase"
+            class="inline-flex items-center gap-1.5 px-3 py-2 min-h-[44px] text-xs font-mono font-bold text-[#5EE6A8] bg-transparent border border-[#5EE6A8]/40 transition-all duration-150 hover:border-[#5EE6A8] hover:-translate-y-0.5 hover:shadow-[2px_2px_0_#3DB882] focus:outline-none focus-visible:ring-1 focus-visible:ring-[#5EE6A8] select-none uppercase"
             aria-label={`${t('projects.viewRepository')}: ${title}`}
           >
             {t('projects.viewRepository')} ↗
