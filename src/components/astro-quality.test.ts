@@ -14,6 +14,9 @@ const themeToggle = read('src/components/ThemeToggle.astro');
 const projectList = read('src/components/ProjectList.astro');
 const questMap = read('src/components/QuestMap.astro');
 const footer = read('src/components/Footer.astro');
+const baseLayout = read('src/layouts/BaseLayout.astro');
+const indexEs = read('src/pages/index.astro');
+const indexEn = read('src/pages/en/index.astro');
 
 const staticVisualComponents = [
   'src/components/Hero.astro',
@@ -86,9 +89,25 @@ describe('Astro quality: reglas visuales verificables', () => {
     expect(questMap).toMatch(/id="quest-map"/);
     expect(questMap).toMatch(/data-quest-node/);
     expect(questMap).toMatch(/aria-live="polite"/);
+    expect(questMap).toMatch(/height:\s*100%/);
+    expect(questMap).toMatch(/overflow:\s*hidden/);
     expect(questMap).toMatch(/matchMedia\(\s*['"]\(prefers-reduced-motion: reduce\)['"]\s*\)/);
     expect(questMap).not.toMatch(/client:(load|idle|visible|media|only)/);
     expect(questMap).not.toMatch(/from\s+["'](?:phaser|kaboom|pixi\.js|three|@react-three\/fiber)/);
     expect(questMap).not.toMatch(/Pokemon|Pokémon/);
+  });
+
+  it('las homes renderizan QuestMap como experiencia principal, sin secciones tradicionales', () => {
+    for (const source of [indexEs, indexEn]) {
+      expect(source).toMatch(/<BaseLayout[\s\S]*immersive/);
+      expect(source).toMatch(/<QuestMap\s*\/>/);
+      expect(source).not.toMatch(/<Hero\s*\/>/);
+      expect(source).not.toMatch(/<AboutSection\s*\/>/);
+      expect(source).not.toMatch(/<ProjectList/);
+    }
+
+    expect(baseLayout).toMatch(/immersive\?:\s*boolean/);
+    expect(baseLayout).toMatch(/data-immersive/);
+    expect(baseLayout).toMatch(/!immersive\s*&&\s*<Footer\s*\/>/);
   });
 });

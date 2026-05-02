@@ -1,14 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
-import ProjectList from '../components/ProjectList.astro';
-import Hero from '../components/Hero.astro';
-import AboutSection from '../components/AboutSection.astro';
-const projects = await getCollection('projects');
+import QuestMap from '../components/QuestMap.astro';
 ---
 
-<BaseLayout title="Portfolio de Nacho Sizle" description="Portfolio de Nacho Sizle, desarrollador de software. Proyectos, artículos y más.">
-	<Hero />
-	<AboutSection />
-	<ProjectList projects={projects} />
+<BaseLayout title="Portfolio de Nacho Sizle" description="Portfolio de Nacho Sizle, desarrollador de software. Proyectos, artículos y más." immersive>
+	<QuestMap />
 </BaseLayout>

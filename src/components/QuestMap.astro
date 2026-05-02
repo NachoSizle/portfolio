@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import { getLangFromUrl, useTranslations, withBase } from '../i18n/utils';
+import { BASE_URL, CAREER_START_YEAR, CONTACT, CV, LANGUAGES, SOCIAL_LINKS, TECHNOLOGIES } from '../constants';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -17,56 +18,86 @@ function translateOrRaw(value: string): string {
   return value;
 }
 
+const yearsOfExperience = new Date().getFullYear() - CAREER_START_YEAR;
+const cvHref = `${BASE_URL}${CV.path}`;
+
 const projectPositions = [
-  { x: 68, y: 26 },
-  { x: 52, y: 62 },
-  { x: 78, y: 70 },
+  { x: 74, y: 24 },
+  { x: 56, y: 62 },
+  { x: 82, y: 73 },
 ];
 
 const staticNodes = [
   {
+    id: 'town',
+    anchor: 'about',
+    kind: 'town',
+    href: '#quest-map',
+    actionUrl: '#quest-map',
+    actionLabel: t('game.action.inspect'),
+    label: t('game.zone.town'),
+    kicker: t('game.zone.town.kicker'),
+    badge: t('game.badge.start'),
+    dialog: t('game.zone.town.dialog'),
+    x: 20,
+    y: 28,
+  },
+  {
     id: 'lab',
+    anchor: 'experience',
     kind: 'lab',
-    href: '#about',
+    href: '#quest-map',
+    actionUrl: cvHref,
+    actionLabel: t('hero.cta.cv'),
+    download: CV.filename,
     label: t('game.zone.lab'),
     kicker: t('game.zone.lab.kicker'),
     badge: t('game.badge.start'),
     dialog: t('game.zone.lab.dialog'),
-    x: 18,
-    y: 30,
+    x: 34,
+    y: 49,
   },
   {
     id: 'skills',
+    anchor: 'skills',
     kind: 'gym',
-    href: '#about',
+    href: '#quest-map',
+    actionUrl: '#quest-map',
+    actionLabel: t('game.action.inspect'),
     label: t('game.zone.skills'),
     kicker: t('game.zone.skills.kicker'),
     badge: t('game.badge.skill'),
     dialog: t('game.zone.skills.dialog'),
-    x: 36,
-    y: 58,
+    x: 48,
+    y: 26,
   },
   {
     id: 'board',
+    anchor: 'projects',
     kind: 'board',
-    href: '#projects',
+    href: '#quest-map',
+    actionUrl: '#quest-map',
+    actionLabel: t('game.action.inspect'),
     label: t('game.zone.board'),
     kicker: t('game.zone.board.kicker'),
     badge: t('game.badge.main'),
     dialog: t('game.zone.board.dialog'),
-    x: 58,
-    y: 44,
+    x: 62,
+    y: 45,
   },
   {
     id: 'contact',
+    anchor: 'contact',
     kind: 'save',
-    href: '#contact',
+    href: CONTACT.mailto,
+    actionUrl: CONTACT.mailto,
+    actionLabel: t('game.action.contact'),
     label: t('game.zone.contact'),
     kicker: t('game.zone.contact.kicker'),
     badge: t('game.badge.save'),
     dialog: t('game.zone.contact.dialog'),
-    x: 88,
-    y: 38,
+    x: 89,
+    y: 39,
   },
 ];
 
@@ -75,11 +106,15 @@ const projectNodes = projects.slice(0, 3).map((project, index) => {
   const status = project.data.status ?? 'prod';
   const statusKey = `game.status.${status}` as TranslationKey;
   const position = projectPositions[index] ?? projectPositions[0];
+  const href = lang === 'en' ? withBase(`/en/projects/${project.id}`) : withBase(`/projects/${project.id}`);
 
   return {
     id: `project-${project.id}`,
+    anchor: `project-${project.id}`,
     kind: project.data.featured ? 'featured' : 'quest',
-    href: lang === 'en' ? withBase(`/en/projects/${project.id}`) : withBase(`/projects/${project.id}`),
+    href,
+    actionUrl: href,
+    actionLabel: t('projects.viewDetails'),
     label: title,
     kicker: t(statusKey),
     badge: project.data.featured ? t('game.badge.featured') : t('game.badge.project'),
@@ -90,22 +125,38 @@ const projectNodes = projects.slice(0, 3).map((project, index) => {
 });
 
 const routeNodes = [...staticNodes, ...projectNodes];
-const tiles = Array.from({ length: 64 }, (_, index) => {
+const activeNode = routeNodes[0];
+
+const stats = [
+  { value: `${yearsOfExperience}+`, label: t('game.stat.experience') },
+  { value: `${projects.length}`, label: t('game.stat.projects') },
+  { value: `${TECHNOLOGIES.length}`, label: t('game.stat.stack') },
+  { value: `${LANGUAGES.length}`, label: t('game.stat.languages') },
+];
+
+const quickActions = [
+  { href: cvHref, label: t('hero.cta.cv'), attr: 'download' },
+  { href: SOCIAL_LINKS.github, label: t('hero.social.github'), attr: 'external' },
+  { href: SOCIAL_LINKS.linkedin, label: t('hero.social.linkedin'), attr: 'external' },
+  { href: CONTACT.mailto, label: t('game.action.contact'), attr: 'mail' },
+];
+
+const tiles = Array.from({ length: 100 }, (_, index) => {
+  if (index % 19 === 0 || index % 23 === 0) return 'water';
   if (index % 11 === 0 || index % 13 === 0) return 'grass';
-  if (index % 17 === 0) return 'water';
   if (index % 5 === 0 || index % 7 === 0) return 'path';
   return 'field';
 });
 ---
 
 <section id="quest-map" class="quest-map" aria-labelledby="quest-map-title" data-quest-map>
-  <div class="quest-map__hud">
-    <span class="quest-map__eyebrow">{t('game.hud.eyebrow')}</span>
-    <h2 id="quest-map-title" class="quest-map__title">{t('game.hud.title')}</h2>
-    <p class="quest-map__description">{t('game.hud.description')}</p>
-  </div>
+  <div class="quest-map__frame">
+    <div class="quest-map__topbar" aria-label={t('game.hud.title')}>
+      <span class="quest-map__save">{t('game.hud.eyebrow')}</span>
+      <span class="quest-map__route-name">{t('game.world.route')}</span>
+      <span class="quest-map__signal">{t('game.world.signal')}</span>
+    </div>
 
-  <div class="quest-map__shell">
     <div class="quest-map__screen" aria-describedby="quest-map-help">
       <p id="quest-map-help" class="sr-only">{t('game.help')}</p>
 
@@ -113,23 +164,50 @@ const tiles = Array.from({ length: 64 }, (_, index) => {
         {tiles.map((tile) => <span class={`quest-map__tile quest-map__tile--${tile}`} />)}
       </div>
 
-      <div class="quest-map__path quest-map__path--one" aria-hidden="true"></div>
-      <div class="quest-map__path quest-map__path--two" aria-hidden="true"></div>
+      <div class="quest-map__path quest-map__path--main" aria-hidden="true"></div>
+      <div class="quest-map__path quest-map__path--north" aria-hidden="true"></div>
+      <div class="quest-map__path quest-map__path--east" aria-hidden="true"></div>
+      <div class="quest-map__pond" aria-hidden="true"></div>
+      <div class="quest-map__grove quest-map__grove--one" aria-hidden="true"></div>
+      <div class="quest-map__grove quest-map__grove--two" aria-hidden="true"></div>
 
       <div class="quest-avatar" aria-hidden="true" data-quest-avatar>
+        <span class="quest-avatar__cap"></span>
         <span class="quest-avatar__head"></span>
         <span class="quest-avatar__body"></span>
         <span class="quest-avatar__feet"></span>
       </div>
 
+      <div class="quest-map__intro">
+        <span class="quest-map__eyebrow">{t('game.world.eyebrow')}</span>
+        <h1 id="quest-map-title" class="quest-map__title">{t('game.world.title')}</h1>
+        <p class="quest-map__description">{t('game.world.description')}</p>
+      </div>
+
+      <ul class="quest-map__stats" aria-label={t('game.stats.label')}>
+        {stats.map((stat) => (
+          <li>
+            <strong>{stat.value}</strong>
+            <span>{stat.label}</span>
+          </li>
+        ))}
+      </ul>
+
       <nav class="quest-map__route" aria-label={t('game.map.navLabel')}>
         {routeNodes.map((node, index) => (
           <a
+            id={node.anchor}
             class={`quest-node quest-node--${node.kind}`}
             href={node.href}
             style={`--quest-x: ${node.x}%; --quest-y: ${node.y}%;`}
             data-quest-node
             data-dialog={node.dialog}
+            data-title={node.label}
+            data-kicker={node.kicker}
+            data-badge={node.badge}
+            data-action-label={node.actionLabel}
+            data-action-url={node.actionUrl}
+            data-download={'download' in node ? node.download : ''}
             data-index={index}
           >
             <span class="quest-node__sprite" aria-hidden="true">
@@ -138,17 +216,45 @@ const tiles = Array.from({ length: 64 }, (_, index) => {
             <span class="quest-node__copy">
               <span class="quest-node__badge">{node.badge}</span>
               <span class="quest-node__label">{node.label}</span>
-              <span class="quest-node__kicker">{node.kicker}</span>
             </span>
           </a>
         ))}
       </nav>
     </div>
 
-    <div class="quest-dialog" role="status" aria-live="polite" aria-atomic="true">
-      <span class="quest-dialog__speaker">{t('game.dialog.speaker')}</span>
-      <p class="quest-dialog__text" data-quest-dialog>{t('game.dialog.default')}</p>
-    </div>
+    <aside class="quest-panel" aria-label={t('game.panel.label')}>
+      <div class="quest-dialog" role="status" aria-live="polite" aria-atomic="true">
+        <span class="quest-dialog__speaker">{t('game.dialog.speaker')}</span>
+        <p class="quest-dialog__text" data-quest-dialog>{activeNode.dialog}</p>
+      </div>
+
+      <div class="quest-panel__mission">
+        <span class="quest-panel__badge" data-quest-panel-badge>{activeNode.badge}</span>
+        <h2 data-quest-panel-title>{activeNode.label}</h2>
+        <p data-quest-panel-kicker>{activeNode.kicker}</p>
+        <a href={activeNode.actionUrl} class="quest-panel__action" data-quest-action>
+          {activeNode.actionLabel} →
+        </a>
+      </div>
+
+      <div class="quest-panel__commands">
+        <span>{t('game.commands.title')}</span>
+        <p>{t('game.commands.body')}</p>
+      </div>
+
+      <div class="quest-panel__quick-actions" aria-label={t('game.actions.label')}>
+        {quickActions.map((action) => (
+          <a
+            href={action.href}
+            target={action.attr === 'external' ? '_blank' : undefined}
+            rel={action.attr === 'external' ? 'noopener noreferrer' : undefined}
+            download={action.attr === 'download' ? CV.filename : undefined}
+          >
+            {action.label}
+          </a>
+        ))}
+      </div>
+    </aside>
   </div>
 </section>
 
@@ -159,6 +265,10 @@ const tiles = Array.from({ length: 64 }, (_, index) => {
     const nodes = Array.from(questMap.querySelectorAll('[data-quest-node]'));
     const avatar = questMap.querySelector('[data-quest-avatar]');
     const dialog = questMap.querySelector('[data-quest-dialog]');
+    const panelTitle = questMap.querySelector('[data-quest-panel-title]');
+    const panelKicker = questMap.querySelector('[data-quest-panel-kicker]');
+    const panelBadge = questMap.querySelector('[data-quest-panel-badge]');
+    const action = questMap.querySelector('[data-quest-action]');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
     const setActiveNode = (node: Element) => {
@@ -167,8 +277,16 @@ const tiles = Array.from({ length: 64 }, (_, index) => {
       nodes.forEach((item) => item.removeAttribute('aria-current'));
       node.setAttribute('aria-current', 'location');
 
-      if (dialog instanceof HTMLElement) {
-        dialog.textContent = node.dataset.dialog || dialog.textContent;
+      if (dialog instanceof HTMLElement) dialog.textContent = node.dataset.dialog || dialog.textContent;
+      if (panelTitle instanceof HTMLElement) panelTitle.textContent = node.dataset.title || panelTitle.textContent;
+      if (panelKicker instanceof HTMLElement) panelKicker.textContent = node.dataset.kicker || panelKicker.textContent;
+      if (panelBadge instanceof HTMLElement) panelBadge.textContent = node.dataset.badge || panelBadge.textContent;
+
+      if (action instanceof HTMLAnchorElement) {
+        action.href = node.dataset.actionUrl || '#quest-map';
+        action.textContent = `${node.dataset.actionLabel || action.textContent} →`;
+        if (node.dataset.download) action.setAttribute('download', node.dataset.download);
+        else action.removeAttribute('download');
       }
 
       if (avatar instanceof HTMLElement) {
@@ -181,7 +299,10 @@ const tiles = Array.from({ length: 64 }, (_, index) => {
     nodes.forEach((node, index) => {
       node.addEventListener('focus', () => setActiveNode(node));
       node.addEventListener('pointerenter', () => setActiveNode(node));
-      node.addEventListener('click', () => setActiveNode(node));
+      node.addEventListener('click', (event) => {
+        event.preventDefault();
+        setActiveNode(node);
+      });
 
       node.addEventListener('keydown', (event) => {
         if (!(event instanceof KeyboardEvent)) return;
@@ -219,8 +340,11 @@ const tiles = Array.from({ length: 64 }, (_, index) => {
     --map-tile-grass: #bdd8bc;
     --map-tile-path: #eadab8;
     --map-tile-water: #b8d7e8;
-    display: grid;
-    gap: 1rem;
+    position: relative;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    padding: 0.75rem;
   }
 
   :global(.dark) .quest-map {
@@ -230,14 +354,45 @@ const tiles = Array.from({ length: 64 }, (_, index) => {
     --map-tile-water: #14273b;
   }
 
-  .quest-map__hud {
+  .quest-map__frame {
     display: grid;
-    gap: 0.45rem;
+    height: 100%;
+    min-height: 0;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    border: 2px solid var(--map-border);
+    background: var(--map-surface);
+    box-shadow: 5px 5px 0 var(--map-shadow);
+    overflow: hidden;
   }
 
+  .quest-map__topbar,
+  .quest-panel__quick-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .quest-map__topbar {
+    justify-content: space-between;
+    border-bottom: 2px solid var(--map-border);
+    background: var(--map-surface-2);
+    color: var(--theme-text);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 800;
+    min-height: 2.35rem;
+    padding: 0.45rem 0.75rem;
+    text-transform: uppercase;
+  }
+
+  .quest-map__save,
+  .quest-map__signal,
   .quest-map__eyebrow,
   .quest-node__badge,
-  .quest-dialog__speaker {
+  .quest-dialog__speaker,
+  .quest-panel__badge,
+  .quest-panel__commands span {
     color: var(--theme-accent-dim);
     font-family: var(--font-mono);
     font-size: 0.75rem;
@@ -246,35 +401,10 @@ const tiles = Array.from({ length: 64 }, (_, index) => {
     text-transform: uppercase;
   }
 
-  .quest-map__title {
-    color: var(--theme-text);
-    font-family: var(--font-mono);
-    font-size: 1.25rem;
-    font-weight: 900;
-    letter-spacing: 0;
-    line-height: 1.1;
-  }
-
-  .quest-map__description {
-    color: var(--theme-text-secondary);
-    font-family: var(--font-mono);
-    font-size: 0.875rem;
-    line-height: 1.6;
-    max-width: 34rem;
-  }
-
-  .quest-map__shell {
-    border: 1px solid var(--map-border);
-    background: var(--map-surface);
-    box-shadow: 4px 4px 0 var(--map-shadow);
-    padding: 0.5rem;
-  }
-
   .quest-map__screen {
     position: relative;
-    min-height: 22rem;
+    min-height: 0;
     overflow: hidden;
-    border: 1px solid var(--map-border);
     background-color: var(--map-tile-field);
     isolation: isolate;
   }
@@ -282,10 +412,10 @@ const tiles = Array.from({ length: 64 }, (_, index) => {
   .quest-map__tiles {
     position: absolute;
     inset: 0;
-    z-index: -2;
+    z-index: -3;
     display: grid;
-    grid-template-columns: repeat(8, minmax(0, 1fr));
-    grid-template-rows: repeat(8, minmax(0, 1fr));
+    grid-template-columns: repeat(10, minmax(0, 1fr));
+    grid-template-rows: repeat(10, minmax(0, 1fr));
   }
 
   .quest-map__tile {
@@ -306,25 +436,136 @@ const tiles = Array.from({ length: 64 }, (_, index) => {
     background-color: var(--map-tile-water);
   }
 
-  .quest-map__path {
+  .quest-map__path,
+  .quest-map__pond,
+  .quest-map__grove {
     position: absolute;
-    z-index: -1;
-    background-color: rgba(var(--theme-amber-rgb), 0.22);
+    z-index: -2;
     image-rendering: pixelated;
   }
 
-  .quest-map__path--one {
-    left: 16%;
-    top: 38%;
-    width: 74%;
-    height: 1.15rem;
+  .quest-map__path {
+    background-color: rgba(var(--theme-amber-rgb), 0.28);
   }
 
-  .quest-map__path--two {
-    left: 34%;
-    top: 39%;
-    width: 1.15rem;
-    height: 34%;
+  .quest-map__path--main {
+    left: 17%;
+    top: 41%;
+    width: 73%;
+    height: 1.2rem;
+  }
+
+  .quest-map__path--north {
+    left: 47%;
+    top: 24%;
+    width: 1.2rem;
+    height: 40%;
+  }
+
+  .quest-map__path--east {
+    left: 73%;
+    top: 40%;
+    width: 1.2rem;
+    height: 35%;
+  }
+
+  .quest-map__pond {
+    right: 5%;
+    bottom: 9%;
+    width: 11rem;
+    height: 7rem;
+    border: 2px solid rgba(var(--theme-info-rgb), 0.55);
+    background: var(--map-tile-water);
+    box-shadow: inset 0 0 0 0.6rem rgba(var(--theme-info-rgb), 0.12);
+  }
+
+  .quest-map__grove {
+    width: 7rem;
+    height: 5rem;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 0.8rem,
+      rgba(var(--theme-accent-rgb), 0.28) 0.8rem,
+      rgba(var(--theme-accent-rgb), 0.28) 1.2rem
+    );
+  }
+
+  .quest-map__grove--one {
+    left: 5%;
+    bottom: 10%;
+  }
+
+  .quest-map__grove--two {
+    right: 13%;
+    top: 9%;
+  }
+
+  .quest-map__intro {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    z-index: 2;
+    display: grid;
+    max-width: 27rem;
+    gap: 0.5rem;
+    border: 2px solid var(--map-border);
+    background: var(--map-surface);
+    box-shadow: 4px 4px 0 var(--map-shadow);
+    padding: 0.85rem;
+  }
+
+  .quest-map__title {
+    color: var(--theme-text);
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 1.08;
+  }
+
+  .quest-map__description {
+    color: var(--theme-text-secondary);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    line-height: 1.45;
+  }
+
+  .quest-map__stats {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    z-index: 2;
+    display: grid;
+    width: min(19rem, calc(100% - 2rem));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.4rem;
+    list-style: none;
+  }
+
+  .quest-map__stats li {
+    display: grid;
+    gap: 0.2rem;
+    border: 2px solid var(--map-border);
+    background: var(--map-surface);
+    box-shadow: 3px 3px 0 var(--map-shadow);
+    padding: 0.5rem;
+  }
+
+  .quest-map__stats strong {
+    color: var(--theme-accent);
+    font-family: var(--font-pixel);
+    font-size: 1.35rem;
+    font-weight: 400;
+    line-height: 1;
+  }
+
+  .quest-map__stats span {
+    color: var(--theme-text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    line-height: 1.25;
+    text-transform: uppercase;
   }
 
   .quest-map__route {
@@ -336,17 +577,18 @@ const tiles = Array.from({ length: 64 }, (_, index) => {
     position: absolute;
     left: var(--quest-x);
     top: var(--quest-y);
+    z-index: 3;
     display: grid;
-    width: min(12rem, calc(100% - 2rem));
-    min-height: 4.7rem;
+    width: min(9.5rem, calc(100% - 2rem));
+    min-height: 3.85rem;
     transform: translate(-50%, -50%);
-    grid-template-columns: 2.1rem minmax(0, 1fr);
-    gap: 0.55rem;
+    grid-template-columns: 2rem minmax(0, 1fr);
+    gap: 0.5rem;
     align-items: center;
     border: 2px solid var(--map-border);
     background: var(--map-surface);
     color: var(--theme-text);
-    padding: 0.55rem;
+    padding: 0.42rem;
     text-decoration: none;
     box-shadow: 3px 3px 0 var(--map-shadow);
     transition: transform 0.16s ease, border-color 0.16s ease, box-shadow 0.16s ease;
@@ -361,7 +603,9 @@ const tiles = Array.from({ length: 64 }, (_, index) => {
     box-shadow: 5px 5px 0 var(--map-shadow);
   }
 
-  .quest-node:focus-visible {
+  .quest-node:focus-visible,
+  .quest-panel__action:focus-visible,
+  .quest-panel__quick-actions a:focus-visible {
     outline: 2px solid var(--theme-accent);
     outline-offset: 3px;
   }
@@ -415,33 +659,23 @@ const tiles = Array.from({ length: 64 }, (_, index) => {
     overflow: hidden;
     color: var(--theme-text);
     font-family: var(--font-mono);
-    font-size: 0.82rem;
+    font-size: 0.72rem;
     font-weight: 900;
     line-height: 1.2;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 
-  .quest-node__kicker {
-    overflow: hidden;
-    color: var(--theme-text-muted);
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    line-height: 1.2;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
   .quest-avatar {
-    --avatar-x: 18%;
-    --avatar-y: 30%;
+    --avatar-x: 20%;
+    --avatar-y: 28%;
     position: absolute;
     left: var(--avatar-x);
-    top: calc(var(--avatar-y) + 3.8rem);
-    z-index: 3;
+    top: calc(var(--avatar-y) + 3.6rem);
+    z-index: 4;
     display: grid;
     width: 1.35rem;
-    height: 2rem;
+    height: 2.2rem;
     transform: translate(-50%, -50%);
     justify-items: center;
     transition: left 0.18s steps(3), top 0.18s steps(3);
@@ -449,10 +683,23 @@ const tiles = Array.from({ length: 64 }, (_, index) => {
     pointer-events: none;
   }
 
+  .quest-avatar__cap,
+  .quest-avatar__head,
+  .quest-avatar__body,
+  .quest-avatar__feet {
+    display: block;
+  }
+
+  .quest-avatar__cap {
+    width: 1rem;
+    height: 0.35rem;
+    background: var(--theme-error);
+  }
+
   .quest-avatar__head {
     width: 0.95rem;
-    height: 0.75rem;
-    border: 2px solid var(--theme-text);
+    height: 0.6rem;
+    border-inline: 2px solid var(--theme-text);
     background: var(--theme-accent);
   }
 
@@ -469,77 +716,265 @@ const tiles = Array.from({ length: 64 }, (_, index) => {
     background: var(--theme-text);
   }
 
-  .quest-dialog {
+  .quest-panel {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(15rem, 0.8fr) minmax(13rem, 0.7fr);
+    gap: 0.55rem;
+    border-top: 2px solid var(--map-border);
+    background: var(--map-surface-2);
+    padding: 0.55rem;
+    overflow: hidden;
+  }
+
+  .quest-dialog,
+  .quest-panel__mission,
+  .quest-panel__commands {
     display: grid;
     gap: 0.45rem;
-    margin-top: 0.5rem;
     border: 2px solid var(--theme-text);
     background: var(--map-surface);
     box-shadow: inset 0 0 0 3px var(--map-surface), inset 0 0 0 4px var(--map-border);
-    padding: 0.9rem 1rem;
+    min-height: 0;
+    padding: 0.65rem;
   }
 
-  .quest-dialog__text {
-    min-height: 2.8rem;
+  .quest-dialog__text,
+  .quest-panel__mission p,
+  .quest-panel__commands p {
     color: var(--theme-text-secondary);
     font-family: var(--font-mono);
+    font-size: 0.76rem;
+    line-height: 1.4;
+  }
+
+  .quest-panel__mission h2 {
+    color: var(--theme-text);
+    font-family: var(--font-mono);
     font-size: 0.9rem;
-    line-height: 1.55;
+    font-weight: 900;
+    line-height: 1.2;
+  }
+
+  .quest-panel__action,
+  .quest-panel__quick-actions a {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--theme-accent);
+    color: var(--theme-accent);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 900;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: transform 0.16s ease, box-shadow 0.16s ease;
+  }
+
+  .quest-panel__action:hover,
+  .quest-panel__quick-actions a:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 3px 3px 0 var(--map-shadow);
+  }
+
+  .quest-panel__quick-actions {
+    align-content: start;
+  }
+
+  .quest-panel__quick-actions a {
+    flex: 1 1 8rem;
+    background: var(--map-surface);
   }
 
   :global(html:not(.dark)) .quest-map__screen,
-  :global(html:not(.dark)) .quest-map__path {
+  :global(html:not(.dark)) .quest-map__path,
+  :global(html:not(.dark)) .quest-map__grove {
     background-image: none;
   }
 
-  @media (max-width: 720px) {
-    .quest-map__screen {
-      min-height: 38rem;
+  @media (max-width: 980px) {
+    .quest-map {
+      padding: 0.5rem;
+    }
+
+    .quest-map__topbar {
+      min-height: 2.1rem;
+      padding: 0.35rem 0.5rem;
+    }
+
+    .quest-map__intro {
+      left: 0.5rem;
+      top: 0.5rem;
+      max-width: calc(100% - 1rem);
+      gap: 0.25rem;
+      padding: 0.55rem;
+    }
+
+    .quest-map__title {
+      font-size: 1.1rem;
+    }
+
+    .quest-map__description,
+    .quest-map__stats,
+    .quest-panel__commands,
+    .quest-panel__quick-actions {
+      display: none;
     }
 
     .quest-node {
-      width: min(13rem, calc(100% - 2rem));
+      width: min(7.8rem, calc(100% - 1rem));
+      min-height: 3rem;
+      grid-template-columns: 1.35rem minmax(0, 1fr);
+      gap: 0.3rem;
+      padding: 0.3rem;
+    }
+
+    .quest-node__sprite {
+      width: 1.35rem;
+      height: 1.35rem;
+    }
+
+    .quest-node__badge {
+      font-size: 0.56rem;
+    }
+
+    .quest-node__label {
+      font-size: 0.64rem;
     }
 
     .quest-node:nth-child(1) {
-      left: 28%;
-      top: 13%;
+      left: 21%;
+      top: 35%;
     }
 
     .quest-node:nth-child(2) {
-      left: 68%;
-      top: 26%;
+      left: 52%;
+      top: 42%;
     }
 
     .quest-node:nth-child(3) {
-      left: 30%;
-      top: 39%;
+      left: 79%;
+      top: 34%;
     }
 
     .quest-node:nth-child(4) {
-      left: 70%;
-      top: 52%;
+      left: 30%;
+      top: 58%;
     }
 
     .quest-node:nth-child(5) {
-      left: 50%;
-      top: 65%;
+      left: 79%;
+      top: 57%;
     }
 
     .quest-node:nth-child(6) {
-      left: 50%;
-      top: 78%;
+      left: 22%;
+      top: 79%;
     }
 
     .quest-node:nth-child(7) {
-      left: 50%;
-      top: 91%;
+      left: 54%;
+      top: 81%;
+    }
+
+    .quest-node:nth-child(8) {
+      left: 82%;
+      top: 79%;
+    }
+
+    .quest-panel {
+      grid-template-columns: minmax(0, 1fr) minmax(10rem, 0.8fr);
+      gap: 0.45rem;
+      padding: 0.45rem;
+    }
+
+    .quest-dialog,
+    .quest-panel__mission {
+      padding: 0.5rem;
+    }
+
+    .quest-dialog__text,
+    .quest-panel__mission p {
+      font-size: 0.68rem;
+      line-height: 1.3;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .quest-map__topbar {
+      font-size: 0.62rem;
+    }
+
+    .quest-map__save {
+      display: none;
+    }
+
+    .quest-map__intro {
+      max-width: 13rem;
+    }
+
+    .quest-node {
+      width: min(6.8rem, calc(100% - 1rem));
+      min-height: 2.8rem;
+    }
+
+    .quest-panel {
+      grid-template-columns: 1fr;
+    }
+
+    .quest-panel__mission p {
+      display: none;
+    }
+  }
+
+  @media (max-height: 720px) {
+    .quest-map__description,
+    .quest-map__stats,
+    .quest-panel__commands,
+    .quest-panel__quick-actions {
+      display: none;
+    }
+
+    .quest-map__intro {
+      max-width: 22rem;
+      padding: 0.55rem;
+    }
+
+    .quest-map__title {
+      font-size: 1.05rem;
+    }
+
+    .quest-panel {
+      grid-template-columns: minmax(0, 1fr) minmax(13rem, 0.65fr);
+    }
+
+    .quest-dialog,
+    .quest-panel__mission {
+      padding: 0.5rem;
+    }
+
+    .quest-dialog__text,
+    .quest-panel__mission p {
+      font-size: 0.68rem;
+      line-height: 1.25;
+    }
+  }
+
+  @media (max-width: 640px) and (max-height: 720px) {
+    .quest-panel {
+      grid-template-columns: 1fr;
+    }
+
+    .quest-panel__mission p {
+      display: none;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .quest-node,
-    .quest-avatar {
+    .quest-avatar,
+    .quest-panel__action,
+    .quest-panel__quick-actions a {
       transition: none;
     }
 
@@ -547,6 +982,13 @@ const tiles = Array.from({ length: 64 }, (_, index) => {
     .quest-node:focus-visible,
     .quest-node[aria-current='location'] {
       transform: translate(-50%, -50%);
+      box-shadow: none;
+    }
+
+    .quest-panel__action:hover,
+    .quest-panel__quick-actions a:hover {
+      transform: none;
+      box-shadow: none;
     }
   }
 </style>

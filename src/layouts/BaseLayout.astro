@@ -10,13 +10,17 @@ export interface Props {
   title: string;
   description: string;
   image?: string;
+  immersive?: boolean;
 }
 
 const {
   title,
   description,
   image = withBase('/placeholder-social.jpg'),
+  immersive = false,
 } = Astro.props;
+
+const bodyClass = `bg-[var(--theme-canvas)] text-[var(--theme-text)] font-sans antialiased${immersive ? ' overflow-hidden' : ''}`;
 
 const lang = getLangFromUrl(Astro.url);
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -118,13 +122,35 @@ const websiteLd = {
     <!-- Umami -->
     <script is:inline defer src="https://cloud.umami.is/script.js" data-website-id="7e7bb8f2-01ba-436c-bc5e-8a999ddb1891"></script>
 
+    <style is:global>
+      :root {
+        --app-header-height: 4.35rem;
+      }
+
+      body[data-immersive='true'] {
+        overflow: hidden;
+        overscroll-behavior: none;
+      }
+
+      body[data-immersive='true'] main {
+        height: calc(100dvh - var(--app-header-height));
+        overflow: hidden;
+      }
+
+      @supports not (height: 100dvh) {
+        body[data-immersive='true'] main {
+          height: calc(100vh - var(--app-header-height));
+        }
+      }
+    </style>
+
   </head>
-  <body class="bg-[var(--theme-canvas)] text-[var(--theme-text)] font-sans antialiased">
+  <body class={bodyClass} data-immersive={immersive ? 'true' : undefined}>
     <BackgroundGradients />
     <Header />
     <main class="relative z-10">
       <slot />
     </main>
-    <Footer />
+    {!immersive && <Footer />}
   </body>
 </html>

@@ -35,6 +35,23 @@ export const ui = {
     'game.hud.title': 'Elige tu próxima misión',
     'game.hud.description':
       'Explora el mapa como en un RPG portátil clásico: habla con cada zona, revisa misiones y entra en los case studies cuando estés listo.',
+    'game.world.eyebrow': 'Aventura portfolio',
+    'game.world.title': 'Ruta Nacho',
+    'game.world.description':
+      'Un mundo navegable sobre cómo pienso, construyo y entrego producto web. Muévete por el mapa, activa zonas y abre misiones reales.',
+    'game.world.route': 'Mapa general',
+    'game.world.signal': 'Online',
+    'game.panel.label': 'Panel de misión activa',
+    'game.stats.label': 'Estadísticas del jugador',
+    'game.stat.experience': 'Años de ruta',
+    'game.stat.projects': 'Misiones',
+    'game.stat.stack': 'Skills',
+    'game.stat.languages': 'Idiomas',
+    'game.commands.title': 'Controles',
+    'game.commands.body': 'Tab o flechas para moverte. Enter abre la acción destacada del panel.',
+    'game.actions.label': 'Acciones rápidas',
+    'game.action.inspect': 'Inspeccionar zona',
+    'game.action.contact': 'Enviar mensaje',
     'game.help':
       'Mapa interactivo con enlaces. Usa Tab para recorrer zonas, Enter para abrir una ruta y las flechas para cambiar el foco entre nodos.',
     'game.map.navLabel': 'Mapa de misiones del portfolio',
@@ -42,6 +59,10 @@ export const ui = {
     'game.dialog.speaker': 'PROF. NACHO',
     'game.dialog.default':
       'Te doy la bienvenida a Ruta Nacho. Elige una zona y te cuento qué puedes descubrir allí.',
+    'game.zone.town': 'Pueblo Inicio',
+    'game.zone.town.kicker': 'Perfil y contexto',
+    'game.zone.town.dialog':
+      'Empieza aquí: Product Engineer con base Frontend fuerte, foco en producto, DX, performance y ejecución mantenible.',
     'game.zone.lab': 'Laboratorio',
     'game.zone.lab.kicker': 'Origen y método',
     'game.zone.lab.dialog':
@@ -193,6 +214,24 @@ export const ui = {
     'game.hud.title': 'Choose your next mission',
     'game.hud.description':
       'Explore the map like a classic handheld RPG: talk to each zone, inspect missions, and enter the case studies when you are ready.',
+    'game.world.eyebrow': 'Portfolio adventure',
+    'game.world.title': 'Nacho Route',
+    'game.world.description':
+      'A navigable world about how I think, build, and ship web products. Move through the map, activate zones, and open real missions.',
+    'game.world.route': 'World map',
+    'game.world.signal': 'Online',
+    'game.panel.label': 'Active mission panel',
+    'game.stats.label': 'Player stats',
+    'game.stat.experience': 'Route years',
+    'game.stat.projects': 'Missions',
+    'game.stat.stack': 'Skills',
+    'game.stat.languages': 'Languages',
+    'game.commands.title': 'Controls',
+    'game.commands.body':
+      'Use Tab or arrow keys to move. Enter opens the highlighted panel action.',
+    'game.actions.label': 'Quick actions',
+    'game.action.inspect': 'Inspect zone',
+    'game.action.contact': 'Send message',
     'game.help':
       'Interactive map with links. Use Tab to browse zones, Enter to open a route, and arrow keys to move focus between nodes.',
     'game.map.navLabel': 'Portfolio mission map',
@@ -200,6 +239,10 @@ export const ui = {
     'game.dialog.speaker': 'PROF. NACHO',
     'game.dialog.default':
       'Welcome to Nacho Route. Choose a zone and I will tell you what you can discover there.',
+    'game.zone.town': 'Start Town',
+    'game.zone.town.kicker': 'Profile and context',
+    'game.zone.town.dialog':
+      'Start here: Product Engineer with a strong Frontend foundation, focused on product, DX, performance, and maintainable execution.',
     'game.zone.lab': 'Lab',
     'game.zone.lab.kicker': 'Origin and method',
     'game.zone.lab.dialog':
