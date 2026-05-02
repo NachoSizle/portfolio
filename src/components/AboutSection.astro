@@ -78,6 +78,7 @@ const loopSteps = [
           </div>
 
           <!-- Steps row -->
+          <div class="loop-scroll-wrapper">
           <div class="loop-steps" role="list" aria-label="Product Engineering Loop">
             {loopSteps.map((step, i) => (
               <div class="loop-step" role="listitem">
@@ -110,6 +111,7 @@ const loopSteps = [
               <span class="font-mono text-[#3D4B5A] text-xs select-none">↩</span>
             </div>
           </div>
+          </div><!-- /loop-scroll-wrapper -->
         </div>
 
       </div>
@@ -124,12 +126,38 @@ const loopSteps = [
 </section>
 
 <style>
+  /* Wrapper con fade-right en mobile para indicar scroll */
+  .loop-scroll-wrapper {
+    position: relative;
+  }
+  .loop-scroll-wrapper::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    background: linear-gradient(to right, transparent, #0B0D10);
+    pointer-events: none;
+  }
+  @media (min-width: 640px) {
+    .loop-scroll-wrapper::after {
+      display: none;
+    }
+  }
+
   .loop-steps {
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 0;
-    row-gap: 0.75rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 2px;
+  }
+  .loop-steps::-webkit-scrollbar {
+    display: none;
   }
 
   .loop-step {
@@ -139,55 +167,21 @@ const loopSteps = [
   .step-box {
     min-width: 72px;
     text-align: center;
+    flex-shrink: 0;
   }
 
   .loop-connector {
     display: flex;
     align-items: center;
     padding: 0 4px;
+    flex-shrink: 0;
   }
 
   .loop-back {
     display: flex;
     align-items: center;
     padding: 0 4px;
-  }
-
-  @media (max-width: 640px) {
-    .loop-steps {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0;
-    }
-    .loop-connector {
-      padding: 0;
-      width: 40px;
-      height: 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      padding-left: 0.75rem;
-    }
-    .loop-connector span {
-      display: none;
-    }
-    .loop-connector::after {
-      content: '';
-      display: block;
-      width: 2px;
-      height: 1.5rem;
-      background: #2D3A48;
-      margin-left: 0.25rem;
-    }
-    .loop-back {
-      display: none;
-    }
-    .step-box {
-      min-width: 80px;
-      flex-direction: row;
-      gap: 0.5rem;
-      padding: 0.5rem 0.75rem;
-    }
+    flex-shrink: 0;
   }
 
   @media (prefers-reduced-motion: reduce) {

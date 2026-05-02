@@ -13,7 +13,18 @@ const { project, index } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const { title, description, stack, demoLink, repoLink, date, status, problem, solution, impact } = project.data;
+const { title: rawTitle, description: rawDescription, stack, demoLink, repoLink, date, status, problem, solution, impact } = project.data;
+
+function translateOrRaw(value: string): string {
+  if (typeof value !== 'string') return String(value);
+  if (value.startsWith('projects.')) {
+    return (t(value as any) as string) || value;
+  }
+  return value;
+}
+
+const title = translateOrRaw(rawTitle);
+const description = translateOrRaw(rawDescription ?? '');
 
 const statusConfig: Record<string, { label: string; color: string; bg: string }> = {
   prod:       { label: 'PROD',       color: '#5EE6A8', bg: 'rgba(94,230,168,0.08)' },
@@ -34,7 +45,7 @@ const projectNum = String(index + 1).padStart(2, '0');
     <div class="flex items-center justify-between gap-2 sm:gap-4 px-4 sm:px-5 py-3 border-b border-[#1F2630] bg-[#0D1117]">
       <div class="flex items-center gap-2 sm:gap-3 min-w-0">
         <span class="shrink-0 font-mono text-xs text-[#3DB882] tracking-widest select-none">#{projectNum}</span>
-        <h3 class="font-mono text-sm sm:text-base font-bold text-slate-100 leading-tight truncate">
+        <h3 class="font-mono text-sm sm:text-base font-bold text-[#E2E8F0] leading-tight truncate min-w-0">
           {title}
         </h3>
       </div>
@@ -51,23 +62,23 @@ const projectNum = String(index + 1).padStart(2, '0');
       {problem && (
         <div class="space-y-1">
           <div class="font-mono text-xs text-[#3DB882] tracking-widest uppercase select-none">PROBLEM</div>
-          <p class="text-sm text-slate-400 leading-relaxed">{problem}</p>
+          <p class="text-sm text-[#8B9AB0] leading-relaxed">{problem}</p>
         </div>
       )}
       {solution && (
         <div class="space-y-1">
           <div class="font-mono text-xs text-[#F5B36B] tracking-widest uppercase select-none">SOLUTION</div>
-          <p class="text-sm text-slate-300 leading-relaxed">{solution}</p>
+          <p class="text-sm text-[#CBD5E1] leading-relaxed">{solution}</p>
         </div>
       )}
       {!problem && !solution && (
-        <p class="text-sm text-slate-400 leading-relaxed">{description}</p>
+        <p class="text-sm text-[#8B9AB0] leading-relaxed">{description}</p>
       )}
       <div class="space-y-1.5">
         <div class="font-mono text-xs text-[#8B9AB0] tracking-widest uppercase select-none">STACK</div>
         <div class="flex flex-wrap gap-2">
           {stack.map((tech: string) => (
-            <span class="px-2 py-0.5 text-xs font-mono text-slate-300 border border-[#1F2630] bg-[#161B22] hover:border-[#5EE6A8]/50 transition-colors duration-150 select-none">
+            <span class="px-2 py-0.5 text-xs font-mono text-[#CBD5E1] border border-[#1F2630] bg-[#161B22] hover:border-[#5EE6A8]/50 transition-colors duration-150 select-none">
               {tech}
             </span>
           ))}
@@ -76,7 +87,7 @@ const projectNum = String(index + 1).padStart(2, '0');
       {impact && (
         <div class="space-y-1">
           <div class="font-mono text-xs text-[#58A6FF] tracking-widest uppercase select-none">IMPACT</div>
-          <p class="text-xs font-mono text-slate-400 leading-relaxed">{impact}</p>
+          <p class="text-xs font-mono text-[#8B9AB0] leading-relaxed">{impact}</p>
         </div>
       )}
     </div>
