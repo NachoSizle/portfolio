@@ -1,44 +1,46 @@
 ---
-export interface Props {
-  projects: any[];
-}
+import type { CollectionEntry } from 'astro:content';
 import ProjectCard from './ProjectCard.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+export interface Props {
+  projects: CollectionEntry<'projects'>[];
+}
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const { projects } = Astro.props;
 
-const featuredProject = projects.find((p: any) => p.data.featured);
-const otherProjects = projects.filter((p: any) => !p.data.featured);
+const featuredProject = projects.find((project) => project.data.featured);
+const otherProjects = projects.filter((project) => !project.data.featured);
 const totalProjects = projects.length;
 ---
 
-<section class="relative mx-auto max-w-6xl px-4 sm:px-6 mb-12 sm:mb-16 mt-0 bg-transparent" aria-labelledby="projects-section" role="region">
+<section class="relative mx-auto max-w-6xl px-4 sm:px-6 mb-10 sm:mb-14 mt-0 bg-transparent" aria-labelledby="projects-section" role="region">
 
   <!-- Header terminal -->
-  <div class="mb-10 relative z-10">
+  <div class="mb-8 relative z-10">
     <span id="projects" tabindex="-1" class="sr-only">{t('projects.title')}</span>
     <div class="flex items-center gap-3 mb-2">
-      <span class="font-mono text-xs text-[#3DB882] tracking-widest uppercase select-none">// PROJECTS</span>
+      <span class="font-mono text-xs text-[#3DB882] uppercase select-none">// PROJECTS</span>
       <div class="h-px flex-1 bg-[#1F2630]"></div>
       <span class="font-mono text-xs text-[#3D4B5A] select-none">{totalProjects} entries</span>
     </div>
     <h2
       id="projects-section"
-      class="text-3xl sm:text-4xl font-extrabold font-mono tracking-tight text-slate-100 select-none"
+      class="text-2xl sm:text-3xl font-extrabold font-mono tracking-normal text-slate-100 select-none"
     >
-      {t('projects.title')} <span style="color: #5EE6A8;">{t('projects.titleHighlight')}</span>
+      {t('projects.title')} <span style="color: var(--theme-accent);">{t('projects.titleHighlight')}</span>
     </h2>
-    <p class="mt-2 text-sm text-slate-500 font-mono max-w-2xl select-none" set:html={t('projects.subtitle')} />
+    <p class="mt-2 text-sm sm:text-base leading-6 text-slate-500 font-mono max-w-2xl select-none" set:html={t('projects.subtitle')} />
   </div>
 
   <!-- Featured project (si existe) -->
   {featuredProject && (
     <div class="mb-8">
       <div class="flex items-center gap-2 mb-3">
-        <span class="px-2 py-0.5 text-xs font-mono font-bold text-[#F5B36B] border border-[#F5B36B]/40 bg-[rgba(245,179,107,0.08)] select-none tracking-widest">
+        <span class="px-2 py-0.5 text-xs font-mono font-bold text-[#F5B36B] border border-[#F5B36B]/40 bg-[rgba(245,179,107,0.08)] select-none">
           [FEATURED]
         </span>
         <div class="h-px flex-1 bg-[#1F2630]"></div>
@@ -56,12 +58,12 @@ const totalProjects = projects.length;
     <div>
       {featuredProject && (
         <div class="flex items-center gap-2 mb-3">
-          <span class="font-mono text-xs text-[#3D4B5A] select-none tracking-widest">// OTHER PROJECTS</span>
+          <span class="font-mono text-xs text-[#3D4B5A] select-none">// OTHER PROJECTS</span>
           <div class="h-px flex-1 bg-[#1F2630]"></div>
         </div>
       )}
       <ul class="space-y-4" role="list">
-        {otherProjects.map((project: any, index: number) => (
+        {otherProjects.map((project, index) => (
           <ProjectCard
             project={project}
             index={featuredProject ? index + 1 : index}

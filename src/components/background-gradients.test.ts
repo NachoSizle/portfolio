@@ -9,14 +9,16 @@ describe('GYM-118: BackgroundGradients endurecido', () => {
     expect(src).not.toMatch(/:global\(\.dark\)\s*\.opacity-0/);
   });
 
-  it('usa una clase explícita bg-blob para los blobs', () => {
-    expect(src).toMatch(/class="[^"]*bg-blob/);
+  it('usa clases explícitas para el fondo técnico', () => {
+    expect(src).toMatch(/class="[^"]*theme-background/);
+    expect(src).toContain('theme-background-dots');
+    expect(src).toContain('theme-background-vignette');
+    expect(src).toContain('theme-background-lines');
   });
 
-  it('reduce el número de blobs a 5 o menos', () => {
-    const blobMatches = src.match(/class="[^"]*bg-blob/g) ?? [];
-    expect(blobMatches.length).toBeGreaterThan(0);
-    expect(blobMatches.length).toBeLessThanOrEqual(5);
+  it('oculta el fondo decorativo en modo claro para mantenerlo plano', () => {
+    expect(src).toMatch(/html:not\(\.dark\)\)\s+\.theme-background/);
+    expect(src).toMatch(/display:\s*none/);
   });
 
   it('respeta prefers-reduced-motion desactivando la animación', () => {

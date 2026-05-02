@@ -11,6 +11,7 @@ interface Props {
 const { project } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+type TranslationKey = Parameters<typeof t>[0];
 const content = project.data;
 
 const { Content } = await render(project);
@@ -19,7 +20,7 @@ const stack = Array.isArray(content.stack) ? content.stack : [];
 
 function translateOrRaw(value: string): string {
   if (typeof value !== 'string') return String(value);
-  if (value.startsWith('projects.')) return (t(value as any) as string) || value;
+  if (value.startsWith('projects.')) return t(value as TranslationKey) || value;
   return value;
 }
 
@@ -27,10 +28,25 @@ const title = translateOrRaw(content.title);
 const description = translateOrRaw(content.description);
 const backHref = getTranslatedPath('/', lang);
 
-const statusConfig: Record<string, { label: string; color: string; bg: string }> = {
-  prod:       { label: 'PROD',       color: '#5EE6A8', bg: 'rgba(94,230,168,0.08)' },
-  experiment: { label: 'EXPERIMENT', color: '#F5B36B', bg: 'rgba(245,179,107,0.08)' },
-  archived:   { label: 'ARCHIVED',   color: '#8B9AB0', bg: 'rgba(139,154,176,0.08)' },
+const statusConfig: Record<string, { label: string; color: string; border: string; bg: string }> = {
+  prod: {
+    label: 'PROD',
+    color: 'var(--theme-accent)',
+    border: 'rgba(var(--theme-accent-rgb), 0.4)',
+    bg: 'rgba(var(--theme-accent-rgb), 0.1)',
+  },
+  experiment: {
+    label: 'EXPERIMENT',
+    color: 'var(--theme-amber)',
+    border: 'rgba(var(--theme-amber-rgb), 0.4)',
+    bg: 'rgba(var(--theme-amber-rgb), 0.1)',
+  },
+  archived: {
+    label: 'ARCHIVED',
+    color: 'var(--theme-text-muted)',
+    border: 'rgba(var(--theme-muted-rgb), 0.4)',
+    bg: 'rgba(var(--theme-muted-rgb), 0.1)',
+  },
 };
 const currentStatus = statusConfig[content.status ?? 'prod'] ?? statusConfig.prod;
 
@@ -50,11 +66,11 @@ const dateStr = content.date
         aria-label={t('projects.backToList')}
       >
         <span class="transition-transform duration-150 group-hover:-translate-x-0.5">←</span>
-        <span class="tracking-widest uppercase">{t('projects.backToList')}</span>
+        <span class="uppercase">{t('projects.backToList')}</span>
       </a>
       <span
-        class="font-mono text-xs font-bold tracking-widest border px-2 py-0.5 select-none"
-        style={`color: ${currentStatus.color}; border-color: ${currentStatus.color}40; background: ${currentStatus.bg};`}
+        class="font-mono text-xs font-bold border px-2 py-0.5 select-none"
+        style={`color: ${currentStatus.color}; border-color: ${currentStatus.border}; background: ${currentStatus.bg};`}
       >
         [{currentStatus.label}]
       </span>
@@ -67,7 +83,7 @@ const dateStr = content.date
     <header class="pt-10 pb-8 border-b border-[#1F2630]">
       <!-- Número de proyecto + fecha -->
       <div class="flex items-center gap-3 mb-5">
-        <span class="font-mono text-xs text-[#3D4B5A] tracking-widest select-none">PROJECT</span>
+        <span class="font-mono text-xs text-[#3D4B5A] select-none">PROJECT</span>
         <span class="font-mono text-xs text-[#1F2630] select-none">//</span>
         {dateStr && (
           <time
@@ -82,7 +98,7 @@ const dateStr = content.date
       <!-- Título principal -->
       <h1
         id="project-title"
-        class="font-mono text-3xl sm:text-4xl md:text-5xl font-bold text-[#E2E8F0] leading-tight mb-4 select-none"
+        class="font-mono text-3xl sm:text-4xl md:text-5xl font-bold tracking-normal text-[#E2E8F0] leading-tight mb-4 select-none"
       >
         {title}
       </h1>
@@ -165,7 +181,7 @@ const dateStr = content.date
       >
         {content.problem && (
           <div class="px-5 py-5 border-b sm:border-b-0 sm:border-r border-[#1F2630] bg-[#11151A] group hover:bg-[#0D1117] transition-colors duration-150">
-            <div class="font-mono text-xs text-[#5EE6A8] tracking-widest uppercase mb-2 select-none flex items-center gap-2">
+            <div class="font-mono text-xs text-[#5EE6A8] uppercase mb-2 select-none flex items-center gap-2">
               <span class="text-[#1F2630] group-hover:text-[#5EE6A8]/40 transition-colors duration-150">▶</span>
               PROBLEM
             </div>
@@ -174,7 +190,7 @@ const dateStr = content.date
         )}
         {content.solution && (
           <div class="px-5 py-5 border-b sm:border-b-0 sm:border-r border-[#1F2630] bg-[#11151A] group hover:bg-[#0D1117] transition-colors duration-150">
-            <div class="font-mono text-xs text-[#F5B36B] tracking-widest uppercase mb-2 select-none flex items-center gap-2">
+            <div class="font-mono text-xs text-[#F5B36B] uppercase mb-2 select-none flex items-center gap-2">
               <span class="text-[#1F2630] group-hover:text-[#F5B36B]/40 transition-colors duration-150">▶</span>
               SOLUTION
             </div>
@@ -183,11 +199,11 @@ const dateStr = content.date
         )}
         {content.impact && (
           <div class="px-5 py-5 bg-[#11151A] group hover:bg-[#0D1117] transition-colors duration-150">
-            <div class="font-mono text-xs text-[#58A6FF] tracking-widest uppercase mb-2 select-none flex items-center gap-2">
+            <div class="font-mono text-xs text-[#58A6FF] uppercase mb-2 select-none flex items-center gap-2">
               <span class="text-[#1F2630] group-hover:text-[#58A6FF]/40 transition-colors duration-150">▶</span>
               IMPACT
             </div>
-            <p class="text-xs font-mono text-[#8B9AB0] leading-relaxed">{content.impact}</p>
+            <p class="text-sm font-mono text-[#8B9AB0] leading-6">{content.impact}</p>
           </div>
         )}
       </section>
@@ -196,7 +212,7 @@ const dateStr = content.date
     <!-- ── SEPARADOR ── -->
     <div class="flex items-center gap-3 my-8">
       <div class="h-px flex-1 bg-[#1F2630]"></div>
-      <span class="font-mono text-xs text-[#3D4B5A] tracking-widest select-none uppercase">case study</span>
+      <span class="font-mono text-xs text-[#3D4B5A] select-none uppercase">case study</span>
       <div class="h-px flex-1 bg-[#1F2630]"></div>
     </div>
 
@@ -211,7 +227,7 @@ const dateStr = content.date
     <footer class="mt-12 pt-6 border-t border-[#1F2630] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
       <a
         href={backHref}
-        class="group inline-flex items-center gap-2 font-mono text-xs text-[#5EE6A8] focus:outline-none focus-visible:ring-1 focus-visible:ring-[#5EE6A8] select-none transition-colors duration-150 uppercase tracking-widest"
+        class="group inline-flex items-center gap-2 font-mono text-xs text-[#5EE6A8] focus:outline-none focus-visible:ring-1 focus-visible:ring-[#5EE6A8] select-none transition-colors duration-150 uppercase"
         aria-label={t('projects.backToList')}
       >
         <span class="transition-transform duration-150 group-hover:-translate-x-0.5">←</span>
@@ -257,6 +273,10 @@ const dateStr = content.date
       rgba(0, 0, 0, 0.15) 4px
     );
   }
+  html:not(.dark) .scanlines {
+    background: none;
+    opacity: 0;
+  }
 
   /* ─── Neo-prose: estilos del contenido MDX ─── */
   .neo-prose {
@@ -271,7 +291,7 @@ const dateStr = content.date
     font-size: 1.125rem;
     font-weight: 700;
     color: #5EE6A8;
-    letter-spacing: 0.05em;
+    letter-spacing: 0;
     text-transform: uppercase;
     margin-top: 2.5rem;
     margin-bottom: 1rem;
@@ -292,7 +312,7 @@ const dateStr = content.date
     font-size: 1rem;
     font-weight: 600;
     color: #F5B36B;
-    letter-spacing: 0.03em;
+    letter-spacing: 0;
     margin-top: 1.75rem;
     margin-bottom: 0.75rem;
     display: flex;
@@ -310,7 +330,7 @@ const dateStr = content.date
     font-size: 0.875rem;
     font-weight: 600;
     color: #58A6FF;
-    letter-spacing: 0.03em;
+    letter-spacing: 0;
     margin-top: 1.5rem;
     margin-bottom: 0.5rem;
   }
@@ -402,7 +422,7 @@ const dateStr = content.date
     font-size: 0.6875rem;
     color: #3D4B5A;
     margin-bottom: 0.75rem;
-    letter-spacing: 0.05em;
+    letter-spacing: 0;
   }
   .neo-prose pre code {
     background: transparent;
@@ -456,7 +476,7 @@ const dateStr = content.date
     font-family: var(--font-mono, ui-monospace, monospace);
     font-size: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0;
     color: #5EE6A8;
     border-bottom: 1px solid #1F2630;
     padding: 0.5rem 0.75rem;

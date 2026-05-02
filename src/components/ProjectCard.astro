@@ -12,24 +12,41 @@ export interface Props {
 const { project, index } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+type TranslationKey = Parameters<typeof t>[0];
 
 const { title: rawTitle, description: rawDescription, stack, demoLink, repoLink, date, status, problem, solution, impact } = project.data;
 
 function translateOrRaw(value: string): string {
   if (typeof value !== 'string') return String(value);
   if (value.startsWith('projects.')) {
-    return (t(value as any) as string) || value;
+    return t(value as TranslationKey) || value;
   }
   return value;
 }
 
 const title = translateOrRaw(rawTitle);
 const description = translateOrRaw(rawDescription ?? '');
+const stackTitle = t('projects.stackTitle');
 
-const statusConfig: Record<string, { label: string; color: string; bg: string }> = {
-  prod:       { label: 'PROD',       color: '#5EE6A8', bg: 'rgba(94,230,168,0.08)' },
-  experiment: { label: 'EXPERIMENT', color: '#F5B36B', bg: 'rgba(245,179,107,0.08)' },
-  archived:   { label: 'ARCHIVED',   color: '#8B9AB0', bg: 'rgba(139,154,176,0.08)' },
+const statusConfig: Record<string, { label: string; color: string; border: string; bg: string }> = {
+  prod: {
+    label: 'PROD',
+    color: 'var(--theme-accent)',
+    border: 'rgba(var(--theme-accent-rgb), 0.4)',
+    bg: 'rgba(var(--theme-accent-rgb), 0.1)',
+  },
+  experiment: {
+    label: 'EXPERIMENT',
+    color: 'var(--theme-amber)',
+    border: 'rgba(var(--theme-amber-rgb), 0.4)',
+    bg: 'rgba(var(--theme-amber-rgb), 0.1)',
+  },
+  archived: {
+    label: 'ARCHIVED',
+    color: 'var(--theme-text-muted)',
+    border: 'rgba(var(--theme-muted-rgb), 0.4)',
+    bg: 'rgba(var(--theme-muted-rgb), 0.1)',
+  },
 };
 
 const currentStatus = statusConfig[status ?? 'prod'] ?? statusConfig.prod;
@@ -47,14 +64,14 @@ const detailPath = lang === 'en'
     <!-- HEADER -->
     <div class="flex items-center justify-between gap-2 sm:gap-4 px-4 sm:px-5 py-3 border-b border-[#1F2630] bg-[#0D1117]">
       <div class="flex items-center gap-2 sm:gap-3 min-w-0">
-        <span class="shrink-0 font-mono text-xs text-[#3DB882] tracking-widest select-none">#{projectNum}</span>
-        <h3 class="font-mono text-sm sm:text-base font-bold text-[#E2E8F0] leading-tight truncate min-w-0">
+        <span class="shrink-0 font-mono text-xs text-[#3DB882] select-none">#{projectNum}</span>
+        <h3 class="font-mono text-base font-bold text-[#E2E8F0] leading-snug truncate min-w-0">
           {title}
         </h3>
       </div>
       <span
-        class="shrink-0 px-2 py-0.5 text-xs font-mono font-bold tracking-widest border select-none whitespace-nowrap"
-        style={`color: ${currentStatus.color}; border-color: ${currentStatus.color}40; background: ${currentStatus.bg};`}
+        class="shrink-0 px-2 py-0.5 text-xs font-mono font-bold border select-none whitespace-nowrap"
+        style={`color: ${currentStatus.color}; border-color: ${currentStatus.border}; background: ${currentStatus.bg};`}
       >
         [{currentStatus.label}]
       </span>
@@ -64,21 +81,21 @@ const detailPath = lang === 'en'
     <div class="px-4 sm:px-5 py-4 space-y-4">
       {problem && (
         <div class="space-y-1">
-          <div class="font-mono text-xs text-[#3DB882] tracking-widest uppercase select-none">PROBLEM</div>
-          <p class="text-sm text-[#8B9AB0] leading-relaxed">{problem}</p>
+          <div class="font-mono text-xs text-[#3DB882] uppercase select-none">PROBLEM</div>
+          <p class="text-[0.9375rem] text-[#8B9AB0] leading-6">{problem}</p>
         </div>
       )}
       {solution && (
         <div class="space-y-1">
-          <div class="font-mono text-xs text-[#F5B36B] tracking-widest uppercase select-none">SOLUTION</div>
-          <p class="text-sm text-[#CBD5E1] leading-relaxed">{solution}</p>
+          <div class="font-mono text-xs text-[#F5B36B] uppercase select-none">SOLUTION</div>
+          <p class="text-[0.9375rem] text-[#CBD5E1] leading-6">{solution}</p>
         </div>
       )}
       {!problem && !solution && (
-        <p class="text-sm text-[#8B9AB0] leading-relaxed">{description}</p>
+        <p class="text-[0.9375rem] text-[#8B9AB0] leading-6">{description}</p>
       )}
-      <div class="space-y-1.5">
-        <div class="font-mono text-xs text-[#8B9AB0] tracking-widest uppercase select-none">STACK</div>
+      <div class="space-y-1.5" aria-label={stackTitle}>
+        <div class="font-mono text-xs text-[#8B9AB0] uppercase select-none">STACK</div>
         <div class="flex flex-wrap gap-2">
           {stack.map((tech: string) => (
             <span class="px-2 py-0.5 text-xs font-mono text-[#CBD5E1] border border-[#1F2630] bg-[#161B22] hover:border-[#5EE6A8]/50 transition-colors duration-150 select-none">
@@ -89,8 +106,8 @@ const detailPath = lang === 'en'
       </div>
       {impact && (
         <div class="space-y-1">
-          <div class="font-mono text-xs text-[#58A6FF] tracking-widest uppercase select-none">IMPACT</div>
-          <p class="text-xs font-mono text-[#8B9AB0] leading-relaxed">{impact}</p>
+          <div class="font-mono text-xs text-[#58A6FF] uppercase select-none">IMPACT</div>
+          <p class="text-sm font-mono text-[#8B9AB0] leading-6">{impact}</p>
         </div>
       )}
     </div>
@@ -146,6 +163,10 @@ const detailPath = lang === 'en'
     font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
   }
   @media (prefers-reduced-motion: reduce) {
+    .project-card,
+    .project-card * {
+      animation: none !important;
+    }
     .project-card {
       transition: none;
     }

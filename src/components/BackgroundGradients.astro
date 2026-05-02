@@ -1,32 +1,41 @@
 ---
-// Background Técnico Neo 8-bit — Grid de puntos + gradiente sutil
-// Siempre oscuro, sin blobs de colores vibrantes
+// Background Técnico Neo 8-bit — solo activo en modo oscuro.
+// En modo claro el layout queda plano, sin gradientes ni grid decorativo.
 ---
 
 <div
-  class="fixed inset-0 overflow-hidden pointer-events-none z-0"
+  class="theme-background fixed inset-0 overflow-hidden pointer-events-none z-0"
   aria-hidden="true"
 >
   <!-- Grid de puntos técnico (estilo PCB/terminal) -->
-  <div
-    class="absolute inset-0"
-    style="background-image: radial-gradient(circle, rgba(94, 230, 168, 0.12) 1px, transparent 1px); background-size: 28px 28px;"
-  ></div>
+  <div class="theme-background-dots absolute inset-0"></div>
 
   <!-- Gradiente de vignette para dar profundidad -->
-  <div
-    class="absolute inset-0"
-    style="background: radial-gradient(ellipse at center, transparent 40%, rgba(11, 13, 16, 0.7) 100%);"
-  ></div>
+  <div class="theme-background-vignette absolute inset-0"></div>
 
   <!-- Línea de grid horizontal sutil -->
-  <div
-    class="absolute inset-0 opacity-20"
-    style="background-image: linear-gradient(rgba(94, 230, 168, 0.05) 1px, transparent 1px); background-size: 100% 56px;"
-  ></div>
+  <div class="theme-background-lines absolute inset-0 opacity-20"></div>
 </div>
 
 <style>
+  :global(html:not(.dark)) .theme-background {
+    display: none;
+  }
+
+  .theme-background-dots {
+    background-image: radial-gradient(circle, var(--theme-grid-dot) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+
+  .theme-background-vignette {
+    background: radial-gradient(ellipse at center, transparent 40%, var(--theme-vignette) 100%);
+  }
+
+  .theme-background-lines {
+    background-image: linear-gradient(var(--theme-grid-line) 1px, transparent 1px);
+    background-size: 100% 56px;
+  }
+
   /* Respetar preferencia de movimiento reducido (WCAG 2.3.3) */
   @media (prefers-reduced-motion: reduce) {
     div {

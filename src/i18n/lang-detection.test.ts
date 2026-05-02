@@ -27,7 +27,7 @@ describe('GYM-99: detección de idioma sin redirect cliente', () => {
   });
 
   it('Header expone LanguagePicker fuera del drawer móvil (siempre visible)', () => {
-    expect(header).toMatch(/<LanguagePicker\s*\/?>/);
+    expect(header).toMatch(/<LanguagePicker\s+id="language-toggle-desktop"\s*\/?>/);
     // El picker está dentro del bloque de controles "siempre visibles"
     const controlsMatch = header.match(/Controles \(siempre visibles\)[\s\S]*?<LanguagePicker/);
     expect(controlsMatch).not.toBeNull();

@@ -1,5 +1,6 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
+import { z } from 'zod/v4';
 
 const projects = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/projects' }),
@@ -7,9 +8,9 @@ const projects = defineCollection({
     title: z.string(),
     description: z.string(),
     stack: z.array(z.string()),
-    cover: z.string().url(),
-    demoLink: z.string().url().optional(),
-    repoLink: z.string().url().optional(),
+    cover: z.url(),
+    demoLink: z.url().optional(),
+    repoLink: z.url().optional(),
     date: z.date(),
     featured: z.boolean().default(false),
     status: z.enum(['prod', 'experiment', 'archived']).default('prod'),

@@ -1,8 +1,17 @@
 ---
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
 
+export interface Props {
+  id?: string;
+}
+
+const { id = 'theme-toggle' } = Astro.props;
+
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+const darkIconId = `${id}-dark-icon`;
+const lightIconId = `${id}-light-icon`;
+const statusId = `${id}-status`;
 
 const labels = {
   toggle: t('theme.toggle'),
@@ -12,38 +21,43 @@ const labels = {
 ---
 
 <button 
-  id="theme-toggle"
+  id={id}
   class="inline-flex items-center justify-center w-11 h-11 border border-[#1F2630] bg-[#11151A] text-slate-400 hover:text-[#5EE6A8] hover:border-[#5EE6A8]/40 transition-all duration-150 focus:outline-none focus-visible:ring-1 focus-visible:ring-[#5EE6A8] select-none"
   aria-label={labels.toggle}
   aria-pressed="false"
 >
-  <svg id="theme-toggle-dark-icon" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+  <svg id={darkIconId} class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
   </svg>
-  <svg id="theme-toggle-light-icon" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+  <svg id={lightIconId} class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
   </svg>
 </button>
 
 <!-- Región viva para anunciar cambios de tema a lectores de pantalla -->
-<span id="theme-toggle-status" class="sr-only" aria-live="polite" aria-atomic="true"></span>
+<span id={statusId} class="sr-only" aria-live="polite" aria-atomic="true"></span>
 
-<script is:inline define:vars={{ THEME_LABELS: labels }}>
+<script is:inline define:vars={{ THEME_LABELS: labels, THEME_TOGGLE_ID: id, THEME_DARK_ICON_ID: darkIconId, THEME_LIGHT_ICON_ID: lightIconId }}>
   // Anti-flicker (GYM-116): este script va inmediatamente después del botón
   // en el DOM, así que puede ejecutarse sin esperar DOMContentLoaded y
   // sincronizar los iconos con la clase `dark` ya aplicada por el script
   // inline de BaseLayout, evitando el parpadeo del icono incorrecto.
   (function () {
-    const themeToggleBtn = document.getElementById('theme-toggle');
-    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
-    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
-    const themeStatus = document.getElementById('theme-toggle-status');
+    const themeToggleBtn = document.getElementById(THEME_TOGGLE_ID);
+    const themeToggleDarkIcon = document.getElementById(THEME_DARK_ICON_ID);
+    const themeToggleLightIcon = document.getElementById(THEME_LIGHT_ICON_ID);
+    const themeStatus = document.getElementById(`${THEME_TOGGLE_ID}-status`);
 
     if (!themeToggleBtn || !themeToggleDarkIcon || !themeToggleLightIcon) return;
 
     function updateTheme(announce) {
       const isDark = document.documentElement.classList.contains('dark');
+      const themeColor = document.getElementById('theme-color');
       const newLabel = isDark ? THEME_LABELS.toLight : THEME_LABELS.toDark;
+      document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';
+      if (themeColor) {
+        themeColor.setAttribute('content', isDark ? '#0B0D10' : '#F8FAFC');
+      }
       themeToggleBtn.setAttribute('aria-label', newLabel);
       themeToggleBtn.setAttribute('title', newLabel);
       themeToggleBtn.setAttribute('aria-pressed', String(isDark));

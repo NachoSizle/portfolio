@@ -1,7 +1,7 @@
 ---
 import ThemeToggle from "./ThemeToggle.astro";
 import LanguagePicker from "./LanguagePicker.astro";
-import { getLangFromUrl, useTranslations, withBase, getTranslatedPath } from '../i18n/utils';
+import { getLangFromUrl, useTranslations, getTranslatedPath } from '../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -18,16 +18,16 @@ const homeUrl = getTranslatedPath('/', lang);
 
 <style>
   #main-nav {
-    border-bottom: 1px solid #1F2630;
-    background: rgba(11, 13, 16, 0.9);
+    border-bottom: 1px solid var(--theme-border);
+    background: var(--theme-nav-bg);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     transition: border-color 0.2s, box-shadow 0.2s;
   }
 
   #main-nav.scrolled-nav {
-    border-bottom-color: #2D3A48;
-    box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.6);
+    border-bottom-color: var(--theme-border-hover);
+    box-shadow: 0 2px 16px 0 var(--theme-nav-shadow);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -45,7 +45,7 @@ const homeUrl = getTranslatedPath('/', lang);
         navLinks.map((link) => (
           <a
             href={link.href}
-            class="px-3 py-1.5 font-mono text-xs font-bold tracking-widest uppercase text-slate-400 hover:text-[#5EE6A8] transition-colors duration-150 select-none focus:outline-none focus-visible:ring-1 focus-visible:ring-[#5EE6A8]"
+            class="px-3 py-1.5 font-mono text-xs font-bold uppercase text-slate-400 hover:text-[#5EE6A8] transition-colors duration-150 select-none focus:outline-none focus-visible:ring-1 focus-visible:ring-[#5EE6A8]"
           >
             {link.label}
           </a>
@@ -61,8 +61,8 @@ const homeUrl = getTranslatedPath('/', lang);
 
     <!-- Controles (siempre visibles) -->
     <div class="flex gap-3 items-center">
-      <LanguagePicker />
-      <ThemeToggle />
+      <LanguagePicker id="language-toggle-desktop" />
+      <ThemeToggle id="theme-toggle-desktop" />
 
       <!-- Botón hamburguesa (solo mobile) -->
       <button
@@ -106,7 +106,7 @@ const homeUrl = getTranslatedPath('/', lang);
         <li>
           <a
             href={link.href}
-            class="flex items-center w-full min-h-[48px] px-4 py-3 font-mono text-xs font-bold tracking-widest uppercase text-slate-400 hover:text-[#5EE6A8] hover:bg-[#11151A] focus:outline-none focus-visible:ring-1 focus-visible:ring-[#5EE6A8] transition-colors duration-150"
+            class="flex items-center w-full min-h-[48px] px-4 py-3 font-mono text-xs font-bold uppercase text-slate-400 hover:text-[#5EE6A8] hover:bg-[#11151A] focus:outline-none focus-visible:ring-1 focus-visible:ring-[#5EE6A8] transition-colors duration-150"
             data-mobile-link
           >
             {link.label}
@@ -116,8 +116,8 @@ const homeUrl = getTranslatedPath('/', lang);
     </ul>
     <!-- Controles de idioma/tema accesibles en mobile -->
     <div class="mt-1 pt-3 border-t border-[#1F2630] flex items-center gap-3 px-4 pb-1">
-      <LanguagePicker />
-      <ThemeToggle />
+      <LanguagePicker id="language-toggle-mobile" />
+      <ThemeToggle id="theme-toggle-mobile" />
     </div>
   </div>
 </div>

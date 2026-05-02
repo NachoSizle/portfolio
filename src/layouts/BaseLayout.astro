@@ -24,7 +24,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 // URLs alternativas para SEO multiidioma
 const esUrl = new URL(getTranslatedPath(Astro.url.pathname, 'es'), Astro.site);
 const enUrl = new URL(getTranslatedPath(Astro.url.pathname, 'en'), Astro.site);
-const alternateUrl = lang === 'es' ? enUrl : esUrl;
 
 // JSON-LD: Person + WebSite. Datos centralizados aquí porque BaseLayout es el
 // único punto de entrada SEO para todas las páginas (estáticas y dinámicas).
@@ -58,7 +57,27 @@ const websiteLd = {
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <link rel="icon" type="image/png" href={withBase('/favicon.png')} />
     <link rel="manifest" href={withBase('/manifest.webmanifest')} />
+    <meta id="theme-color" name="theme-color" content="#F8FAFC" />
     <meta name="generator" content={Astro.generator} />
+
+    <script is:inline>
+      const theme = (() => {
+        try {
+          const storedTheme = localStorage.getItem('theme');
+          if (storedTheme === 'light' || storedTheme === 'dark') return storedTheme;
+        } catch (e) {}
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark';
+        return 'light';
+      })();
+
+      document.documentElement.classList.toggle('dark', theme === 'dark');
+      document.documentElement.style.colorScheme = theme;
+
+      const themeColor = document.getElementById('theme-color');
+      if (themeColor) {
+        themeColor.setAttribute('content', theme === 'dark' ? '#0B0D10' : '#F8FAFC');
+      }
+    </script>
 
     <!-- SEO -->
     <title>{title}</title>
@@ -88,8 +107,8 @@ const websiteLd = {
     <meta name="twitter:image" content={new URL(image, Astro.site)} />
 
     <!-- JSON-LD: Person + WebSite -->
-    <script type="application/ld+json" set:html={JSON.stringify(personLd)} />
-    <script type="application/ld+json" set:html={JSON.stringify(websiteLd)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(personLd)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(websiteLd)} />
 
     <!-- Google Fonts: JetBrains Mono + VT323 + Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -99,10 +118,8 @@ const websiteLd = {
     <!-- Umami -->
     <script is:inline defer src="https://cloud.umami.is/script.js" data-website-id="7e7bb8f2-01ba-436c-bc5e-8a999ddb1891"></script>
 
-    <!-- Meta theme-color Neo 8-bit -->
-    <meta name="theme-color" content="#0B0D10" />
   </head>
-  <body class="bg-[#0B0D10] text-slate-200 font-sans antialiased">
+  <body class="bg-[var(--theme-canvas)] text-[var(--theme-text)] font-sans antialiased">
     <BackgroundGradients />
     <Header />
     <main class="relative z-10">

@@ -1,24 +1,50 @@
 ---
 // SystemStatusPanel — Panel terminal Neo 8-bit para el Hero
 // Muestra estado del sistema con líneas técnicas tipo terminal
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
-
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
 
 const statusLines = [
-  { label: 'Product thinking', status: 'ON', color: '#5EE6A8' },
-  { label: 'Frontend architecture', status: 'READY', color: '#5EE6A8' },
-  { label: 'Performance budget', status: 'PASS', color: '#5EE6A8' },
-  { label: 'Automation layer', status: 'ACTIVE', color: '#F5B36B' },
-  { label: 'Open to work', status: 'TRUE', color: '#5EE6A8' },
+  {
+    label: 'Product thinking',
+    status: 'ON',
+    color: 'var(--theme-accent)',
+    border: 'rgba(var(--theme-accent-rgb), 0.3)',
+    bg: 'rgba(var(--theme-accent-rgb), 0.1)',
+  },
+  {
+    label: 'Frontend architecture',
+    status: 'READY',
+    color: 'var(--theme-accent)',
+    border: 'rgba(var(--theme-accent-rgb), 0.3)',
+    bg: 'rgba(var(--theme-accent-rgb), 0.1)',
+  },
+  {
+    label: 'Performance budget',
+    status: 'PASS',
+    color: 'var(--theme-accent)',
+    border: 'rgba(var(--theme-accent-rgb), 0.3)',
+    bg: 'rgba(var(--theme-accent-rgb), 0.1)',
+  },
+  {
+    label: 'Automation layer',
+    status: 'ACTIVE',
+    color: 'var(--theme-amber)',
+    border: 'rgba(var(--theme-amber-rgb), 0.3)',
+    bg: 'rgba(var(--theme-amber-rgb), 0.1)',
+  },
+  {
+    label: 'Open to work',
+    status: 'TRUE',
+    color: 'var(--theme-accent)',
+    border: 'rgba(var(--theme-accent-rgb), 0.3)',
+    bg: 'rgba(var(--theme-accent-rgb), 0.1)',
+  },
 ];
 
 const uptimeDate = '2015-01-01';
 const uptimeYears = new Date().getFullYear() - new Date(uptimeDate).getFullYear();
 ---
 
-<div class="system-panel font-mono text-sm border border-[#1F2630] bg-[#11151A] rounded-sm overflow-hidden w-full max-w-sm">
+<div class="system-panel font-mono text-sm border border-[#1F2630] bg-[#11151A] rounded-sm overflow-hidden w-full max-w-[22rem]">
   <!-- Header tipo terminal -->
   <div class="flex items-center gap-2 px-4 py-2.5 border-b border-[#1F2630] bg-[#0D1117]">
     <div class="flex gap-1.5">
@@ -26,7 +52,7 @@ const uptimeYears = new Date().getFullYear() - new Date(uptimeDate).getFullYear(
       <span class="w-3 h-3 rounded-full bg-[#F5B36B] block"></span>
       <span class="w-3 h-3 rounded-full bg-[#5EE6A8] block"></span>
     </div>
-    <span class="text-[#5EE6A8] text-xs tracking-widest uppercase ml-2 select-none">SYSTEM STATUS</span>
+    <span class="text-[#5EE6A8] text-xs uppercase ml-2 select-none">SYSTEM STATUS</span>
     <span class="ml-auto text-[#2D3A48] text-xs select-none">v{uptimeYears}.0.0</span>
   </div>
 
@@ -37,8 +63,8 @@ const uptimeYears = new Date().getFullYear() - new Date(uptimeDate).getFullYear(
       <div class="flex items-center justify-between gap-4">
         <span class="text-[#8B9AB0] text-xs select-none">▸ {line.label}</span>
         <span
-          class="text-xs font-bold tracking-widest select-none px-1.5 py-0.5 border"
-          style={`color: ${line.color}; border-color: ${line.color}30; background-color: ${line.color}10;`}
+          class="text-xs font-bold select-none px-1.5 py-0.5 border"
+          style={`color: ${line.color}; border-color: ${line.border}; background-color: ${line.bg};`}
         >
           {line.status}
         </span>

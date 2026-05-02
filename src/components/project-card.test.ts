@@ -30,11 +30,15 @@ describe('GYM-117: ProjectCard respeta prefers-reduced-motion', () => {
 });
 
 describe('GYM-117: i18n completa', () => {
-  it('usa t("projects.newBadge") (no hardcoded "Nuevo")', () => {
-    expect(card).toMatch(/t\(\s*['"]projects\.newBadge['"]/);
+  it('no recupera el badge legacy hardcoded "Nuevo"', () => {
+    expect(card).not.toMatch(/Nuevo|✨\s*New/);
   });
 
   it('usa t("projects.stackTitle") (no hardcoded)', () => {
     expect(card).toMatch(/t\(\s*['"]projects\.stackTitle['"]/);
+  });
+
+  it('usa t("projects.viewDetails") para el CTA interno', () => {
+    expect(card).toMatch(/t\(\s*['"]projects\.viewDetails['"]/);
   });
 });

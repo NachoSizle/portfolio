@@ -33,7 +33,7 @@ const icons = ['⧖', '◈', '⬡', '⌥'];
 
 <div class="relative z-10 max-w-5xl mx-auto px-0 mt-10">
   <div class="flex items-center gap-3 mb-4">
-    <span class="font-mono text-xs text-[#3D4B5A] tracking-widest uppercase select-none">// METRICS</span>
+    <span class="font-mono text-xs text-[#3D4B5A] uppercase select-none">// METRICS</span>
     <div class="h-px flex-1 bg-[#1F2630]"></div>
   </div>
 
@@ -48,21 +48,21 @@ const icons = ['⧖', '◈', '⬡', '⌥'];
             {icons[i]}
           </span>
           <span
-            class="stat-number select-none"
-            style="font-family: 'VT323', monospace; font-size: clamp(1.8rem, 5vw, 2.6rem); line-height: 1; color: #5EE6A8; letter-spacing: 0.02em;"
+            class="stat-number text-[2rem] sm:text-[2.25rem] select-none"
+            style="font-family: 'VT323', monospace; line-height: 1; color: var(--theme-accent); letter-spacing: 0;"
           >
             {stat.number}
           </span>
         </div>
 
         <!-- Label -->
-        <div class="font-mono text-xs text-slate-400 tracking-wide leading-tight select-none uppercase">
+        <div class="font-mono text-xs text-slate-400 leading-snug select-none uppercase">
           {stat.label}
         </div>
 
         <!-- Subtitle -->
         {subtitles[i] && subtitles[i] !== stat.label && (
-          <div class="font-mono text-[10px] text-[#3D4B5A] leading-tight select-none">
+          <div class="font-mono text-xs text-[#3D4B5A] leading-5 select-none">
             {subtitles[i]}
           </div>
         )}

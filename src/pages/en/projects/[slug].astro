@@ -17,16 +17,17 @@ interface Props {
   project: CollectionEntry<'projects'>;
 }
 
-const { project } = Astro.props;
+const { project } = Astro.props as Props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+type TranslationKey = Parameters<typeof t>[0];
 
 const raw = project.data;
 const title = typeof raw.title === 'string' && raw.title.startsWith('projects.')
-  ? (t(raw.title as any) as string) || raw.title
+  ? t(raw.title as TranslationKey) || raw.title
   : raw.title;
 const description = typeof raw.description === 'string' && raw.description.startsWith('projects.')
-  ? (t(raw.description as any) as string) || raw.description
+  ? t(raw.description as TranslationKey) || raw.description
   : raw.description;
 ---
 <BaseLayout title={title} description={description}>

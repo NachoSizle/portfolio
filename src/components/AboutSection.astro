@@ -21,16 +21,16 @@ const stats = [
 
 // Pasos del Product Engineering Loop
 const loopSteps = [
-  { id: 'DISCOVER', icon: '◈', color: '#58A6FF' },
-  { id: 'DESIGN',   icon: '◇', color: '#F5B36B' },
-  { id: 'BUILD',    icon: '▣', color: '#5EE6A8' },
-  { id: 'SHIP',     icon: '▲', color: '#5EE6A8' },
-  { id: 'ITERATE',  icon: '↺', color: '#F5B36B' },
+  { id: 'DISCOVER', icon: '◈', color: 'var(--theme-info)' },
+  { id: 'DESIGN',   icon: '◇', color: 'var(--theme-amber)' },
+  { id: 'BUILD',    icon: '▣', color: 'var(--theme-accent)' },
+  { id: 'SHIP',     icon: '▲', color: 'var(--theme-accent)' },
+  { id: 'ITERATE',  icon: '↺', color: 'var(--theme-amber)' },
 ];
 ---
 
 <section
-  class="relative py-10 sm:py-16 pb-12 sm:pb-20 overflow-hidden bg-transparent"
+  class="relative py-8 sm:py-12 pb-10 sm:pb-16 overflow-hidden bg-transparent"
   id="about"
   aria-labelledby="about-heading"
 >
@@ -39,21 +39,21 @@ const loopSteps = [
   <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
 
     <!-- Header -->
-    <div class="mb-8 sm:mb-12">
+    <div class="mb-6 sm:mb-8">
       <div class="flex items-center gap-3 mb-2">
-        <span class="font-mono text-xs text-[#3DB882] tracking-widest uppercase select-none">// ABOUT</span>
+        <span class="font-mono text-xs text-[#3DB882] uppercase select-none">// ABOUT</span>
         <div class="h-px flex-1 bg-[#1F2630]"></div>
       </div>
       <h2
         id="about-heading"
-        class="text-3xl sm:text-4xl font-extrabold font-mono tracking-tight text-slate-100 select-none"
+        class="text-2xl sm:text-3xl font-extrabold font-mono tracking-normal text-slate-100 select-none"
       >
         {t('about.title')}
       </h2>
     </div>
 
     <!-- Layout: foto + loop + stats -->
-    <div class="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-8 sm:gap-10 lg:gap-16 items-start">
+    <div class="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-8 sm:gap-10 lg:gap-12 items-start">
 
       <!-- Foto de perfil -->
       <div class="flex justify-center lg:justify-start">
@@ -63,17 +63,17 @@ const loopSteps = [
       </div>
 
       <!-- Columna derecha: loop + descripción -->
-      <div class="space-y-8">
+      <div class="space-y-6 sm:space-y-7">
 
         <!-- Descripción corta -->
         <div class="space-y-1">
-          <div class="font-mono text-xs text-[#8B9AB0] tracking-widest uppercase select-none">BIO</div>
-          <p class="text-sm text-slate-400 leading-relaxed max-w-xl" set:html={t('about.subtitle')} />
+          <div class="font-mono text-xs text-[#8B9AB0] uppercase select-none">BIO</div>
+          <p class="text-base leading-7 text-slate-400 max-w-2xl" set:html={t('about.subtitle')} />
         </div>
 
         <!-- Product Engineering Loop -->
         <div class="space-y-3">
-          <div class="font-mono text-xs text-[#3DB882] tracking-widest uppercase select-none">
+          <div class="font-mono text-xs text-[#3DB882] uppercase select-none">
             // PRODUCT ENGINEERING LOOP
           </div>
 
@@ -90,7 +90,7 @@ const loopSteps = [
                     {step.icon}
                   </span>
                   <span
-                    class="font-mono text-[10px] font-bold tracking-widest select-none"
+                    class="font-mono text-xs font-bold select-none"
                     style={`color: ${step.color};`}
                   >
                     {step.id}
@@ -100,7 +100,7 @@ const loopSteps = [
                 <!-- Conector (después de cada step menos el último) -->
                 {i < loopSteps.length - 1 && (
                   <div class="loop-connector" aria-hidden="true">
-                    <span class="font-mono text-[#1F2630] text-xs select-none tracking-widest">·····</span>
+                    <span class="font-mono text-[#1F2630] text-xs select-none">·····</span>
                   </div>
                 )}
               </div>
@@ -118,7 +118,7 @@ const loopSteps = [
     </div>
 
     <!-- Stats Grid -->
-    <div class="mt-12">
+    <div class="mt-10 sm:mt-12">
       <StatsGrid stats={stats} />
     </div>
 
@@ -137,8 +137,11 @@ const loopSteps = [
     top: 0;
     bottom: 0;
     width: 40px;
-    background: linear-gradient(to right, transparent, #0B0D10);
+    background: linear-gradient(to right, transparent, var(--theme-canvas));
     pointer-events: none;
+  }
+  :global(html:not(.dark)) .loop-scroll-wrapper::after {
+    display: none;
   }
   @media (min-width: 640px) {
     .loop-scroll-wrapper::after {
@@ -165,7 +168,7 @@ const loopSteps = [
   }
 
   .step-box {
-    min-width: 72px;
+    min-width: 84px;
     text-align: center;
     flex-shrink: 0;
   }

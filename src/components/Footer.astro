@@ -43,7 +43,7 @@ const { socialLinks, quickLinks } = getFooterData(lang);
       <div class="space-y-8">
         <!-- Navigation Links -->
         <div class="space-y-4">
-          <h4 class="font-mono text-xs font-bold tracking-widest uppercase text-[#5EE6A8] select-none">{t('footer.navigation')}</h4>
+          <h4 class="font-mono text-xs font-bold uppercase text-[#5EE6A8] select-none">{t('footer.navigation')}</h4>
           <nav class="flex flex-wrap gap-x-4 gap-y-2" aria-label="Footer navigation">
             {quickLinks.map((link) => (
               <a
@@ -58,7 +58,7 @@ const { socialLinks, quickLinks } = getFooterData(lang);
 
         <!-- Social Links -->
         <div class="space-y-4">
-          <h4 class="font-mono text-xs font-bold tracking-widest uppercase text-[#5EE6A8] select-none">{t('footer.connect')}</h4>
+          <h4 class="font-mono text-xs font-bold uppercase text-[#5EE6A8] select-none">{t('footer.connect')}</h4>
           <div class="flex flex-wrap gap-3">
             {socialLinks.map((social) => (
               <a
@@ -122,6 +122,15 @@ const { socialLinks, quickLinks } = getFooterData(lang);
   (function () {
     const btn = document.getElementById('scrollToTop');
     if (!btn) return;
+
+    function getScrollBehavior() {
+      try {
+        return window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+      } catch (e) {
+        return 'smooth';
+      }
+    }
+
     window.addEventListener('scroll', () => {
       if (window.scrollY > 300) {
         btn.classList.remove('opacity-0', 'pointer-events-none');
@@ -130,9 +139,9 @@ const { socialLinks, quickLinks } = getFooterData(lang);
         btn.classList.add('opacity-0', 'pointer-events-none');
         btn.classList.remove('opacity-100');
       }
-    });
+    }, { passive: true });
     btn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: getScrollBehavior() });
     });
   })();
 </script>

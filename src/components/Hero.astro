@@ -9,35 +9,35 @@ const t = useTranslations(lang);
 ---
 
 <section class="relative isolate overflow-visible" aria-labelledby="hero-section">
-  <div class="mx-auto max-w-6xl px-4 sm:px-6 py-10 sm:py-16 lg:py-24 relative z-10">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 py-6 sm:py-10 lg:py-12 relative z-10">
 
     <!-- Layout 2 columnas en desktop -->
-    <div class="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 sm:gap-12 lg:gap-16 items-center">
+    <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_auto] gap-8 sm:gap-10 lg:gap-12 items-center">
 
       <!-- Columna izquierda: texto -->
-      <div class="space-y-5 sm:space-y-7">
+      <div class="space-y-5 sm:space-y-6">
 
         <!-- Badge de estado "disponible" -->
-        <div class="inline-flex items-center gap-2 px-3 py-1.5 border border-[#1F2630] bg-[#11151A] font-mono text-xs text-[#5EE6A8] tracking-widest">
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 border border-[#1F2630] bg-[#11151A] font-mono text-xs text-[#5EE6A8]">
           <span class="w-2 h-2 rounded-full bg-[#5EE6A8] inline-block animate-pulse"></span>
           PRODUCT ENGINEER · AVAILABLE
         </div>
 
-        <!-- H1 alineado a la izquierda — tipografía fluida -->
+        <!-- H1 alineado a la izquierda -->
         <h1
           id="hero-section"
-          class="font-extrabold tracking-tight leading-[1.1] text-slate-100 select-none font-mono hero-title"
+          class="font-extrabold tracking-normal leading-[1.08] text-slate-100 select-none font-mono hero-title"
         >
           {t('hero.title')}
           <br />
-          <span style="color: #5EE6A8;">{t('hero.title.highlight')}</span>
+          <span style="color: var(--theme-accent);">{t('hero.title.highlight')}</span>
         </h1>
 
         <!-- Descripción -->
-        <p class="text-sm sm:text-base leading-relaxed text-slate-400 max-w-xl select-none">
+        <p class="text-base sm:text-lg leading-7 text-slate-400 max-w-2xl select-none">
           {t('hero.description')}
         </p>
-        <p class="text-xs sm:text-sm leading-relaxed text-slate-500 max-w-xl select-none font-mono">
+        <p class="text-sm leading-6 text-slate-500 max-w-2xl select-none font-mono">
           {t('hero.description.line2')}
         </p>
 
@@ -48,7 +48,7 @@ const t = useTranslations(lang);
             aria-label={t('hero.cta.primary')}
             data-umami-event="cta-click"
             data-umami-event-location="hero"
-            class="hero-btn-primary inline-flex items-center justify-center gap-2 px-6 py-3 min-h-[44px] text-sm font-bold font-mono tracking-widest text-[#0B0D10] bg-[#5EE6A8] border border-[#5EE6A8] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[4px_4px_0_#3DB882] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5EE6A8] select-none uppercase"
+            class="hero-btn-primary inline-flex items-center justify-center gap-2 px-6 py-3 min-h-[44px] text-sm font-bold font-mono text-[#0B0D10] bg-[#5EE6A8] border border-[#5EE6A8] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[4px_4px_0_#3DB882] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5EE6A8] select-none uppercase"
           >
             {t('hero.cta.primary')} →
           </a>
@@ -60,7 +60,7 @@ const t = useTranslations(lang);
             rel="noopener noreferrer"
             data-umami-event="cv-download"
             data-umami-event-lang={lang}
-            class="hero-btn-secondary inline-flex items-center justify-center gap-2 px-6 py-3 min-h-[44px] text-sm font-bold font-mono tracking-widest text-[#5EE6A8] bg-transparent border border-[#5EE6A8] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#5EE6A8]/10 hover:shadow-[4px_4px_0_#3DB882] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5EE6A8] select-none uppercase"
+            class="hero-btn-secondary inline-flex items-center justify-center gap-2 px-6 py-3 min-h-[44px] text-sm font-bold font-mono text-[#5EE6A8] bg-transparent border border-[#5EE6A8] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#5EE6A8]/10 hover:shadow-[4px_4px_0_#3DB882] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5EE6A8] select-none uppercase"
           >
             {t('hero.cta.cv')} ↓
           </a>
@@ -99,9 +99,21 @@ const t = useTranslations(lang);
 </section>
 
 <style>
-  /* Tipografía fluida para el H1: de 28px (mobile 360px) a 60px (desktop 1200px) */
   .hero-title {
-    font-size: clamp(1.75rem, 5vw + 0.5rem, 3.75rem);
+    font-size: 1.875rem;
+    letter-spacing: 0;
+  }
+
+  @media (min-width: 640px) {
+    .hero-title {
+      font-size: 2.375rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-title {
+      font-size: 3rem;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
