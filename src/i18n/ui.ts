@@ -59,6 +59,7 @@ export const ui = {
     'projects.stackOf': 'Stack de {{title}}',
     'projects.demoOf': 'Demo de {{title}}',
     'projects.repoOf': 'Repositorio de {{title}}',
+    'projects.viewDetails': 'Ver Case Study',
 
     'projects.blog-engine.title': 'Motor de Blog',
     'projects.blog-engine.description':
@@ -176,6 +177,7 @@ export const ui = {
     'projects.stackOf': 'Stack of {{title}}',
     'projects.demoOf': 'Demo of {{title}}',
     'projects.repoOf': 'Repository of {{title}}',
+    'projects.viewDetails': 'View Case Study',
 
     'projects.blog-engine.title': 'Blog Engine',
     'projects.blog-engine.description':

@@ -1,7 +1,7 @@
 ---
 // ProjectCard — Neo 8-bit · Case Study Format
 import type { CollectionEntry } from 'astro:content';
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { getLangFromUrl, useTranslations, withBase } from '../i18n/utils';
 
 export interface Props {
   project: CollectionEntry<'projects'>;
@@ -34,6 +34,9 @@ const statusConfig: Record<string, { label: string; color: string; bg: string }>
 
 const currentStatus = statusConfig[status ?? 'prod'] ?? statusConfig.prod;
 const projectNum = String(index + 1).padStart(2, '0');
+const detailPath = lang === 'en'
+  ? withBase(`/en/projects/${project.id}`)
+  : withBase(`/projects/${project.id}`);
 ---
 
 <li class="project-card-wrapper list-none">
@@ -101,6 +104,13 @@ const projectNum = String(index + 1).padStart(2, '0');
         {date.toISOString().split('T')[0]}
       </time>
       <div class="flex items-center gap-2 sm:gap-3 flex-wrap">
+        <a
+          href={detailPath}
+          class="inline-flex items-center gap-1.5 px-3 py-2 min-h-[44px] text-xs font-mono font-bold text-[#5EE6A8] bg-transparent border border-[#5EE6A8]/40 transition-all duration-150 hover:border-[#5EE6A8] hover:bg-[#5EE6A8]/10 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-1 focus-visible:ring-[#5EE6A8] select-none uppercase"
+          aria-label={`${t('projects.viewDetails')}: ${title}`}
+        >
+          {t('projects.viewDetails')} →
+        </a>
         {demoLink && (
           <a
             href={demoLink}
